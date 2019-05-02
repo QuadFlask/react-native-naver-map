@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 23
+    buildToolsVersion rootProject.ext.hasProperty('buildToolsVersion') ? rootProject.ext.buildToolsVersion : "28.0.3"
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 16
+        targetSdkVersion rootProject.ext.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 26
+
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'https://navercorp.bintray.com/maps'
+    }
+}
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.hasProperty('supportLibVersion') ? rootProject.ext.supportLibVersion : "28.0.0"}"
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.naver.maps:map-sdk:3.3.0'
+}

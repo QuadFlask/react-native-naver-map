@@ -1,0 +1,43 @@
+{
+  "name": "react-native-naver-map",
+  "version": "0.0.11",
+  "description": "react-native bridge for naver map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ./tsconfig.json",
+    "deploy": "npm version patch; npm run build; npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quadflask/react-native-naver-map"
+  },
+  "keywords": [
+    "react-native",
+    "navermap"
+  ],
+  "author": "QuadFlask",
+  "license": "MIT",
+  "homepage": "https://github.com/quadflask/react-native-naver-map",
+  "peerDependencies": {
+    "react": "^16.6.0",
+    "react-native": "^0.59.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.15",
+    "@types/react-native": "^0.57.51",
+    "react": "^16.6.0",
+    "react-native": "^0.59.0",
+    "typescript": "^3.4.5"
+  },
+  "files": [
+    "*.js",
+    "*.ts",
+    "*.tsx",
+    "*.json",
+    "ios/navermap/**",
+    "ios/navermap.xcodeproj/**",
+    "react-native-naver-map.podspec",
+    "android/**"
+  ]
+}
