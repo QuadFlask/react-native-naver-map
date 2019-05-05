@@ -9,7 +9,7 @@ PODS:
   - NMapsMap (3.3.0)
   - React (0.59.5):
     - React/Core (= 0.59.5)
-  - react-native-naver-map (0.0.11):
+  - react-native-naver-map (0.0.12):
     - NMapsMap (~> 3.3.0)
     - React
   - React/Core (0.59.5):
@@ -95,9 +95,9 @@ SPEC CHECKSUMS:
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   NMapsMap: a2505543fbd96365f557f0f1856710b48888edb1
   React: 90adac468c7b72bf1fa6c64bf230650f851a8388
-  react-native-naver-map: 2994887f992243c53b89b3eca2df8b1fc2b4c40e
+  react-native-naver-map: 91a913fa1fd8212307f8232f6924b1b17e40677e
   yoga: 2e571f113e8cbeb0eb752aeebc86c1bfe7a8200c
 
-PODFILE CHECKSUM: fabc71018ecc8133a1f6d04e0c24573f389f0a35
+PODFILE CHECKSUM: 98bd1de3f4ee568d5cb5300b7473e0c1192257e9
 
 COCOAPODS: 1.7.0.beta.3

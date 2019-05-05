@@ -24,9 +24,8 @@ target 'example' do
 
 	rn_naver_map_path = '../node_modules/react-native-naver-map'
 
-    pod 'NMapsMap'
-
-    pod 'react-native-naver-map', path: rn_naver_map_path
+	pod 'NMapsMap'
+ 	pod 'react-native-naver-map', path: rn_naver_map_path
 
 end
 

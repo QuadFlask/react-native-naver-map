@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/navermap/**/*.{h,m}"
 
   s.dependency 'React'
+  s.dependency 'RCTImage'
   s.dependency 'NMapsMap', '~> 3.3.0'
   s.static_framework = true
 
