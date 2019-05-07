@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/quadflask/react-native-naver-map.git" }
   s.source_files = "ios/navermap/**/*.{h,m}"
 
+  s.static_framework = true
   s.dependency 'React'
   s.dependency 'NMapsMap', '~> 3.3.0'
-  s.static_framework = true
 
 end
