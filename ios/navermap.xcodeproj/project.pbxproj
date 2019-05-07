@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD5FE7EB22814FFE0011168F /* NMapsMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5FE7EA22814FFE0011168F /* NMapsMap.framework */; };
 		CDE187AA22781E5E0049A9D4 /* RNNaverMapPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE1879A22781E5D0049A9D4 /* RNNaverMapPolylineOverlay.m */; };
 		CDE187AB22781E5E0049A9D4 /* RNNaverMapPathOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE1879C22781E5D0049A9D4 /* RNNaverMapPathOverlay.m */; };
 		CDE187AC22781E5E0049A9D4 /* RNNaverMapPathOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE1879F22781E5D0049A9D4 /* RNNaverMapPathOverlayManager.m */; };
@@ -31,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CD5FE7EA22814FFE0011168F /* NMapsMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NMapsMap.framework; sourceTree = SOURCE_ROOT; };
 		CDE1878D22781DD20049A9D4 /* libnavermap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libnavermap.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE1879922781E5D0049A9D4 /* RNNaverMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapMarker.h; sourceTree = "<group>"; };
 		CDE1879A22781E5D0049A9D4 /* RNNaverMapPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapPolylineOverlay.m; sourceTree = "<group>"; };
@@ -56,15 +58,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD5FE7EB22814FFE0011168F /* NMapsMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD5FE7E922814FD10011168F /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				CD5FE7EA22814FFE0011168F /* NMapsMap.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		CDE1878422781DD20049A9D4 = {
 			isa = PBXGroup;
 			children = (
+				CD5FE7E922814FD10011168F /* Framework */,
 				CDE1878F22781DD20049A9D4 /* navermap */,
 				CDE1878E22781DD20049A9D4 /* Products */,
 			);
@@ -289,6 +301,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../react-native/Libraries/Image",
@@ -304,6 +320,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../react-native/Libraries/Image",
