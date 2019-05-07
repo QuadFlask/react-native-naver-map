@@ -1,6 +1,6 @@
 {
   "name": "react-native-naver-map",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "react-native bridge for naver map",
   "main": "index.js",
   "scripts": {
