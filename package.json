@@ -36,6 +36,7 @@
     "*.tsx",
     "*.json",
     "ios/navermap/**",
+    "ios/Frameworks/**",
     "ios/navermap.xcodeproj/**",
     "react-native-naver-map.podspec",
     "android/**"
