@@ -1,0 +1,6 @@
+framework module Pods_RNNaverMap {
+  umbrella header "Pods-RNNaverMap-umbrella.h"
+
+  export *
+  module * { export * }
+}

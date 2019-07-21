@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C571A096E9C8557DCA754EB /* Pods_RNNaverMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6719D8939E52B76A9B3FF22 /* Pods_RNNaverMap.framework */; };
+		CD83ED6B22E4636600FF2D5C /* RNNaverMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED5E22E4636600FF2D5C /* RNNaverMapMarkerManager.m */; };
+		CD83ED6C22E4636600FF2D5C /* RCTConvert+NMFMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED5F22E4636600FF2D5C /* RCTConvert+NMFMapView.m */; };
+		CD83ED6D22E4636600FF2D5C /* RNNaverMapViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6022E4636600FF2D5C /* RNNaverMapViewManager.m */; };
+		CD83ED6E22E4636600FF2D5C /* RNNaverMapPathOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6122E4636600FF2D5C /* RNNaverMapPathOverlay.m */; };
+		CD83ED6F22E4636600FF2D5C /* RNNaverMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6222E4636600FF2D5C /* RNNaverMapMarker.m */; };
+		CD83ED7022E4636600FF2D5C /* RNNaverMapPathOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6322E4636600FF2D5C /* RNNaverMapPathOverlayManager.m */; };
+		CD83ED7122E4636600FF2D5C /* RNNaverMapPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6522E4636600FF2D5C /* RNNaverMapPolylineOverlay.m */; };
+		CD83ED7222E4636600FF2D5C /* RNNaverMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6822E4636600FF2D5C /* RNNaverMapView.m */; };
+		CD83ED7322E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83ED6922E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CD83ED4C22E45F4200FF2D5C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CD83ED4E22E45F4200FF2D5C /* libRNNaverMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNNaverMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD83ED5A22E4636600FF2D5C /* RNNaverMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapMarkerManager.h; path = ../../ios_old/navermap/RNNaverMapMarkerManager.h; sourceTree = "<group>"; };
+		CD83ED5B22E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolylineOverlayManager.h; path = ../../ios_old/navermap/RNNaverMapPolylineOverlayManager.h; sourceTree = "<group>"; };
+		CD83ED5C22E4636600FF2D5C /* RNNaverMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapView.h; path = ../../ios_old/navermap/RNNaverMapView.h; sourceTree = "<group>"; };
+		CD83ED5D22E4636600FF2D5C /* RNNaverMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapMarker.h; path = ../../ios_old/navermap/RNNaverMapMarker.h; sourceTree = "<group>"; };
+		CD83ED5E22E4636600FF2D5C /* RNNaverMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapMarkerManager.m; path = ../../ios_old/navermap/RNNaverMapMarkerManager.m; sourceTree = "<group>"; };
+		CD83ED5F22E4636600FF2D5C /* RCTConvert+NMFMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+NMFMapView.m"; path = "../../ios_old/navermap/RCTConvert+NMFMapView.m"; sourceTree = "<group>"; };
+		CD83ED6022E4636600FF2D5C /* RNNaverMapViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapViewManager.m; path = ../../ios_old/navermap/RNNaverMapViewManager.m; sourceTree = "<group>"; };
+		CD83ED6122E4636600FF2D5C /* RNNaverMapPathOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPathOverlay.m; path = ../../ios_old/navermap/RNNaverMapPathOverlay.m; sourceTree = "<group>"; };
+		CD83ED6222E4636600FF2D5C /* RNNaverMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapMarker.m; path = ../../ios_old/navermap/RNNaverMapMarker.m; sourceTree = "<group>"; };
+		CD83ED6322E4636600FF2D5C /* RNNaverMapPathOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPathOverlayManager.m; path = ../../ios_old/navermap/RNNaverMapPathOverlayManager.m; sourceTree = "<group>"; };
+		CD83ED6422E4636600FF2D5C /* RCTConvert+NMFMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+NMFMapView.h"; path = "../../ios_old/navermap/RCTConvert+NMFMapView.h"; sourceTree = "<group>"; };
+		CD83ED6522E4636600FF2D5C /* RNNaverMapPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolylineOverlay.m; path = ../../ios_old/navermap/RNNaverMapPolylineOverlay.m; sourceTree = "<group>"; };
+		CD83ED6622E4636600FF2D5C /* RNNaverMapPathOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPathOverlay.h; path = ../../ios_old/navermap/RNNaverMapPathOverlay.h; sourceTree = "<group>"; };
+		CD83ED6722E4636600FF2D5C /* RNNaverMapPathOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPathOverlayManager.h; path = ../../ios_old/navermap/RNNaverMapPathOverlayManager.h; sourceTree = "<group>"; };
+		CD83ED6822E4636600FF2D5C /* RNNaverMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapView.m; path = ../../ios_old/navermap/RNNaverMapView.m; sourceTree = "<group>"; };
+		CD83ED6922E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolylineOverlayManager.m; path = ../../ios_old/navermap/RNNaverMapPolylineOverlayManager.m; sourceTree = "<group>"; };
+		CD83ED6A22E4636600FF2D5C /* RNNaverMapPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolylineOverlay.h; path = ../../ios_old/navermap/RNNaverMapPolylineOverlay.h; sourceTree = "<group>"; };
+		D6719D8939E52B76A9B3FF22 /* Pods_RNNaverMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNNaverMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0C4E14AB5AE602A3D40F5CB /* Pods-RNNaverMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNNaverMap.debug.xcconfig"; path = "Target Support Files/Pods-RNNaverMap/Pods-RNNaverMap.debug.xcconfig"; sourceTree = "<group>"; };
+		F34AE7D84E3FD6A5E6B134D7 /* Pods-RNNaverMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNNaverMap.release.xcconfig"; path = "Target Support Files/Pods-RNNaverMap/Pods-RNNaverMap.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD83ED4B22E45F4200FF2D5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C571A096E9C8557DCA754EB /* Pods_RNNaverMap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15446EFF636A85E17B3364A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0C4E14AB5AE602A3D40F5CB /* Pods-RNNaverMap.debug.xcconfig */,
+				F34AE7D84E3FD6A5E6B134D7 /* Pods-RNNaverMap.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CD83ED4522E45F4200FF2D5C = {
+			isa = PBXGroup;
+			children = (
+				CD83ED5022E45F4200FF2D5C /* RNNaverMap */,
+				CD83ED4F22E45F4200FF2D5C /* Products */,
+				15446EFF636A85E17B3364A6 /* Pods */,
+				FE039DF878A0389B13C1DA4F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CD83ED4F22E45F4200FF2D5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD83ED4E22E45F4200FF2D5C /* libRNNaverMap.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD83ED5022E45F4200FF2D5C /* RNNaverMap */ = {
+			isa = PBXGroup;
+			children = (
+				CD83ED6422E4636600FF2D5C /* RCTConvert+NMFMapView.h */,
+				CD83ED5F22E4636600FF2D5C /* RCTConvert+NMFMapView.m */,
+				CD83ED5D22E4636600FF2D5C /* RNNaverMapMarker.h */,
+				CD83ED6222E4636600FF2D5C /* RNNaverMapMarker.m */,
+				CD83ED5A22E4636600FF2D5C /* RNNaverMapMarkerManager.h */,
+				CD83ED5E22E4636600FF2D5C /* RNNaverMapMarkerManager.m */,
+				CD83ED6622E4636600FF2D5C /* RNNaverMapPathOverlay.h */,
+				CD83ED6122E4636600FF2D5C /* RNNaverMapPathOverlay.m */,
+				CD83ED6722E4636600FF2D5C /* RNNaverMapPathOverlayManager.h */,
+				CD83ED6322E4636600FF2D5C /* RNNaverMapPathOverlayManager.m */,
+				CD83ED6A22E4636600FF2D5C /* RNNaverMapPolylineOverlay.h */,
+				CD83ED6522E4636600FF2D5C /* RNNaverMapPolylineOverlay.m */,
+				CD83ED5B22E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.h */,
+				CD83ED6922E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.m */,
+				CD83ED5C22E4636600FF2D5C /* RNNaverMapView.h */,
+				CD83ED6822E4636600FF2D5C /* RNNaverMapView.m */,
+				CD83ED6022E4636600FF2D5C /* RNNaverMapViewManager.m */,
+			);
+			path = RNNaverMap;
+			sourceTree = "<group>";
+		};
+		FE039DF878A0389B13C1DA4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6719D8939E52B76A9B3FF22 /* Pods_RNNaverMap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD83ED4D22E45F4200FF2D5C /* RNNaverMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD83ED5722E45F4200FF2D5C /* Build configuration list for PBXNativeTarget "RNNaverMap" */;
+			buildPhases = (
+				C188C76ED755EC6E904C2780 /* [CP] Check Pods Manifest.lock */,
+				CD83ED4A22E45F4200FF2D5C /* Sources */,
+				CD83ED4B22E45F4200FF2D5C /* Frameworks */,
+				CD83ED4C22E45F4200FF2D5C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNNaverMap;
+			productName = RNNaverMap;
+			productReference = CD83ED4E22E45F4200FF2D5C /* libRNNaverMap.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD83ED4622E45F4200FF2D5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = flask;
+				TargetAttributes = {
+					CD83ED4D22E45F4200FF2D5C = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = CD83ED4922E45F4200FF2D5C /* Build configuration list for PBXProject "RNNaverMap" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD83ED4522E45F4200FF2D5C;
+			productRefGroup = CD83ED4F22E45F4200FF2D5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD83ED4D22E45F4200FF2D5C /* RNNaverMap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C188C76ED755EC6E904C2780 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNNaverMap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD83ED4A22E45F4200FF2D5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD83ED7322E4636600FF2D5C /* RNNaverMapPolylineOverlayManager.m in Sources */,
+				CD83ED7222E4636600FF2D5C /* RNNaverMapView.m in Sources */,
+				CD83ED7022E4636600FF2D5C /* RNNaverMapPathOverlayManager.m in Sources */,
+				CD83ED6C22E4636600FF2D5C /* RCTConvert+NMFMapView.m in Sources */,
+				CD83ED6D22E4636600FF2D5C /* RNNaverMapViewManager.m in Sources */,
+				CD83ED6F22E4636600FF2D5C /* RNNaverMapMarker.m in Sources */,
+				CD83ED6B22E4636600FF2D5C /* RNNaverMapMarkerManager.m in Sources */,
+				CD83ED7122E4636600FF2D5C /* RNNaverMapPolylineOverlay.m in Sources */,
+				CD83ED6E22E4636600FF2D5C /* RNNaverMapPathOverlay.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CD83ED5522E45F4200FF2D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CD83ED5622E45F4200FF2D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD83ED5822E45F4200FF2D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0C4E14AB5AE602A3D40F5CB /* Pods-RNNaverMap.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD83ED5922E45F4200FF2D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F34AE7D84E3FD6A5E6B134D7 /* Pods-RNNaverMap.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD83ED4922E45F4200FF2D5C /* Build configuration list for PBXProject "RNNaverMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD83ED5522E45F4200FF2D5C /* Debug */,
+				CD83ED5622E45F4200FF2D5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD83ED5722E45F4200FF2D5C /* Build configuration list for PBXNativeTarget "RNNaverMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD83ED5822E45F4200FF2D5C /* Debug */,
+				CD83ED5922E45F4200FF2D5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD83ED4622E45F4200FF2D5C /* Project object */;
+}
