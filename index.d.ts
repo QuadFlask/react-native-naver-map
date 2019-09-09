@@ -47,6 +47,13 @@ export interface NaverMapViewProps {
         longitude: number;
         zoom: number;
     }) => void;
+    onMapClick?: (event: {
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
+    }) => void;
+    onTouch?: () => void;
     showsMyLocationButton?: boolean;
     compass?: boolean;
     scaleBar?: boolean;
@@ -64,6 +71,17 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
+    handleOnCameraChange: (event: React.SyntheticEvent<{}, {
+        latitude: number;
+        longitude: number;
+        zoom: number;
+    }>) => void;
+    handleOnMapClick: (event: React.SyntheticEvent<{}, {
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
+    }>) => void;
     render(): JSX.Element;
 }
 interface RNNaverMapView extends React.Component<{}, any> {
@@ -78,6 +96,8 @@ interface MarkerProps {
     rotation?: number;
     flat?: boolean;
     image?: ImageSourcePropType;
+    width?: number;
+    height?: number;
 }
 export declare class Marker extends Component<MarkerProps> {
     render(): JSX.Element;

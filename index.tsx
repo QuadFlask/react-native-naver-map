@@ -47,6 +47,13 @@ export interface NaverMapViewProps {
         longitude: number,
         zoom: number,
     }) => void,
+    onMapClick?: (event: {
+        x: number,
+        y: number,
+        latitude: number,
+        longitude: number,
+    }) => void,
+    onTouch?: () => void,
     showsMyLocationButton?: boolean,
     compass?: boolean,
     scaleBar?: boolean,
@@ -94,6 +101,21 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         })();
     };
 
+    handleOnCameraChange = (event: SyntheticEvent<{}, {
+        latitude: number,
+        longitude: number,
+        zoom: number,
+    }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
+
+    handleOnMapClick = (event: SyntheticEvent<{}, {
+        x: number,
+        y: number,
+        latitude: number,
+        longitude: number,
+    }>) => {
+        this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
+    };
+
     render() {
         const {
             onInitialized,
@@ -101,23 +123,19 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             tilt,
             bearing,
             mapPadding,
-            onCameraChange,
             nightMode
         } = this.props;
 
         return <RNNaverMapView ref={this.resolveRef}
-                               {...this.props}
-                               onInitialized={onInitialized}
-                               center={center}
-                               mapPadding={mapPadding}
-                               tilt={tilt}
-                               bearing={bearing}
-                               nightMode={nightMode}
-                               onCameraChange={onCameraChange ? (event: SyntheticEvent<{}, {
-                                   latitude: number,
-                                   longitude: number,
-                                   zoom: number,
-                               }>) => onCameraChange(event.nativeEvent) : null}
+        {...this.props}
+        onInitialized={onInitialized}
+        center={center}
+        mapPadding={mapPadding}
+        tilt={tilt}
+        bearing={bearing}
+        nightMode={nightMode}
+                               onCameraChange={this.handleOnCameraChange}
+                               onMapClick={this.handleOnMapClick}
         />
     }
 }
@@ -132,6 +150,8 @@ interface MarkerProps {
     rotation?: number
     flat?: boolean
     image?: ImageSourcePropType
+    width?: number
+    height?: number
 }
 
 export class Marker extends Component<MarkerProps> {

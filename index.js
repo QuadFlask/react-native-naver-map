@@ -53,10 +53,14 @@ export default class NaverMapView extends Component {
                 ios: () => NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg)
             })();
         };
+        this.handleOnCameraChange = (event) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
+        this.handleOnMapClick = (event) => {
+            this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
+        };
     }
     render() {
-        const { onInitialized, center, tilt, bearing, mapPadding, onCameraChange, nightMode } = this.props;
-        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: onCameraChange ? (event) => onCameraChange(event.nativeEvent) : null }));
+        const { onInitialized, center, tilt, bearing, mapPadding, nightMode } = this.props;
+        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {

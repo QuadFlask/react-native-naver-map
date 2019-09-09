@@ -63,6 +63,14 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
         feature.setAngle(rotation);
     }
 
+    public void setWidth(int width) {
+        feature.setWidth(width);
+    }
+
+    public void setHeight(int height) {
+        feature.setHeight(height);
+    }
+
     public void setImage(String uri) {
         if (uri != null) {
             OverlayImage overlayImage = OverlayImages.get(uri);
@@ -115,7 +123,8 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
                             .build();
                     imageHolder.setController(controller);
                 } else {
-                    final OverlayImage overlayImage1 = OverlayImage.fromAsset(uri);
+                    int rid = getRidFromName(uri);
+                    final OverlayImage overlayImage1 = OverlayImage.fromResource(rid);
                     OverlayImages.put(uri, overlayImage1);
                     setOverlayImage(overlayImage1);
                 }
@@ -125,5 +134,9 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
 
     private void setOverlayImage(OverlayImage image) {
         feature.setIcon(image);
+    }
+
+    private int getRidFromName(String name) {
+        return getContext().getResources().getIdentifier(name, "drawable", getContext().getPackageName());
     }
 }

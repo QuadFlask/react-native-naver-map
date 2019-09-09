@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: javax.inject:javax.inject:1@jar">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

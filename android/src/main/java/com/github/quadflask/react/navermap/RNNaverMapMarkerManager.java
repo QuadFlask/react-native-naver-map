@@ -76,4 +76,16 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
     public void setFlat(RNNaverMapMarker view, boolean flat) {
         view.setFlat(flat);
     }
+
+    @ReactProp(name = "width", defaultFloat = 64)
+    public void setWidth(RNNaverMapMarker view, float width) {
+        int widthInScreenPx = Math.round(metrics.density * width);
+        view.setWidth(widthInScreenPx);
+    }
+
+    @ReactProp(name = "height", defaultFloat = 64)
+    public void setHeight(RNNaverMapMarker view, float height) {
+        int heightInScreenPx = Math.round(metrics.density * height);
+        view.setHeight(heightInScreenPx);
+    }
 }

@@ -1,8 +1,8 @@
 package com.github.quadflask.react.navermap;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
-import android.support.v4.util.Consumer;
+import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 import android.view.View;
 
 import com.airbnb.android.react.maps.SizeReportingShadowNode;
@@ -40,6 +40,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     public RNNaverMapViewManager(ReactApplicationContext context) {
         super();
         this.appContext = context;
+        locationSource = new FusedLocationSource(context.getCurrentActivity(), 0x1000);
     }
 
     public static void onCreate(Activity activity) {

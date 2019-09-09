@@ -2,7 +2,7 @@ package com.github.quadflask.react.navermap;
 
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.support.v4.util.Consumer;
+import androidx.core.util.Consumer;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;

@@ -1,8 +1,8 @@
 package com.github.quadflask.react.navermap;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.util.Pair;
+import android.graphics.PointF;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 
@@ -32,17 +32,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener {
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
+
+public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
     public static final String[] EVENT_NAMES = new String[]{
             "onInitialized",
             "onCameraChange",
+            "onMapClick",
+            "onTouch"
     };
 
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
     private LifecycleEventListener lifecycleListener;
     private NaverMap naverMap;
-    private List<OnMapReadyCallback> listeners = new ArrayList<>();
     private List<Marker> markers = new ArrayList<>();
     private List<PolylineOverlay> polylineOverlays = new ArrayList<>();
     private Map<Integer, Pair<Marker, InfoWindow>> infoWindows = new HashMap<>();
@@ -99,27 +103,37 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         }
     }
 
+    long lastTouch = 0;
+
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
         this.naverMap.setLocationSource(locationSource);
-        execAfterInit(null);
+        this.naverMap.setOnMapClickListener(this);
+        this.naverMap.addOnCameraChangeListener((reason, animated) -> {
+            if (reason == -1 && System.currentTimeMillis() - lastTouch > 1000) { // changed by user
+                emitEvent("onTouch", null);
+                lastTouch = System.currentTimeMillis();
+            }
+        });
         this.onInitialized();
+
+        Log.e("RNNaverMapView.onMapReady", "onMapReady");
 
         lifecycleListener = new LifecycleEventListener() {
             @Override
             public void onHostResume() {
-                onResume();
+//                onResume();
             }
 
             @Override
             public void onHostPause() {
-                onPause();
+//                onPause();
             }
 
             @Override
             public void onHostDestroy() {
-                onStop();
+//                onStop();
 //                onDestroy();
                 if (locationSource != null)
                     locationSource.deactivate();
@@ -130,23 +144,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         themedReactContext.addLifecycleEventListener(lifecycleListener);
     }
 
-    private void execAfterInit(OnMapReadyCallback listener) {
-        themedReactContext.getCurrentActivity().runOnUiThread(() -> {
-            if (naverMap != null) {
-                if (listener != null)
-                    listener.onMapReady(naverMap);
-                for (OnMapReadyCallback onMapReadyCallback : listeners) {
-                    onMapReadyCallback.onMapReady(naverMap);
-                }
-                listeners.clear();
-            } else {
-                listeners.add(listener);
-            }
-        });
-    }
-
     public void setCenter(LatLng latLng) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng)
                     .animate(CameraAnimation.Easing);
             naverMap.moveCamera(cameraUpdate);
@@ -154,7 +153,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void setCenter(LatLng latLng, Double zoom, Double tilt, Double bearing) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             if (zoom != null && tilt != null && bearing != null) {
                 naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(latLng, zoom, tilt, bearing))
                         .animate(CameraAnimation.Easing));
@@ -163,7 +162,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void zoomTo(LatLngBounds latLngBounds, int paddingInPx) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             CameraUpdate cameraUpdate = CameraUpdate.fitBounds(latLngBounds, paddingInPx)
                     .animate(CameraAnimation.Easing);
             naverMap.moveCamera(cameraUpdate);
@@ -171,27 +170,27 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void setTilt(int tilt) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
             naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(cameraPosition.target, cameraPosition.zoom, tilt, cameraPosition.bearing)));
         });
     }
 
     public void setBearing(int bearing) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
             naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, bearing)));
         });
     }
 
     public void setMapPadding(int left, int top, int right, int bottom) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             naverMap.setContentPadding(left, top, right, bottom);
         });
     }
 
     public void setMarkers(List<Marker> markersArray) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             for (Marker marker : markers) {
                 marker.setMap(null);
             }
@@ -207,7 +206,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void setPolyLine(List<PolylineOverlay> polyLineArray) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             for (PolylineOverlay polylineOverlay : polylineOverlays) {
                 polylineOverlay.setMap(null);
             }
@@ -223,7 +222,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void setPath(PathOverlay path) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             if (this.path != null) this.path.setMap(null);
             if (path != null) {
                 this.path = path;
@@ -237,46 +236,46 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     public void watchCameraChange() {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             naverMap.removeOnCameraIdleListener(this);
             naverMap.addOnCameraIdleListener(this);
         });
     }
 
     public void showsMyLocationButton(boolean show) {
-        execAfterInit(e -> naverMap.getUiSettings().setLocationButtonEnabled(show));
+        getMapAsync(e -> naverMap.getUiSettings().setLocationButtonEnabled(show));
     }
 
     public void setCompassEnabled(boolean show) {
-        execAfterInit(e -> naverMap.getUiSettings().setCompassEnabled(show));
+        getMapAsync(e -> naverMap.getUiSettings().setCompassEnabled(show));
     }
 
     public void setScaleBarEnabled(boolean show) {
-        execAfterInit(e -> naverMap.getUiSettings().setScaleBarEnabled(show));
+        getMapAsync(e -> naverMap.getUiSettings().setScaleBarEnabled(show));
     }
 
     public void setZoomControlEnabled(boolean show) {
-        execAfterInit(e -> naverMap.getUiSettings().setZoomControlEnabled(show));
+        getMapAsync(e -> naverMap.getUiSettings().setZoomControlEnabled(show));
     }
 
     public void setLocationTrackingMode(int mode) {
-        execAfterInit(e -> naverMap.setLocationTrackingMode(LocationTrackingMode.values()[mode]));
+        getMapAsync(e -> naverMap.setLocationTrackingMode(LocationTrackingMode.values()[mode]));
     }
 
     public void setMapType(NaverMap.MapType value) {
-        execAfterInit(e -> naverMap.setMapType(value));
+        getMapAsync(e -> naverMap.setMapType(value));
     }
 
     public void setBuildingHeight(float height) {
-        execAfterInit(e -> naverMap.setBuildingHeight(height));
+        getMapAsync(e -> naverMap.setBuildingHeight(height));
     }
 
     public void setLayerGroupEnabled(String layerGroup, boolean enable) {
-        execAfterInit(e -> naverMap.setLayerGroupEnabled(layerGroup, enable));
+        getMapAsync(e -> naverMap.setLayerGroupEnabled(layerGroup, enable));
     }
 
     public void setNightModeEnabled(boolean enable) {
-        execAfterInit(e -> naverMap.setNightModeEnabled(enable));
+        getMapAsync(e -> naverMap.setNightModeEnabled(enable));
     }
 
     public void openInfoWindow(int id, LatLng at, final String string) {
@@ -315,7 +314,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private final Map<PathOverlay, RNNaverMapPathOverlay> pathOverlayMap = new HashMap<>();
 
     public void addFeature(View child, int index) {
-        execAfterInit(e -> {
+        getMapAsync(e -> {
             if (child instanceof RNNaverMapMarker) {
                 RNNaverMapMarker annotation = (RNNaverMapMarker) child;
                 annotation.addToMap(this);
@@ -365,6 +364,17 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         param.putDouble("zoom", cameraPosition.zoom);
 
         emitEvent("onCameraChange", param);
+    }
+
+    @Override
+    public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
+        WritableMap param = Arguments.createMap();
+        param.putDouble("x", pointF.x);
+        param.putDouble("y", pointF.y);
+        param.putDouble("latitude", latLng.latitude);
+        param.putDouble("longitude", latLng.longitude);
+
+        emitEvent("onMapClick", param);
     }
 
     private void emitEvent(String eventName, WritableMap param) {

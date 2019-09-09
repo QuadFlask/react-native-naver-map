@@ -128,7 +128,8 @@ public class RNNaverMapPathOverlay extends RNNaverMapFeature<PathOverlay> {
                             .build();
                     imageHolder.setController(controller);
                 } else {
-                    final OverlayImage overlayImage1 = OverlayImage.fromAsset(uri);
+                    int rid = getRidFromName(uri);
+                    final OverlayImage overlayImage1 = OverlayImage.fromResource(rid);
                     OverlayImages.put(uri, overlayImage1);
                     setOverlayImage(overlayImage1);
                 }
@@ -138,5 +139,9 @@ public class RNNaverMapPathOverlay extends RNNaverMapFeature<PathOverlay> {
 
     private void setOverlayImage(OverlayImage image) {
         feature.setPatternImage(image);
+    }
+
+    private int getRidFromName(String name) {
+        return getContext().getResources().getIdentifier(name, "drawable", getContext().getPackageName());
     }
 }

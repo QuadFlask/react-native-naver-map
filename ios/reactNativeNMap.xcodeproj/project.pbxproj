@@ -1,0 +1,334 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CDD8601B232641F6007D13B3 /* RNNaverMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8600A232641F5007D13B3 /* RNNaverMapMarkerManager.m */; };
+		CDD8601C232641F6007D13B3 /* RNNaverMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8600B232641F5007D13B3 /* RNNaverMapMarker.m */; };
+		CDD8601D232641F6007D13B3 /* RNNaverMapPathOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8600E232641F5007D13B3 /* RNNaverMapPathOverlay.m */; };
+		CDD8601E232641F6007D13B3 /* RNNaverMapPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8600F232641F5007D13B3 /* RNNaverMapPolylineOverlay.m */; };
+		CDD8601F232641F6007D13B3 /* RNNaverMapPolylineOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD86011232641F5007D13B3 /* RNNaverMapPolylineOverlayManager.m */; };
+		CDD86020232641F6007D13B3 /* RCTConvert+NMFMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD86013232641F5007D13B3 /* RCTConvert+NMFMapView.m */; };
+		CDD86021232641F6007D13B3 /* RNNaverMapPathOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD86015232641F5007D13B3 /* RNNaverMapPathOverlayManager.m */; };
+		CDD86022232641F6007D13B3 /* RNNaverMapViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD86017232641F5007D13B3 /* RNNaverMapViewManager.m */; };
+		CDD86023232641F6007D13B3 /* RNNaverMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8601A232641F6007D13B3 /* RNNaverMapView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CDD85FFC2326418E007D13B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CDD85FFE2326418E007D13B3 /* libreactNativeNMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libreactNativeNMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD8600A232641F5007D13B3 /* RNNaverMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapMarkerManager.m; sourceTree = "<group>"; };
+		CDD8600B232641F5007D13B3 /* RNNaverMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapMarker.m; sourceTree = "<group>"; };
+		CDD8600C232641F5007D13B3 /* RNNaverMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapMarker.h; sourceTree = "<group>"; };
+		CDD8600D232641F5007D13B3 /* RNNaverMapPathOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapPathOverlay.h; sourceTree = "<group>"; };
+		CDD8600E232641F5007D13B3 /* RNNaverMapPathOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapPathOverlay.m; sourceTree = "<group>"; };
+		CDD8600F232641F5007D13B3 /* RNNaverMapPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapPolylineOverlay.m; sourceTree = "<group>"; };
+		CDD86010232641F5007D13B3 /* RNNaverMapPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapPolylineOverlay.h; sourceTree = "<group>"; };
+		CDD86011232641F5007D13B3 /* RNNaverMapPolylineOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapPolylineOverlayManager.m; sourceTree = "<group>"; };
+		CDD86012232641F5007D13B3 /* RNNaverMapPathOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapPathOverlayManager.h; sourceTree = "<group>"; };
+		CDD86013232641F5007D13B3 /* RCTConvert+NMFMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+NMFMapView.m"; sourceTree = "<group>"; };
+		CDD86014232641F5007D13B3 /* RNNaverMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapMarkerManager.h; sourceTree = "<group>"; };
+		CDD86015232641F5007D13B3 /* RNNaverMapPathOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapPathOverlayManager.m; sourceTree = "<group>"; };
+		CDD86016232641F5007D13B3 /* RNNaverMapPolylineOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapPolylineOverlayManager.h; sourceTree = "<group>"; };
+		CDD86017232641F5007D13B3 /* RNNaverMapViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapViewManager.m; sourceTree = "<group>"; };
+		CDD86018232641F5007D13B3 /* RCTConvert+NMFMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+NMFMapView.h"; sourceTree = "<group>"; };
+		CDD86019232641F6007D13B3 /* RNNaverMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNaverMapView.h; sourceTree = "<group>"; };
+		CDD8601A232641F6007D13B3 /* RNNaverMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNaverMapView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CDD85FFB2326418E007D13B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CDD85FF52326418E007D13B3 = {
+			isa = PBXGroup;
+			children = (
+				CDD860002326418E007D13B3 /* reactNativeNMap */,
+				CDD85FFF2326418E007D13B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CDD85FFF2326418E007D13B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDD85FFE2326418E007D13B3 /* libreactNativeNMap.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDD860002326418E007D13B3 /* reactNativeNMap */ = {
+			isa = PBXGroup;
+			children = (
+				CDD86018232641F5007D13B3 /* RCTConvert+NMFMapView.h */,
+				CDD86013232641F5007D13B3 /* RCTConvert+NMFMapView.m */,
+				CDD8600C232641F5007D13B3 /* RNNaverMapMarker.h */,
+				CDD8600B232641F5007D13B3 /* RNNaverMapMarker.m */,
+				CDD86014232641F5007D13B3 /* RNNaverMapMarkerManager.h */,
+				CDD8600A232641F5007D13B3 /* RNNaverMapMarkerManager.m */,
+				CDD8600D232641F5007D13B3 /* RNNaverMapPathOverlay.h */,
+				CDD8600E232641F5007D13B3 /* RNNaverMapPathOverlay.m */,
+				CDD86012232641F5007D13B3 /* RNNaverMapPathOverlayManager.h */,
+				CDD86015232641F5007D13B3 /* RNNaverMapPathOverlayManager.m */,
+				CDD86010232641F5007D13B3 /* RNNaverMapPolylineOverlay.h */,
+				CDD8600F232641F5007D13B3 /* RNNaverMapPolylineOverlay.m */,
+				CDD86016232641F5007D13B3 /* RNNaverMapPolylineOverlayManager.h */,
+				CDD86011232641F5007D13B3 /* RNNaverMapPolylineOverlayManager.m */,
+				CDD86019232641F6007D13B3 /* RNNaverMapView.h */,
+				CDD8601A232641F6007D13B3 /* RNNaverMapView.m */,
+				CDD86017232641F5007D13B3 /* RNNaverMapViewManager.m */,
+			);
+			path = reactNativeNMap;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDD85FFD2326418E007D13B3 /* reactNativeNMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDD860072326418E007D13B3 /* Build configuration list for PBXNativeTarget "reactNativeNMap" */;
+			buildPhases = (
+				CDD85FFA2326418E007D13B3 /* Sources */,
+				CDD85FFB2326418E007D13B3 /* Frameworks */,
+				CDD85FFC2326418E007D13B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = reactNativeNMap;
+			productName = reactNativeNMap;
+			productReference = CDD85FFE2326418E007D13B3 /* libreactNativeNMap.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CDD85FF62326418E007D13B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = flask;
+				TargetAttributes = {
+					CDD85FFD2326418E007D13B3 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = CDD85FF92326418E007D13B3 /* Build configuration list for PBXProject "reactNativeNMap" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CDD85FF52326418E007D13B3;
+			productRefGroup = CDD85FFF2326418E007D13B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDD85FFD2326418E007D13B3 /* reactNativeNMap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CDD85FFA2326418E007D13B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDD8601C232641F6007D13B3 /* RNNaverMapMarker.m in Sources */,
+				CDD8601B232641F6007D13B3 /* RNNaverMapMarkerManager.m in Sources */,
+				CDD86020232641F6007D13B3 /* RCTConvert+NMFMapView.m in Sources */,
+				CDD86023232641F6007D13B3 /* RNNaverMapView.m in Sources */,
+				CDD86022232641F6007D13B3 /* RNNaverMapViewManager.m in Sources */,
+				CDD8601E232641F6007D13B3 /* RNNaverMapPolylineOverlay.m in Sources */,
+				CDD86021232641F6007D13B3 /* RNNaverMapPathOverlayManager.m in Sources */,
+				CDD8601F232641F6007D13B3 /* RNNaverMapPolylineOverlayManager.m in Sources */,
+				CDD8601D232641F6007D13B3 /* RNNaverMapPathOverlay.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CDD860052326418E007D13B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CDD860062326418E007D13B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDD860082326418E007D13B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDD860092326418E007D13B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CDD85FF92326418E007D13B3 /* Build configuration list for PBXProject "reactNativeNMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDD860052326418E007D13B3 /* Debug */,
+				CDD860062326418E007D13B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDD860072326418E007D13B3 /* Build configuration list for PBXNativeTarget "reactNativeNMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDD860082326418E007D13B3 /* Debug */,
+				CDD860092326418E007D13B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CDD85FF62326418E007D13B3 /* Project object */;
+}
