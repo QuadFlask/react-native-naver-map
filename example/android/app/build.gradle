@@ -133,6 +133,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        manifestPlaceholders = [clientId:"gy34yoribz"]
     }
     splits {
         abi {
@@ -190,6 +192,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':react-native-nmap')
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";
