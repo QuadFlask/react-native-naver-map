@@ -40,45 +40,6 @@ allprojects {
 </manifest>
 ```
 
-현재 위치버튼을 사용하기 위해 `MainActivity.java`에 아래와 같이 추가합니다. [참고](https://navermaps.github.io/android-map-sdk/guide-ko/4-2.html)
-
-```diff
-package com.example;
-
-+ import android.os.Bundle;
-
-import com.facebook.react.ReactActivity;
-+ import com.github.quadflask.react.navermap.RNNaverMapViewManager;
-
-public class MainActivity extends ReactActivity {
-
-    /**
-     * Returns the name of the main component registered from JavaScript.
-     * This is used to schedule rendering of the component.
-     */
-    @Override
-    protected String getMainComponentName() {
-        return "example";
-    }
-
-+    @Override
-+    protected void onCreate(Bundle savedInstanceState) {
-+        super.onCreate(savedInstanceState);
-+        RNNaverMapViewManager.onCreate(this);
-+    }
-+
-+    @Override
-+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-+        if (RNNaverMapViewManager.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
-+            return;
-+        }
-+
-+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-+    }
-}
-
-```
-
 ### IOS 추가 설정
 
 > podspec 작업중입니다
