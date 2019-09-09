@@ -26,6 +26,18 @@ export const MapType = {
     Terrain: 4,
 };
 
+export const CaptionAlign = {
+    Center: 0,
+    Left: 0,
+    Right: 0,
+    Top: 0,
+    Bottom: 0,
+    TopLeft: 0,
+    TopRight: 0,
+    BottomRight: 0,
+    BottomLeft: 0,
+};
+
 export const LayerGroup = {
     LAYER_GROUP_BUILDING: "building",
     LAYER_GROUP_TRANSIT: "transit",
@@ -152,6 +164,19 @@ interface MarkerProps {
     image?: ImageSourcePropType
     width?: number
     height?: number
+    caption?: {
+        text?: string
+        align?: number
+        textSize?: number
+        color?: number
+        haloColor?: number
+    }
+    subCaption?: {
+        text?: string
+        textSize?: number
+        color?: number
+        haloColor?: number
+    }
 }
 
 export class Marker extends Component<MarkerProps> {
