@@ -1,9 +1,8 @@
 //
 //  RCTConvert+RNNaverMapView.m
-//  poolusDriver
 //
 //  Created by flask on 14/04/2019.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 flask. All rights reserved.
 //
 
 #import <NMapsMap/NMFCameraUpdate.h>
@@ -27,7 +26,7 @@
   double zoom = [self double: json[@"zoom"]];
   double tilt = [self double: json[@"tilt"]];
   double bearing = [self double: json[@"bearing"]];
-  
+
   NMFCameraPosition* cameraPosition = [NMFCameraPosition cameraPosition:position zoom:zoom tilt:tilt heading:bearing];
   NMFCameraUpdate *cameraUpdate = [NMFCameraUpdate cameraUpdateWithPosition: cameraPosition];
   cameraUpdate.animation = NMFCameraUpdateAnimationEaseIn;

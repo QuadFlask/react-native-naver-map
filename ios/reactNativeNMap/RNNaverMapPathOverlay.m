@@ -1,9 +1,8 @@
 //
 //  RNNaverMapPolylineOverlay.m
-//  poolusDriver
 //
 //  Created by flask on 18/04/2019.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 flask. All rights reserved.
 //
 #import "RNNaverMapPathOverlay.h"
 
@@ -62,7 +61,7 @@
     _reloadImageCancellationBlock();
     _reloadImageCancellationBlock = nil;
   }
-  
+
   _reloadImageCancellationBlock = [_bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSURLRequest:pattern]
                                                                           size:self.bounds.size
                                                                          scale:RCTScreenScale()

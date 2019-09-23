@@ -1,9 +1,8 @@
 //
 //  RNNaverMapMarker.m
-//  poolusDriver
 //
 //  Created by flask on 18/04/2019.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 flask. All rights reserved.
 //
 
 #import "RNNaverMapMarker.h"
@@ -57,19 +56,19 @@
 - (void)setImage:(NSString *)image
 {
   _image = image;
-  
+
   if (_reloadImageCancellationBlock) {
     _reloadImageCancellationBlock();
     _reloadImageCancellationBlock = nil;
   }
-  
+
   NSLog(@"image : %@", image);
-  
+
   if (!_image) {
     if (_iconImageView) [_iconImageView removeFromSuperview];
     return;
   }
-  
+
   _reloadImageCancellationBlock = [_bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSURLRequest:_image]
                                                                           size:self.bounds.size
                                                                          scale:RCTScreenScale()

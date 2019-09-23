@@ -1,9 +1,8 @@
 //
 //  RNNaverMapViewManager.m
-//  poolusDriver
 //
 //  Created by flask on 14/04/2019.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 flask. All rights reserved.
 //
 #import <React/RCTBridge.h>
 #import <React/RCTViewManager.h>

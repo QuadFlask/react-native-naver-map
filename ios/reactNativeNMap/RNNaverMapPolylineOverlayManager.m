@@ -1,9 +1,8 @@
 //
 //  RNNaverMapPolylineOverlayManager.m
-//  poolusDriver
 //
 //  Created by flask on 19/04/2019.
-//  Copyright © 2019 Facebook. All rights reserved.
+//  Copyright © 2019 flask. All rights reserved.
 //
 
 #import "RNNaverMapPolylineOverlayManager.h"
