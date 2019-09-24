@@ -1,4 +1,4 @@
-package main.java.com.github.quadflask.react.navermap;
+package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,9 +15,7 @@ import java.util.List;
 public class RNNaverMapCircleOverlay extends RNNaverMapFeature<CircleOverlay> {
     public RNNaverMapCircleOverlay(Context context) {
         super(context);
-
-        feature = new CircleOverlay();
-        feature.setColor(ColorUtils.setAlphaComponent(Color.RED, 31));
+        feature = new CircleOverlay();        
     }
 
     public void setCenter(LatLng center) {
@@ -26,5 +24,9 @@ public class RNNaverMapCircleOverlay extends RNNaverMapFeature<CircleOverlay> {
 
     public void setRadius(double radius) {
         feature.setRadius(radius);
+    }
+
+    public void setColor(int color) {
+        feature.setColor(ColorUtils.setAlphaComponent(color, 31));
     }
 }

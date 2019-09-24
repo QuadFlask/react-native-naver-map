@@ -35,11 +35,12 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
-import main.java.com.github.quadflask.react.navermap.RNNaverMapCircleOverlay;
 
-public class RNNaverMapView extends MapView
-        implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
-    public static final String[] EVENT_NAMES = new String[] { "onInitialized", "onCameraChange", "onMapClick",
+public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
+    public static final String[] EVENT_NAMES = new String[] {
+            "onInitialized",
+            "onCameraChange",
+            "onMapClick",
             "onTouch" };
 
     private ThemedReactContext themedReactContext;
@@ -53,7 +54,9 @@ public class RNNaverMapView extends MapView
     private PathOverlay path;
 
     private static boolean contextHasBug(Context context) {
-        return context == null || context.getResources() == null || context.getResources().getConfiguration() == null;
+        return context == null ||
+                context.getResources() == null || 
+                context.getResources().getConfiguration() == null;
     }
 
     private static Context getNonBuggyContext(ThemedReactContext reactContext, ReactApplicationContext appContext) {
@@ -73,8 +76,7 @@ public class RNNaverMapView extends MapView
         return superContext;
     }
 
-    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext,
-            FusedLocationSource locationSource) {
+    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource) {
         super(getNonBuggyContext(themedReactContext, appContext));
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;

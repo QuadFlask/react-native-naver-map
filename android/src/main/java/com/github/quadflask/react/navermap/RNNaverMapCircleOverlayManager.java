@@ -1,4 +1,4 @@
-package main.java.com.github.quadflask.react.navermap;
+package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -51,4 +51,9 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
     public void setRadius(RNNaverMapCircleOverlay view, double radius) {
         view.setRadius(radius);
     }
+    @ReactProp(name = "color", defaultInt = Color.RED, customType="Color")
+    public void setColor(RNNaverMapCircleOverlay view, int color){
+        view.setColor(color);
+    }
+    
 }
