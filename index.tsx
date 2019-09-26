@@ -1,5 +1,5 @@
-import React, { Component, SyntheticEvent } from 'react';
-import {requireNativeComponent,findNodeHandle,UIManager,StyleProp,ViewStyle,Platform,NativeModules,ImageSourcePropType,Image,} from 'react-native';
+import React, {Component, SyntheticEvent} from 'react';
+import {requireNativeComponent, findNodeHandle, UIManager, StyleProp, ViewStyle, Platform, NativeModules, ImageSourcePropType, Image,} from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
@@ -44,15 +44,15 @@ export interface NaverMapViewProps {
     mapPadding?: { left: number; top: number; right: number; bottom: number };
     onInitialized?: Function;
     onCameraChange?: (event: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
+        latitude: number;
+        longitude: number;
+        zoom: number;
     }) => void;
     onMapClick?: (event: {
-      x: number;
-      y: number;
-      latitude: number;
-      longitude: number;
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
     }) => void;
     onTouch?: () => void;
     showsMyLocationButton?: boolean;
@@ -69,91 +69,77 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     nodeHandle?: null | number;
 
     private resolveRef = (ref: RNNaverMapView) => {
-      this.ref = ref;
-      this.nodeHandle = findNodeHandle(ref);
+        this.ref = ref;
+        this.nodeHandle = findNodeHandle(ref);
     };
 
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {
-      this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
+        this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
     };
 
     watchCameraChange = () => {
-      this.dispatchViewManagerCommand('watchCameraChange', []);
+        this.dispatchViewManagerCommand('watchCameraChange', []);
     };
 
     setLocationTrackingMode = (mode: number) => {
-      this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
+        this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
     };
 
     showsMyLocationButton = (show: boolean) => {
-      this.dispatchViewManagerCommand('showsMyLocationButton', [show]);
+        this.dispatchViewManagerCommand('showsMyLocationButton', [show]);
     };
 
     private dispatchViewManagerCommand = (command: string, arg: any) => {
-      return Platform.select({
-        // @ts-ignore
-        android: () =>
-          UIManager.dispatchViewManagerCommand(
-            this.nodeHandle,
+        return Platform.select({
             // @ts-ignore
-            UIManager.getViewManagerConfig('RNNaverMapView').Commands[command],
-            arg,
-          ),
-        ios: () =>
-          NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg),
-      })();
+            android: () => UIManager.dispatchViewManagerCommand(
+                this.nodeHandle,
+                // @ts-ignore
+                UIManager.getViewManagerConfig('RNNaverMapView').Commands[command],
+                arg,
+            ),
+            ios: () =>
+                NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg),
+        })();
     };
 
-    handleOnCameraChange = (
-      event: SyntheticEvent<
-        {},
-        {
-          latitude: number;
-          longitude: number;
-          zoom: number;
-        }
-      >,
-    ) =>
-      this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
+    handleOnCameraChange = (event: SyntheticEvent<{}, {
+        latitude: number;
+        longitude: number;
+        zoom: number;
+    }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
-    handleOnMapClick = (
-      event: SyntheticEvent<
-        {},
-        {
-          x: number;
-          y: number;
-          latitude: number;
-          longitude: number;
-        }
-      >,
-    ) => {
-      this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
-    };
+    handleOnMapClick = (event: SyntheticEvent<{}, {
+        x: number;
+        y: number;
+        latitude: number;
+        longitude: number;
+    }>) => this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
 
     render() {
-      const {
-        onInitialized,
-        center,
-        tilt,
-        bearing,
-        mapPadding,
-        nightMode,
-      } = this.props;
+        const {
+            onInitialized,
+            center,
+            tilt,
+            bearing,
+            mapPadding,
+            nightMode,
+        } = this.props;
 
-      return (
-        <RNNaverMapView
-          ref={this.resolveRef}
-          {...this.props}
-          onInitialized={onInitialized}
-          center={center}
-          mapPadding={mapPadding}
-          tilt={tilt}
-          bearing={bearing}
-          nightMode={nightMode}
-          onCameraChange={this.handleOnCameraChange}
-          onMapClick={this.handleOnMapClick}
-        />
-      );
+        return (
+            <RNNaverMapView
+                ref={this.resolveRef}
+                {...this.props}
+                onInitialized={onInitialized}
+                center={center}
+                mapPadding={mapPadding}
+                tilt={tilt}
+                bearing={bearing}
+                nightMode={nightMode}
+                onCameraChange={this.handleOnCameraChange}
+                onMapClick={this.handleOnMapClick}
+            />
+        );
     }
 }
 
@@ -171,27 +157,28 @@ interface MarkerProps {
     width?: number;
     height?: number;
     caption?: {
-      text?: string
-      align?: number
-      textSize?: number
-      color?: number
-      haloColor?: number
+        text?: string
+        align?: number
+        textSize?: number
+        color?: number
+        haloColor?: number
     }
     subCaption?: {
-      text?: string
-      textSize?: number
-      color?: number
-      haloColor?: number
+        text?: string
+        textSize?: number
+        color?: number
+        haloColor?: number
     }
 }
 
 export class Marker extends Component<MarkerProps> {
     render() {
-      return (
-        <RNNaverMapMarker {...this.props} image={getImageUri(this.props.image)} />
-      );
+        return (
+            <RNNaverMapMarker {...this.props} image={getImageUri(this.props.image)}/>
+        );
     }
 }
+
 interface CircleProps {
     coordinate: Coord;
     radius?: number;
@@ -200,7 +187,7 @@ interface CircleProps {
 
 export class Circle extends Component<CircleProps> {
     render() {
-      return <RNNaverMapCircleOverlay {...this.props} />;
+        return <RNNaverMapCircleOverlay {...this.props} />;
     }
 }
 
@@ -212,7 +199,7 @@ interface PolylineProps {
 
 export class Polyline extends Component<PolylineProps> {
     render() {
-      return <RNNaverMapPolylineOverlay {...this.props} />;
+        return <RNNaverMapPolylineOverlay {...this.props} />;
     }
 }
 
@@ -230,20 +217,20 @@ interface PathProps {
 
 export class Path extends Component<PathProps> {
     render() {
-      return (
-        <RNNaverMapPathOverlay
-          {...this.props}
-          pattern={getImageUri(this.props.pattern)}
-        />
-      );
+        return (
+            <RNNaverMapPathOverlay
+                {...this.props}
+                pattern={getImageUri(this.props.pattern)}
+            />
+        );
     }
 }
 
 function getImageUri(src?: ImageSourcePropType): string | null {
     let imageUri = null;
     if (src) {
-      let image = Image.resolveAssetSource(src) || { uri: null };
-      imageUri = image.uri;
+        let image = Image.resolveAssetSource(src) || {uri: null};
+        imageUri = image.uri;
     }
     return imageUri;
 }

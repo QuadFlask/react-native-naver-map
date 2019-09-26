@@ -21,11 +21,11 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
-import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
@@ -37,11 +37,12 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
-    public static final String[] EVENT_NAMES = new String[] {
+    public static final String[] EVENT_NAMES = new String[]{
             "onInitialized",
             "onCameraChange",
             "onMapClick",
-            "onTouch" };
+            "onTouch"
+    };
 
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
@@ -55,7 +56,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     private static boolean contextHasBug(Context context) {
         return context == null ||
-                context.getResources() == null || 
+                context.getResources() == null ||
                 context.getResources().getConfiguration() == null;
     }
 
