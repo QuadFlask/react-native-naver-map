@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.1",
-    "react-native-nmap": "0.0.35"
+    "react-native-nmap": "0.0.36"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

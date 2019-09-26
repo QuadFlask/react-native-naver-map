@@ -7,9 +7,9 @@ const P1 = {latitude: 37.565051, longitude: 126.978567};
 const P2 = {latitude: 37.565383, longitude: 126.976292};
 
 const App = () => {
-    useEffect(async () => {
-        await requestLocationPermission();
-    });
+    useEffect(() => {
+        requestLocationPermission();
+    }, []);
 
     return <NaverMapView style={{width: '100%', height: '100%'}}
                          showsMyLocationButton={true}>
@@ -18,7 +18,7 @@ const App = () => {
         <Marker coordinate={P2} pinColor="red"/>
         <Path coordinates={[P0, P1]}/>
         <Polyline coordinates={[P1, P2]}/>
-        <Circle coordinate={P0} color={"rgba(255,255,0,0.3)"}/>
+        <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200}/>
     </NaverMapView>
 };
 
