@@ -47,7 +47,7 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
         view.setCenter(toNaverLatLng(map));
     }
 
-    @ReactProp(name = "radius", defaultInt = 500)
+    @ReactProp(name = "radius", defaultDouble = 100.0)
     public void setRadius(RNNaverMapCircleOverlay view, double radius) {
         view.setRadius(radius);
     }
@@ -56,5 +56,5 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
     public void setColor(RNNaverMapCircleOverlay view, int color){
         view.setColor(color);
     }
-    
+
 }
