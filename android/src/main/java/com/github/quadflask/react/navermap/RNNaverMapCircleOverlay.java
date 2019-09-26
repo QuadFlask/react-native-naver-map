@@ -27,6 +27,6 @@ public class RNNaverMapCircleOverlay extends RNNaverMapFeature<CircleOverlay> {
     }
 
     public void setColor(int color) {
-        feature.setColor(ColorUtils.setAlphaComponent(color, 31));
+        feature.setColor(color);
     }
 }
