@@ -22,8 +22,8 @@ public class RNNaverMapPackage implements ReactPackage {
                 new RNNaverMapViewManager(reactContext),
                 new RNNaverMapPolylineOverlayManager(reactContext),
                 new RNNaverMapPathOverlayManager(reactContext),
-                new RNNaverMapMarkerManager(reactContext)
+                new RNNaverMapMarkerManager(reactContext),
+                new RNNaverMapCircleOverlayManager(reactContext)
         );
     }
 }
-

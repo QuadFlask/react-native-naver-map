@@ -25,6 +25,7 @@ import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
+import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
@@ -36,30 +37,29 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
 public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
-    public static final String[] EVENT_NAMES = new String[]{
+    public static final String[] EVENT_NAMES = new String[] {
             "onInitialized",
             "onCameraChange",
             "onMapClick",
-            "onTouch"
-    };
+            "onTouch" };
 
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
     private LifecycleEventListener lifecycleListener;
     private NaverMap naverMap;
     private List<Marker> markers = new ArrayList<>();
+    private List<CircleOverlay> circleOverlays = new ArrayList<>();
     private List<PolylineOverlay> polylineOverlays = new ArrayList<>();
     private Map<Integer, Pair<Marker, InfoWindow>> infoWindows = new HashMap<>();
     private PathOverlay path;
 
     private static boolean contextHasBug(Context context) {
         return context == null ||
-                context.getResources() == null ||
+                context.getResources() == null || 
                 context.getResources().getConfiguration() == null;
     }
 
-    private static Context getNonBuggyContext(ThemedReactContext reactContext,
-                                              ReactApplicationContext appContext) {
+    private static Context getNonBuggyContext(ThemedReactContext reactContext, ReactApplicationContext appContext) {
         Context superContext = reactContext;
         if (!contextHasBug(appContext.getCurrentActivity())) {
             superContext = appContext.getCurrentActivity();
@@ -123,18 +123,18 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         lifecycleListener = new LifecycleEventListener() {
             @Override
             public void onHostResume() {
-//                onResume();
+                // onResume();
             }
 
             @Override
             public void onHostPause() {
-//                onPause();
+                // onPause();
             }
 
             @Override
             public void onHostDestroy() {
-//                onStop();
-//                onDestroy();
+                // onStop();
+                // onDestroy();
                 if (locationSource != null)
                     locationSource.deactivate();
                 themedReactContext.removeLifecycleEventListener(lifecycleListener);
@@ -146,8 +146,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     public void setCenter(LatLng latLng) {
         getMapAsync(e -> {
-            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng)
-                    .animate(CameraAnimation.Easing);
+            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng).animate(CameraAnimation.Easing);
             naverMap.moveCamera(cameraUpdate);
         });
     }
@@ -172,14 +171,16 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     public void setTilt(int tilt) {
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
-            naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(cameraPosition.target, cameraPosition.zoom, tilt, cameraPosition.bearing)));
+            naverMap.moveCamera(CameraUpdate.toCameraPosition(
+                    new CameraPosition(cameraPosition.target, cameraPosition.zoom, tilt, cameraPosition.bearing)));
         });
     }
 
     public void setBearing(int bearing) {
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
-            naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, bearing)));
+            naverMap.moveCamera(CameraUpdate.toCameraPosition(
+                    new CameraPosition(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, bearing)));
         });
     }
 
@@ -205,6 +206,22 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    public void setCircle(List<CircleOverlay> circleArray) {
+        getMapAsync(e -> {
+            for (CircleOverlay circleOverlay : circleOverlays) {
+                circleOverlay.setMap(null);
+            }
+            circleOverlays.clear();
+
+            if (circleArray != null && circleArray.size() > 0) {
+                circleOverlays = circleArray;
+                for (CircleOverlay circleOverlay : circleOverlays) {
+                    circleOverlay.setMap(naverMap);
+                }
+            }
+        });
+    }
+
     public void setPolyLine(List<PolylineOverlay> polyLineArray) {
         getMapAsync(e -> {
             for (PolylineOverlay polylineOverlay : polylineOverlays) {
@@ -223,7 +240,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     public void setPath(PathOverlay path) {
         getMapAsync(e -> {
-            if (this.path != null) this.path.setMap(null);
+            if (this.path != null)
+                this.path.setMap(null);
             if (path != null) {
                 this.path = path;
                 this.path.setMap(naverMap);
@@ -310,6 +328,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private final List<RNNaverMapFeature> features = new ArrayList<>();
     private final Map<Marker, RNNaverMapMarker> markerMap = new HashMap<>();
     private final Map<PolylineOverlay, RNNaverMapPolylineOverlay> polylineMap = new HashMap<>();
+    private final Map<CircleOverlay, RNNaverMapCircleOverlay> circleMap = new HashMap<>();
 
     private final Map<PathOverlay, RNNaverMapPathOverlay> pathOverlayMap = new HashMap<>();
 
@@ -320,6 +339,11 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 annotation.addToMap(this);
                 features.add(index, annotation);
                 markerMap.put(annotation.getFeature(), annotation);
+            } else if (child instanceof RNNaverMapCircleOverlay) {
+                RNNaverMapCircleOverlay annotation = (RNNaverMapCircleOverlay) child;
+                annotation.addToMap(this);
+                features.add(index, annotation);
+                circleMap.put(annotation.getFeature(), annotation);
             } else if (child instanceof RNNaverMapPolylineOverlay) {
                 RNNaverMapPolylineOverlay annotation = (RNNaverMapPolylineOverlay) child;
                 annotation.addToMap(this);
@@ -338,6 +362,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         RNNaverMapFeature feature = features.remove(index);
         if (feature instanceof RNNaverMapMarker) {
             markerMap.remove(feature.getFeature());
+        } else if (feature instanceof RNNaverMapCircleOverlay) {
+            circleMap.remove(feature.getFeature());
         } else if (feature instanceof RNNaverMapPolylineOverlay) {
             polylineMap.remove(feature.getFeature());
         } else if (feature instanceof RNNaverMapPathOverlay) {

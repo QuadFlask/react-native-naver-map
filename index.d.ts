@@ -29,29 +29,29 @@ export declare const LayerGroup: {
 export interface NaverMapViewProps {
     style?: StyleProp<ViewStyle>;
     center?: Coord & {
-        zoom?: number;
-        tilt?: number;
-        bearing?: number;
+      zoom?: number;
+      tilt?: number;
+      bearing?: number;
     };
     tilt?: number;
     bearing?: number;
     mapPadding?: {
-        left: number;
-        top: number;
-        right: number;
-        bottom: number;
+      left: number;
+      top: number;
+      right: number;
+      bottom: number;
     };
     onInitialized?: Function;
     onCameraChange?: (event: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
+      latitude: number;
+      longitude: number;
+      zoom: number;
     }) => void;
     onMapClick?: (event: {
-        x: number;
-        y: number;
-        latitude: number;
-        longitude: number;
+      x: number;
+      y: number;
+      latitude: number;
+      longitude: number;
     }) => void;
     onTouch?: () => void;
     showsMyLocationButton?: boolean;
@@ -71,26 +71,35 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
-    handleOnCameraChange: (event: React.SyntheticEvent<{}, {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-    }>) => void;
-    handleOnMapClick: (event: React.SyntheticEvent<{}, {
-        x: number;
-        y: number;
-        latitude: number;
-        longitude: number;
-    }>) => void;
+    handleOnCameraChange: (
+      event: React.SyntheticEvent<
+        {},
+        {
+          latitude: number;
+          longitude: number;
+          zoom: number;
+        }
+      >,
+    ) => void;
+    handleOnMapClick: (
+      event: React.SyntheticEvent<
+        {},
+        {
+          x: number;
+          y: number;
+          latitude: number;
+          longitude: number;
+        }
+      >,
+    ) => void;
     render(): JSX.Element;
 }
-interface RNNaverMapView extends React.Component<{}, any> {
-}
+interface RNNaverMapView extends React.Component<{}, any> {}
 interface MarkerProps {
     coordinate: Coord;
     anchor?: {
-        x: number;
-        y: number;
+      x: number;
+      y: number;
     };
     pinColor?: string;
     rotation?: number;
@@ -101,6 +110,14 @@ interface MarkerProps {
 }
 export declare class Marker extends Component<MarkerProps> {
     render(): JSX.Element;
+}
+interface CircleProps {
+    coordinate: Coord;
+    radius?: number;
+    color?: string;
+}
+export declare class Circle extends Component<CircleProps> {
+  render(): JSX.Element;
 }
 interface PolylineProps {
     coordinates: Coord[];
