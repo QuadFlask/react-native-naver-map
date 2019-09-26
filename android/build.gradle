@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:0.60.5'
-    implementation 'com.naver.maps:map-sdk:3.5.0'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.naver.maps:map-sdk:3.6.0'
     implementation "com.google.android.gms:play-services-location:16.0.0"
 }

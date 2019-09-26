@@ -2,8 +2,8 @@
   package="com.example">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/><!--위치정보활용시 추가-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/><!--위치정보활용시 추가-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
       android:name=".MainApplication"
