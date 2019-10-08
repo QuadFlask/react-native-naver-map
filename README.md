@@ -54,13 +54,12 @@ allprojects {
 
 ### IOS 추가 설정
 
-```bash
-cd ios && pod install
-```
 [네이버 맵 IOS SDK 문서](https://navermaps.github.io/ios-map-sdk/guide-ko/1.html)를 따라 API키와 레포지터리 경로를 추가합니다.
 
 `info.plist`에 아래와 같이 발급받은 클라이언트 아이디를 추가해줍니다.
+
 ![image](https://user-images.githubusercontent.com/49827449/66392740-b2fd5f00-ea0b-11e9-8c38-23e604b1009d.png)
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
