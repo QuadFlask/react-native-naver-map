@@ -59,7 +59,7 @@ allprojects {
 ```
 cd ios && pod install
 ```
-`info.plist`에 아래와 같이 추가하고 발급받은 클라이언트 아이디로 바꿔줍니다.
+`info.plist`에 아래와 같이 발급받은 클라이언트 아이디를 추가해줍니다.
 ![image](https://user-images.githubusercontent.com/49827449/66392740-b2fd5f00-ea0b-11e9-8c38-23e604b1009d.png)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
