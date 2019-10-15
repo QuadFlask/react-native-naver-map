@@ -17,7 +17,7 @@ $ cd ios/ && pod install
 - **React Native <= 0.59**
 
 ```bash
-$ react-native link @react-native-community/async-storage
+$ react-native link react-native-nmap
 $ cd ios/ && pod install
 ```
 
