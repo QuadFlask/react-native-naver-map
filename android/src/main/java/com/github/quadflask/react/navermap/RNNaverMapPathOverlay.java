@@ -52,6 +52,14 @@ public class RNNaverMapPathOverlay extends RNNaverMapFeature<PathOverlay> {
         feature.setWidth(Math.round(widthInScreenPx));
     }
 
+    public void setZIndex(int zIndex) {
+        feature.setZIndex(zIndex);
+    }
+
+    public void setProgress(float progress) {
+        feature.setProgress(progress);
+    }
+
     public void setOutlineWidth(float widthInScreenPx) {
         feature.setOutlineWidth(Math.round(widthInScreenPx));
     }

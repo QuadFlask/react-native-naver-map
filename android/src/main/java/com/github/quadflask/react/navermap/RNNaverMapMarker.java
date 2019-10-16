@@ -108,6 +108,10 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
         }
     }
 
+    public void setAlpha(float alpha) {
+        feature.setAlpha(alpha);
+    }
+
     public void setAnchor(float x, float y) {
         feature.setAnchor(new PointF(x, y));
     }

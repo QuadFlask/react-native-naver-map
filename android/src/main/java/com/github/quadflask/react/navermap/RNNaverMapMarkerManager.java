@@ -103,4 +103,9 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
     public void setDuration(RNNaverMapMarker view, int duration) {
         view.setDuration(duration);
     }
+
+    @ReactProp(name = "alpha", defaultFloat = 1f)
+    public void setAlpha(RNNaverMapMarker view, float alpha) {
+        view.setAlpha(alpha);
+    }
 }

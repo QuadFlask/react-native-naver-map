@@ -54,6 +54,11 @@ public class RNNaverMapPathOverlayManager extends ViewGroupManager<RNNaverMapPat
         view.setWidth(widthInScreenPx);
     }
 
+    @ReactProp(name = "zIndex", defaultInt = 0)
+    public void setProgress(RNNaverMapPathOverlay view, int zIndex) {
+        view.setZIndex(zIndex);
+    }
+
     @ReactProp(name = "color", defaultInt = Color.RED, customType = "Color")
     public void setColor(RNNaverMapPathOverlay view, int color) {
         view.setColor(color);
@@ -89,5 +94,10 @@ public class RNNaverMapPathOverlayManager extends ViewGroupManager<RNNaverMapPat
     public void setPatternInterval(RNNaverMapPathOverlay view, float widthInPoints) {
         int widthInScreenPx = Math.round(metrics.density * widthInPoints);
         view.setPatternInterval(widthInScreenPx);
+    }
+
+    @ReactProp(name = "progress", defaultFloat = 0f)
+    public void setProgress(RNNaverMapPathOverlay view, float progress) {
+        view.setProgress(progress);
     }
 }
