@@ -1,10 +1,18 @@
 package com.github.quadflask.react.navermap;
 
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.util.Property;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -24,10 +32,13 @@ import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;
+    private boolean animated = false;
+    private int duration = 500;
+    private TimeInterpolator easingFunction;
 
     public RNNaverMapMarker(Context context) {
         super(context);
@@ -44,7 +55,57 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
     }
 
     public void setCoordinate(LatLng latLng) {
-        feature.setPosition(latLng);
+        if (animated && this.duration > 0) setCoordinateAnimated(latLng, this.duration);
+        else feature.setPosition(latLng);
+    }
+
+    public void setCoordinateAnimated(LatLng finalPosition, int duration) {
+        if (Double.isNaN(feature.getPosition().latitude)) {
+            feature.setPosition(finalPosition);
+        } else {
+            Property<Marker, LatLng> property = Property.of(Marker.class, LatLng.class, "position");
+            ObjectAnimator animator = ObjectAnimator.ofObject(
+                    feature,
+                    property,
+                    ReactUtil::interpolate,
+                    finalPosition);
+            animator.setDuration(duration);
+            if (easingFunction != null)
+                animator.setInterpolator(easingFunction);
+            animator.start();
+        }
+    }
+
+    public void setAnimated(boolean animated) {
+        this.animated = animated;
+    }
+
+    public void setEasing(Integer easing) {
+        switch (easing) {
+            case 0:
+                easingFunction = new LinearInterpolator();
+                break;
+            case 1:
+                easingFunction = new AccelerateDecelerateInterpolator();
+                break;
+            case 2:
+                easingFunction = new AccelerateInterpolator();
+                break;
+            case 3:
+                easingFunction = new DecelerateInterpolator();
+                break;
+            case 4:
+                easingFunction = new BounceInterpolator();
+                break;
+            default:
+                easingFunction = null;
+        }
+    }
+
+    public void setDuration(Integer duration) {
+        if (duration != null && duration >= 0) {
+            this.duration = duration;
+        }
     }
 
     public void setAnchor(float x, float y) {

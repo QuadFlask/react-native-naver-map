@@ -12,7 +12,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import javax.annotation.Nonnull;
+import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
@@ -30,15 +30,15 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String getName() {
         return "RNNaverMapCircleOverlay";
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected RNNaverMapCircleOverlay createViewInstance(@Nonnull ThemedReactContext reactContext) {
+    protected RNNaverMapCircleOverlay createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapCircleOverlay(reactContext);
     }
 

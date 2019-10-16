@@ -25,7 +25,7 @@ import com.naver.maps.map.overlay.PathOverlay;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class RNNaverMapPathOverlay extends RNNaverMapFeature<PathOverlay> {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;

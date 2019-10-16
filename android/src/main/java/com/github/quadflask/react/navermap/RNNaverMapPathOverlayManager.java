@@ -12,7 +12,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import javax.annotation.Nonnull;
+import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toLatLngList;
 
@@ -31,15 +31,15 @@ public class RNNaverMapPathOverlayManager extends ViewGroupManager<RNNaverMapPat
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String getName() {
         return "RNNaverMapPathOverlay";
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected RNNaverMapPathOverlay createViewInstance(@Nonnull ThemedReactContext reactContext) {
+    protected RNNaverMapPathOverlay createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapPathOverlay(reactContext);
     }
 

@@ -12,8 +12,8 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
@@ -32,15 +32,15 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String getName() {
         return "RNNaverMapMarker";
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected RNNaverMapMarker createViewInstance(@Nonnull ThemedReactContext reactContext) {
+    protected RNNaverMapMarker createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapMarker(reactContext);
     }
 
@@ -87,5 +87,20 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
     public void setHeight(RNNaverMapMarker view, float height) {
         int heightInScreenPx = Math.round(metrics.density * height);
         view.setHeight(heightInScreenPx);
+    }
+
+    @ReactProp(name = "animated", defaultBoolean = false)
+    public void setAnimated(RNNaverMapMarker view, boolean animated) {
+        view.setAnimated(animated);
+    }
+
+    @ReactProp(name = "easing", defaultInt = -1)
+    public void setEasing(RNNaverMapMarker view, int easingFunction) {
+        view.setEasing(easingFunction);
+    }
+
+    @ReactProp(name = "duration", defaultInt = 500)
+    public void setDuration(RNNaverMapMarker view, int duration) {
+        view.setDuration(duration);
     }
 }

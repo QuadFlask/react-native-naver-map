@@ -297,6 +297,10 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> naverMap.setNightModeEnabled(enable));
     }
 
+    public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
+        getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
+    }
+
     public void openInfoWindow(int id, LatLng at, final String string) {
         final Pair<Marker, InfoWindow> oldInfoWindow = infoWindows.get(id);
         if (oldInfoWindow != null) {

@@ -12,7 +12,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-import javax.annotation.Nonnull;
+import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getLatLngList;
 import static com.github.quadflask.react.navermap.ReactUtil.toLatLngList;
@@ -32,15 +32,15 @@ public class RNNaverMapPolylineOverlayManager extends ViewGroupManager<RNNaverMa
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String getName() {
         return "RNNaverMapPolylineOverlay";
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected RNNaverMapPolylineOverlay createViewInstance(@Nonnull ThemedReactContext reactContext) {
+    protected RNNaverMapPolylineOverlay createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapPolylineOverlay(reactContext);
     }
 

@@ -22,7 +22,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
@@ -36,6 +36,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     private static final int ANIMATE_TO_TWO_COORDINATES = 3;
     private static final int SET_LOCATION_TRACKING_MODE = 4;
     private static final int WATCH_CAMERA_CHANGE = 5;
+    private static final int ANIMATE_TO_COORDINATES = 6;
 
     public RNNaverMapViewManager(ReactApplicationContext context) {
         super();
@@ -51,15 +52,15 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
         return locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String getName() {
         return "RNNaverMapView";
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected RNNaverMapView createViewInstance(@Nonnull ThemedReactContext reactContext) {
+    protected RNNaverMapView createViewInstance(@NonNull ThemedReactContext reactContext) {
         return new RNNaverMapView(reactContext, appContext, locationSource);
     }
 
@@ -173,7 +174,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @Override
-    public void receiveCommand(@Nonnull RNNaverMapView mapView, int commandId, @javax.annotation.Nullable ReadableArray args) {
+    public void receiveCommand(@NonNull RNNaverMapView mapView, int commandId, @Nullable ReadableArray args) {
         switch (commandId) {
             case ANIMATE_TO_REGION: {
                 final ReadableMap region = args.getMap(0);
@@ -203,6 +204,23 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
 
                 break;
             }
+            case ANIMATE_TO_COORDINATES:
+                ReadableArray coordinatesArray = args.getArray(0);
+                ReadableMap edgePadding = args.getMap(1);
+
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (int i = 0; i < coordinatesArray.size(); i++) {
+                    builder.include(toNaverLatLng(coordinatesArray.getMap(i)));
+                }
+
+                int left = getInt(edgePadding, "left", 0);
+                int top = getInt(edgePadding, "top", 0);
+                int right = getInt(edgePadding, "right", 0);
+                int bottom = getInt(edgePadding, "bottom", 0);
+
+                mapView.moveCameraFitBound(builder.build(), left, top, right, bottom);
+
+                break;
             case ANIMATE_TO_COORDINATE:
                 mapView.setCenter(toNaverLatLng(args.getMap(0)));
                 break;
@@ -225,6 +243,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
                 .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
                 .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
                 .put("watchCameraChange", WATCH_CAMERA_CHANGE)
+                .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
                 .build();
     }
 

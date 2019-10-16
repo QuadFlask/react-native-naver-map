@@ -46,6 +46,12 @@ public class ReactUtil {
         return coords;
     }
 
+    public static Integer getInt(@androidx.annotation.Nullable ReadableMap option, String key, Integer defaultValue) {
+        if (option != null && option.hasKey(key))
+            return option.getInt(key);
+        return defaultValue;
+    }
+
     public static void getNumber(ReadableMap option, String key, Consumer<Double> consumer) {
         if (option.hasKey(key))
             consumer.accept(option.getDouble(key));
@@ -94,5 +100,11 @@ public class ReactUtil {
             anchor.y = (float) anchorArray.getDouble(1);
             consumer.accept(anchor);
         }
+    }
+
+    public static LatLng interpolate(float fraction, LatLng a, LatLng b) {
+        double lat = (b.latitude - a.latitude) * fraction + a.latitude;
+        double lng = (b.longitude - a.longitude) * fraction + a.longitude;
+        return new LatLng(lat, lng);
     }
 }
