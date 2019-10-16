@@ -77,6 +77,10 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
     };
 
+    animateToCoordinates = (coords: Coord[], bounds?: { top: number, bottom: number, left: number, right: number, }) => {
+        this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
+    };
+
     watchCameraChange = () => {
         this.dispatchViewManagerCommand('watchCameraChange', []);
     };
@@ -126,20 +130,18 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             nightMode,
         } = this.props;
 
-        return (
-            <RNNaverMapView
-                ref={this.resolveRef}
-                {...this.props}
-                onInitialized={onInitialized}
-                center={center}
-                mapPadding={mapPadding}
-                tilt={tilt}
-                bearing={bearing}
-                nightMode={nightMode}
-                onCameraChange={this.handleOnCameraChange}
-                onMapClick={this.handleOnMapClick}
-            />
-        );
+        return <RNNaverMapView
+            ref={this.resolveRef}
+            {...this.props}
+            onInitialized={onInitialized}
+            center={center}
+            mapPadding={mapPadding}
+            tilt={tilt}
+            bearing={bearing}
+            nightMode={nightMode}
+            onCameraChange={this.handleOnCameraChange}
+            onMapClick={this.handleOnMapClick}
+        />
     }
 }
 
@@ -156,6 +158,8 @@ interface MarkerProps {
     image?: ImageSourcePropType;
     width?: number;
     height?: number;
+    alpha?: number
+    animated?: boolean
     caption?: {
         text?: string
         align?: number
@@ -173,9 +177,7 @@ interface MarkerProps {
 
 export class Marker extends Component<MarkerProps> {
     render() {
-        return (
-            <RNNaverMapMarker {...this.props} image={getImageUri(this.props.image)}/>
-        );
+        return <RNNaverMapMarker {...this.props} image={getImageUri(this.props.image)}/>
     }
 }
 
@@ -213,16 +215,16 @@ interface PathProps {
     passedOutlineColor?: string;
     pattern?: ImageSourcePropType;
     patternInterval?: number;
+    progress?: number
+    zIndex?: number
 }
 
 export class Path extends Component<PathProps> {
     render() {
-        return (
-            <RNNaverMapPathOverlay
-                {...this.props}
-                pattern={getImageUri(this.props.pattern)}
-            />
-        );
+        return <RNNaverMapPathOverlay
+            {...this.props}
+            pattern={getImageUri(this.props.pattern)}
+        />
     }
 }
 

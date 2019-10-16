@@ -14,7 +14,6 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 
 import androidx.annotation.NonNull;
 
-import static com.github.quadflask.react.navermap.ReactUtil.getLatLngList;
 import static com.github.quadflask.react.navermap.ReactUtil.toLatLngList;
 
 public class RNNaverMapPolylineOverlayManager extends ViewGroupManager<RNNaverMapPolylineOverlay> {

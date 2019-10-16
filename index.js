@@ -36,6 +36,9 @@ export default class NaverMapView extends Component {
         this.animateToTwoCoordinates = (c1, c2) => {
             this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
         };
+        this.animateToCoordinates = (coords, bounds) => {
+            this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
+        };
         this.watchCameraChange = () => {
             this.dispatchViewManagerCommand('watchCameraChange', []);
         };
@@ -59,12 +62,12 @@ export default class NaverMapView extends Component {
     }
     render() {
         const { onInitialized, center, tilt, bearing, mapPadding, nightMode, } = this.props;
-        return (React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick })));
+        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {
     render() {
-        return (React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image) })));
+        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image) }));
     }
 }
 export class Circle extends Component {
@@ -79,7 +82,7 @@ export class Polyline extends Component {
 }
 export class Path extends Component {
     render() {
-        return (React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { pattern: getImageUri(this.props.pattern) })));
+        return React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { pattern: getImageUri(this.props.pattern) }));
     }
 }
 function getImageUri(src) {

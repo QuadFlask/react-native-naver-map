@@ -67,6 +67,12 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     nodeHandle?: null | number;
     private resolveRef;
     animateToTwoCoordinates: (c1: Coord, c2: Coord) => void;
+    animateToCoordinates: (coords: Coord[], bounds?: {
+        top: number;
+        bottom: number;
+        left: number;
+        right: number;
+    }) => void;
     watchCameraChange: () => void;
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
@@ -98,6 +104,8 @@ interface MarkerProps {
     image?: ImageSourcePropType;
     width?: number;
     height?: number;
+    alpha?: number;
+    animated?: boolean;
     caption?: {
         text?: string;
         align?: number;
@@ -141,6 +149,8 @@ interface PathProps {
     passedOutlineColor?: string;
     pattern?: ImageSourcePropType;
     patternInterval?: number;
+    progress?: number;
+    zIndex?: number;
 }
 export declare class Path extends Component<PathProps> {
     render(): JSX.Element;
