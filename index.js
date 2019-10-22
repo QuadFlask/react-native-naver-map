@@ -26,6 +26,21 @@ export const LayerGroup = {
     LAYER_GROUP_CADASTRAL: 'landparcel',
     LAYER_GROUP_MOUNTAIN: 'mountain',
 };
+export var Gravity;
+(function (Gravity) {
+    Gravity[Gravity["NO_GRAVITY"] = 0] = "NO_GRAVITY";
+    Gravity[Gravity["AXIS_SPECIFIED"] = 1] = "AXIS_SPECIFIED";
+    Gravity[Gravity["AXIS_PULL_BEFORE"] = 2] = "AXIS_PULL_BEFORE";
+    Gravity[Gravity["AXIS_PULL_AFTER"] = 4] = "AXIS_PULL_AFTER";
+    Gravity[Gravity["AXIS_X_SHIFT"] = 0] = "AXIS_X_SHIFT";
+    Gravity[Gravity["AXIS_Y_SHIFT"] = 4] = "AXIS_Y_SHIFT";
+    Gravity[Gravity["TOP"] = 48] = "TOP";
+    Gravity[Gravity["BOTTOM"] = 80] = "BOTTOM";
+    Gravity[Gravity["LEFT"] = 3] = "LEFT";
+    Gravity[Gravity["RIGHT"] = 5] = "RIGHT";
+    Gravity[Gravity["CENTER_VERTICAL"] = 16] = "CENTER_VERTICAL";
+    Gravity[Gravity["CENTER_HORIZONTAL"] = 1] = "CENTER_HORIZONTAL";
+})(Gravity || (Gravity = {}));
 export default class NaverMapView extends Component {
     constructor() {
         super(...arguments);
@@ -61,8 +76,8 @@ export default class NaverMapView extends Component {
         this.handleOnMapClick = (event) => this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
     }
     render() {
-        const { onInitialized, center, tilt, bearing, mapPadding, nightMode, } = this.props;
-        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
+        const { onInitialized, center, tilt, bearing, mapPadding, logoMargin, nightMode, } = this.props;
+        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {

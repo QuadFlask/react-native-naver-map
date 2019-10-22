@@ -26,6 +26,26 @@ export declare const LayerGroup: {
     LAYER_GROUP_CADASTRAL: string;
     LAYER_GROUP_MOUNTAIN: string;
 };
+export declare enum Gravity {
+    NO_GRAVITY = 0,
+    AXIS_SPECIFIED = 1,
+    AXIS_PULL_BEFORE = 2,
+    AXIS_PULL_AFTER = 4,
+    AXIS_X_SHIFT = 0,
+    AXIS_Y_SHIFT = 4,
+    TOP = 48,
+    BOTTOM = 80,
+    LEFT = 3,
+    RIGHT = 5,
+    CENTER_VERTICAL = 16,
+    CENTER_HORIZONTAL = 1
+}
+export interface Rect {
+    left?: number;
+    top?: number;
+    right?: number;
+    bottom?: number;
+}
 export interface NaverMapViewProps {
     style?: StyleProp<ViewStyle>;
     center?: Coord & {
@@ -35,12 +55,9 @@ export interface NaverMapViewProps {
     };
     tilt?: number;
     bearing?: number;
-    mapPadding?: {
-        left: number;
-        top: number;
-        right: number;
-        bottom: number;
-    };
+    mapPadding?: Rect;
+    logoMargin?: Rect;
+    logoGravity?: Gravity;
     onInitialized?: Function;
     onCameraChange?: (event: {
         latitude: number;
@@ -127,6 +144,9 @@ interface CircleProps {
     coordinate: Coord;
     radius?: number;
     color?: string;
+    outlineWidth?: number;
+    outlineColor?: string;
+    zIndex?: number;
 }
 export declare class Circle extends Component<CircleProps> {
     render(): JSX.Element;

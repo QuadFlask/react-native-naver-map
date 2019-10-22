@@ -36,12 +36,36 @@ export const LayerGroup = {
     LAYER_GROUP_MOUNTAIN: 'mountain',
 };
 
+export enum Gravity {
+    NO_GRAVITY = 0x0000,
+    AXIS_SPECIFIED = 0x0001,
+    AXIS_PULL_BEFORE = 0x0002,
+    AXIS_PULL_AFTER = 0x0004,
+    AXIS_X_SHIFT = 0,
+    AXIS_Y_SHIFT = 4,
+    TOP = (AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_Y_SHIFT,
+    BOTTOM = (AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_Y_SHIFT,
+    LEFT = (AXIS_PULL_BEFORE | AXIS_SPECIFIED) << AXIS_X_SHIFT,
+    RIGHT = (AXIS_PULL_AFTER | AXIS_SPECIFIED) << AXIS_X_SHIFT,
+    CENTER_VERTICAL = AXIS_SPECIFIED << AXIS_Y_SHIFT,
+    CENTER_HORIZONTAL = AXIS_SPECIFIED << AXIS_X_SHIFT,
+}
+
+export interface Rect {
+    left?: number
+    top?: number
+    right?: number
+    bottom?: number
+}
+
 export interface NaverMapViewProps {
     style?: StyleProp<ViewStyle>;
     center?: Coord & { zoom?: number; tilt?: number; bearing?: number };
     tilt?: number;
     bearing?: number;
-    mapPadding?: { left: number; top: number; right: number; bottom: number };
+    mapPadding?: Rect;
+    logoMargin?: Rect;
+    logoGravity?: Gravity;
     onInitialized?: Function;
     onCameraChange?: (event: {
         latitude: number;
@@ -127,6 +151,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             tilt,
             bearing,
             mapPadding,
+            logoMargin,
             nightMode,
         } = this.props;
 
@@ -136,6 +161,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             onInitialized={onInitialized}
             center={center}
             mapPadding={mapPadding}
+            logoMargin={logoMargin}
             tilt={tilt}
             bearing={bearing}
             nightMode={nightMode}
@@ -185,6 +211,9 @@ interface CircleProps {
     coordinate: Coord;
     radius?: number;
     color?: string;
+    outlineWidth?: number
+    outlineColor?: string
+    zIndex?: number
 }
 
 export class Circle extends Component<CircleProps> {
