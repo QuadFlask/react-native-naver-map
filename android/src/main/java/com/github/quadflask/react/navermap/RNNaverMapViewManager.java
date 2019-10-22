@@ -1,8 +1,7 @@
 package com.github.quadflask.react.navermap;
 
 import android.app.Activity;
-import androidx.annotation.Nullable;
-import androidx.core.util.Consumer;
+import android.graphics.Rect;
 import android.view.View;
 
 import com.airbnb.android.react.maps.SizeReportingShadowNode;
@@ -23,6 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
@@ -149,11 +150,28 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
 
     @ReactProp(name = "mapPadding")
     public void setMapPadding(RNNaverMapView mapView, @Nullable ReadableMap padding) {
+        final Rect rect = getRect(padding, mapView.getResources().getDisplayMetrics().density);
+
+        mapView.setMapPadding(rect.left, rect.top, rect.right, rect.bottom);
+    }
+
+    @ReactProp(name = "logoMargin")
+    public void setLogoMargin(RNNaverMapView mapView, @Nullable ReadableMap margin) {
+        final Rect rect = getRect(margin, mapView.getResources().getDisplayMetrics().density);
+
+        mapView.setLogoMargin(rect.left, rect.top, rect.right, rect.bottom);
+    }
+
+    @ReactProp(name = "logoGravity")
+    public void setLogoGravity(RNNaverMapView mapView, int gravity) {
+        mapView.setLogoGravity(gravity);
+    }
+
+    private Rect getRect(@Nullable ReadableMap padding, float density) {
         int left = 0;
         int top = 0;
         int right = 0;
         int bottom = 0;
-        float density = mapView.getResources().getDisplayMetrics().density;
 
         if (padding != null) {
             if (padding.hasKey("left")) {
@@ -170,7 +188,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
             }
         }
 
-        mapView.setMapPadding(left, top, right, bottom);
+        return new Rect(left, top, right, bottom);
     }
 
     @Override

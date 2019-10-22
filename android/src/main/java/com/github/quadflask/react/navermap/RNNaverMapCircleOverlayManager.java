@@ -52,9 +52,24 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
         view.setRadius(radius);
     }
 
-    @ReactProp(name = "color", defaultInt = Color.RED, customType="Color")
-    public void setColor(RNNaverMapCircleOverlay view, int color){
+    @ReactProp(name = "color", defaultInt = Color.RED, customType = "Color")
+    public void setColor(RNNaverMapCircleOverlay view, int color) {
         view.setColor(color);
+    }
+
+    @ReactProp(name = "outlineWidth", defaultInt = 0)
+    public void setOutlineWidth(RNNaverMapCircleOverlay view, int outlineWidth) {
+        view.setOutlineWidth(outlineWidth);
+    }
+
+    @ReactProp(name = "outlineColor", defaultInt = Color.BLACK, customType = "Color")
+    public void setOutlineColor(RNNaverMapCircleOverlay view, int outlineColor) {
+        view.setOutlineColor(outlineColor);
+    }
+
+    @ReactProp(name = "zIndex", defaultInt = 0)
+    public void setZIndex(RNNaverMapCircleOverlay view, int zIndex) {
+        view.setZIndex(zIndex);
     }
 
 }

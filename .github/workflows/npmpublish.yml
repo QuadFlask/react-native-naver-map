@@ -1,12 +1,8 @@
 name: react-native-naver-map
 
 on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
+  release:
+    types: [created]
 
 jobs:
   build:

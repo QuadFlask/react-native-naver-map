@@ -297,6 +297,14 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> naverMap.setNightModeEnabled(enable));
     }
 
+    public void setLogoMargin(int left, int top, int right, int bottom) {
+        getMapAsync(e -> naverMap.getUiSettings().setLogoMargin(left, top, right, bottom));
+    }
+
+    public void setLogoGravity(int gravity) {
+        getMapAsync(e -> naverMap.getUiSettings().setLogoGravity(gravity));
+    }
+
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }

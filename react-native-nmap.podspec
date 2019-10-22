@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.authors      = { "QuadFlask" => "pop9310@gmail.com" }
   s.homepage     = "https://github.com/quadflask/react-native-naver-map"
-  s.license      = "MIT"
+  s.license      = package['license']
   s.platform     = :ios, "9.0"
 
   s.source       = { :git => "https://github.com/quadflask/react-native-naver-map.git" }
