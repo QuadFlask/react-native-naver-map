@@ -27,6 +27,11 @@
 {
   if ((self = [super init])) {
     _realMarker = [NMFMarker new];
+    _realMarker.touchHandler =  ^BOOL(NMFOverlay *overlay) {
+        if(!self.onClick) return NO;
+        self.onClick([self eventFromMarker:overlay])
+        return YES;
+    };
   }
   return self;
 }
