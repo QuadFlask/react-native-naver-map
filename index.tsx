@@ -52,10 +52,10 @@ export enum Gravity {
 }
 
 export interface Rect {
-    left?: number
-    top?: number
-    right?: number
-    bottom?: number
+    left?: number;
+    top?: number;
+    right?: number;
+    bottom?: number;
 }
 
 export interface NaverMapViewProps {
@@ -184,21 +184,22 @@ interface MarkerProps {
     image?: ImageSourcePropType;
     width?: number;
     height?: number;
-    alpha?: number
-    animated?: boolean
+    alpha?: number;
+    animated?: boolean;
     caption?: {
-        text?: string
-        align?: number
-        textSize?: number
-        color?: number
-        haloColor?: number
-    }
+        text?: string;
+        align?: number;
+        textSize?: number;
+        color?: number;
+        haloColor?: number;
+    };
     subCaption?: {
-        text?: string
-        textSize?: number
-        color?: number
-        haloColor?: number
-    }
+        text?: string;
+        textSize?: number;
+        color?: number;
+        haloColor?: number;
+    };
+    onClick?: () => void;
 }
 
 export class Marker extends Component<MarkerProps> {
@@ -211,9 +212,9 @@ interface CircleProps {
     coordinate: Coord;
     radius?: number;
     color?: string;
-    outlineWidth?: number
-    outlineColor?: string
-    zIndex?: number
+    outlineWidth?: number;
+    outlineColor?: string;
+    zIndex?: number;
 }
 
 export class Circle extends Component<CircleProps> {
@@ -244,8 +245,8 @@ interface PathProps {
     passedOutlineColor?: string;
     pattern?: ImageSourcePropType;
     patternInterval?: number;
-    progress?: number
-    zIndex?: number
+    progress?: number;
+    zIndex?: number;
 }
 
 export class Path extends Component<PathProps> {
