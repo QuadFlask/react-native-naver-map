@@ -2,6 +2,7 @@ package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.views.view.ReactViewGroup;
 import com.naver.maps.map.overlay.Overlay;
 
@@ -23,5 +24,12 @@ public abstract class RNNaverMapFeature<T extends Overlay> extends ReactViewGrou
 
     public T getFeature() {
         return feature;
+    }
+
+    public void setOnClickListener(Callback callback) {
+        feature.setOnClickListener(overlay -> {
+            callback.invoke(overlay);
+            return true;
+        });
     }
 }

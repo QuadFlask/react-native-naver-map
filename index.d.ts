@@ -136,6 +136,7 @@ interface MarkerProps {
         color?: number;
         haloColor?: number;
     };
+    onClick?: () => void;
 }
 export declare class Marker extends Component<MarkerProps> {
     render(): JSX.Element;

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -99,5 +100,10 @@ public class RNNaverMapPathOverlayManager extends ViewGroupManager<RNNaverMapPat
     @ReactProp(name = "progress", defaultFloat = 0f)
     public void setProgress(RNNaverMapPathOverlay view, float progress) {
         view.setProgress(progress);
+    }
+
+    @ReactProp(name = "onClick")
+    public void setOnClick(RNNaverMapMarker view, Callback callback) {
+        view.setOnClickListener(callback);
     }
 }

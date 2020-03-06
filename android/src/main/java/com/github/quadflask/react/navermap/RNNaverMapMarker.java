@@ -198,13 +198,6 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
         }
     }
 
-    public void setOnClickListener(Callback callback) {
-        feature.setOnClickListener(overlay -> {
-            callback.invoke(overlay);
-            return true;
-        });
-    }
-
     private void setOverlayImage(OverlayImage image) {
         feature.setIcon(image);
     }
