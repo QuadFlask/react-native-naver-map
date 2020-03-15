@@ -16,11 +16,11 @@ import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
-public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapCircleOverlay> {
+public class RNNaverMapCircleOverlayManager extends EventEmittableViewGroupManager<RNNaverMapCircleOverlay> {
     private final DisplayMetrics metrics;
 
     public RNNaverMapCircleOverlayManager(ReactApplicationContext reactContext) {
-        super();
+        super(reactContext);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             metrics = new DisplayMetrics();
             ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay()
@@ -28,6 +28,13 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
         } else {
             metrics = reactContext.getResources().getDisplayMetrics();
         }
+    }
+
+    @Override
+    String[] getEventNames() {
+        return new String[]{
+                "onClick"
+        };
     }
 
     @NonNull
@@ -39,7 +46,7 @@ public class RNNaverMapCircleOverlayManager extends ViewGroupManager<RNNaverMapC
     @NonNull
     @Override
     protected RNNaverMapCircleOverlay createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapCircleOverlay(reactContext);
+        return new RNNaverMapCircleOverlay(this, reactContext);
     }
 
     @ReactProp(name = "coordinate")

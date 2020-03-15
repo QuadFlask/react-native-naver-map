@@ -14,6 +14,8 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -28,21 +30,18 @@ import com.facebook.imagepipeline.image.CloseableStaticBitmap;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.facebook.react.bridge.Callback;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 
-import androidx.annotation.Nullable;
-
-public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
+public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;
     private boolean animated = false;
     private int duration = 500;
     private TimeInterpolator easingFunction;
 
-    public RNNaverMapMarker(Context context) {
-        super(context);
+    public RNNaverMapMarker(EventEmittable emitter, Context context) {
+        super(emitter, context);
         feature = new Marker();
         imageHolder = DraweeHolder.create(createDraweeHierarchy(), context);
         imageHolder.onAttach();
@@ -196,13 +195,6 @@ public class RNNaverMapMarker extends RNNaverMapFeature<Marker> {
                 }
             }
         }
-    }
-
-    public void setOnClickListener(Callback callback) {
-        feature.setOnClickListener(overlay -> {
-            callback.invoke(overlay);
-            return true;
-        });
     }
 
     private void setOverlayImage(OverlayImage image) {

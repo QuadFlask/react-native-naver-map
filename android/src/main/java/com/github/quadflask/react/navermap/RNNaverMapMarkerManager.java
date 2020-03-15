@@ -6,23 +6,23 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.ViewGroupManager;
-import com.facebook.react.uimanager.annotations.ReactProp;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
+
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
-public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> {
+public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
+    private final ReactApplicationContext appContext;
     private final DisplayMetrics metrics;
 
     public RNNaverMapMarkerManager(ReactApplicationContext reactContext) {
-        super();
+        super(reactContext);
+        this.appContext = reactContext;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             metrics = new DisplayMetrics();
             ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE))
@@ -31,6 +31,13 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
         } else {
             metrics = reactContext.getResources().getDisplayMetrics();
         }
+    }
+
+    @Override
+    String[] getEventNames() {
+        return new String[]{
+                "onClick"
+        };
     }
 
     @NonNull
@@ -42,7 +49,7 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
     @NonNull
     @Override
     protected RNNaverMapMarker createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapMarker(reactContext);
+        return new RNNaverMapMarker(this, appContext);
     }
 
     @ReactProp(name = "coordinate")
@@ -108,10 +115,5 @@ public class RNNaverMapMarkerManager extends ViewGroupManager<RNNaverMapMarker> 
     @ReactProp(name = "alpha", defaultFloat = 1f)
     public void setAlpha(RNNaverMapMarker view, float alpha) {
         view.setAlpha(alpha);
-    }
-
-    @ReactProp(name = "onClick")
-    public void setOnClick(RNNaverMapMarker view, Callback callback) {
-        view.setOnClickListener(callback);
     }
 }

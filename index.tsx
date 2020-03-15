@@ -1,5 +1,15 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {requireNativeComponent, findNodeHandle, UIManager, StyleProp, ViewStyle, Platform, NativeModules, ImageSourcePropType, Image,} from 'react-native';
+import {
+    requireNativeComponent,
+    findNodeHandle,
+    UIManager,
+    StyleProp,
+    ViewStyle,
+    Platform,
+    NativeModules,
+    ImageSourcePropType,
+    Image,
+} from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
@@ -175,8 +185,12 @@ interface RNNaverMapView extends React.Component<{}, any> {
 
 }
 
-interface MarkerProps {
+export interface MapOverlay {
     coordinate: Coord;
+    onClick?: () => void;
+}
+
+export interface MarkerProps extends MapOverlay {
     anchor?: { x: number; y: number };
     pinColor?: string;
     rotation?: number;
@@ -199,7 +213,6 @@ interface MarkerProps {
         color?: number;
         haloColor?: number;
     };
-    onClick?: () => void;
 }
 
 export class Marker extends Component<MarkerProps> {
@@ -208,8 +221,7 @@ export class Marker extends Component<MarkerProps> {
     }
 }
 
-interface CircleProps {
-    coordinate: Coord;
+export interface CircleProps extends MapOverlay {
     radius?: number;
     color?: string;
     outlineWidth?: number;
@@ -223,7 +235,7 @@ export class Circle extends Component<CircleProps> {
     }
 }
 
-interface PolylineProps {
+interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
     strokeWidth?: number;
     strokeColor?: string;
@@ -235,7 +247,7 @@ export class Polyline extends Component<PolylineProps> {
     }
 }
 
-interface PathProps {
+export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
     width?: number;
     color?: string;

@@ -7,9 +7,9 @@ import com.naver.maps.map.overlay.PolylineOverlay;
 
 import java.util.List;
 
-public class RNNaverMapPolylineOverlay extends RNNaverMapFeature<PolylineOverlay> {
-    public RNNaverMapPolylineOverlay(Context context) {
-        super(context);
+public class RNNaverMapPolylineOverlay extends ClickableRNNaverMapFeature<PolylineOverlay> {
+    public RNNaverMapPolylineOverlay(EventEmittable emitter, Context context) {
+        super(emitter, context);
         feature = new PolylineOverlay();
     }
 

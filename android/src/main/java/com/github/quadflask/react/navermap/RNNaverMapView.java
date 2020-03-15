@@ -2,9 +2,11 @@ package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -32,9 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 
 public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
     public static final String[] EVENT_NAMES = new String[]{
@@ -113,13 +112,14 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         this.naverMap.setOnMapClickListener(this);
         this.naverMap.addOnCameraChangeListener((reason, animated) -> {
             if (reason == -1 && System.currentTimeMillis() - lastTouch > 1000) { // changed by user
-                emitEvent("onTouch", null);
+                WritableMap param = Arguments.createMap();
+                param.putInt("reason", reason);
+                param.putBoolean("animated", animated);
+                emitEvent("onTouch", param);
                 lastTouch = System.currentTimeMillis();
             }
         });
         this.onInitialized();
-
-        Log.e("RNNaverMapView.onMapReady", "onMapReady");
 
         lifecycleListener = new LifecycleEventListener() {
             @Override

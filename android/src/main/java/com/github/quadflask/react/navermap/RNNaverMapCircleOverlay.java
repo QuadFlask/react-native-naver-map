@@ -5,9 +5,9 @@ import android.content.Context;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.CircleOverlay;
 
-public class RNNaverMapCircleOverlay extends RNNaverMapFeature<CircleOverlay> {
-    public RNNaverMapCircleOverlay(Context context) {
-        super(context);
+public class RNNaverMapCircleOverlay extends ClickableRNNaverMapFeature<CircleOverlay> {
+    public RNNaverMapCircleOverlay(EventEmittable emitter, Context context) {
+        super(emitter, context);
         feature = new CircleOverlay();
     }
 

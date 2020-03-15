@@ -109,8 +109,11 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
 }
 interface RNNaverMapView extends React.Component<{}, any> {
 }
-interface MarkerProps {
+export interface MapOverlay {
     coordinate: Coord;
+    onClick?: () => void;
+}
+export interface MarkerProps extends MapOverlay {
     anchor?: {
         x: number;
         y: number;
@@ -136,13 +139,11 @@ interface MarkerProps {
         color?: number;
         haloColor?: number;
     };
-    onClick?: () => void;
 }
 export declare class Marker extends Component<MarkerProps> {
     render(): JSX.Element;
 }
-interface CircleProps {
-    coordinate: Coord;
+export interface CircleProps extends MapOverlay {
     radius?: number;
     color?: string;
     outlineWidth?: number;
@@ -152,7 +153,7 @@ interface CircleProps {
 export declare class Circle extends Component<CircleProps> {
     render(): JSX.Element;
 }
-interface PolylineProps {
+interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
     strokeWidth?: number;
     strokeColor?: string;
@@ -160,7 +161,7 @@ interface PolylineProps {
 export declare class Polyline extends Component<PolylineProps> {
     render(): JSX.Element;
 }
-interface PathProps {
+export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
     width?: number;
     color?: string;

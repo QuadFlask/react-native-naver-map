@@ -16,11 +16,11 @@ import androidx.annotation.NonNull;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toLatLngList;
 
-public class RNNaverMapPolylineOverlayManager extends ViewGroupManager<RNNaverMapPolylineOverlay> {
+public class RNNaverMapPolylineOverlayManager extends EventEmittableViewGroupManager<RNNaverMapPolylineOverlay> {
     private final DisplayMetrics metrics;
 
     public RNNaverMapPolylineOverlayManager(ReactApplicationContext reactContext) {
-        super();
+        super(reactContext);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             metrics = new DisplayMetrics();
             ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE))
@@ -29,6 +29,13 @@ public class RNNaverMapPolylineOverlayManager extends ViewGroupManager<RNNaverMa
         } else {
             metrics = reactContext.getResources().getDisplayMetrics();
         }
+    }
+
+    @Override
+    String[] getEventNames() {
+        return new String[]{
+                "onClick"
+        };
     }
 
     @NonNull
@@ -40,7 +47,7 @@ public class RNNaverMapPolylineOverlayManager extends ViewGroupManager<RNNaverMa
     @NonNull
     @Override
     protected RNNaverMapPolylineOverlay createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapPolylineOverlay(reactContext);
+        return new RNNaverMapPolylineOverlay(this, reactContext);
     }
 
     @ReactProp(name = "coordinates")

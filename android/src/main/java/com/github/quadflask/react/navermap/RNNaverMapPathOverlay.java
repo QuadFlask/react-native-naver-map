@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -25,13 +27,11 @@ import com.naver.maps.map.overlay.PathOverlay;
 
 import java.util.List;
 
-import androidx.annotation.Nullable;
-
-public class RNNaverMapPathOverlay extends RNNaverMapFeature<PathOverlay> {
+public class RNNaverMapPathOverlay extends ClickableRNNaverMapFeature<PathOverlay> {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;
 
-    public RNNaverMapPathOverlay(Context context) {
-        super(context);
+    public RNNaverMapPathOverlay(EventEmittable emitter, Context context) {
+        super(emitter, context);
         feature = new PathOverlay();
         imageHolder = DraweeHolder.create(createDraweeHierarchy(), context);
         imageHolder.onAttach();

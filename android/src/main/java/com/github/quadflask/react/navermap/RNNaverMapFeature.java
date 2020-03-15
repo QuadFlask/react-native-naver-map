@@ -2,14 +2,13 @@ package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 
-import com.facebook.react.views.view.ReactViewGroup;
 import com.naver.maps.map.overlay.Overlay;
 
-public abstract class RNNaverMapFeature<T extends Overlay> extends ReactViewGroup {
+public abstract class RNNaverMapFeature<T extends Overlay> extends EventEmmitableReactView {
     protected T feature;
 
-    public RNNaverMapFeature(Context context) {
-        super(context);
+    public RNNaverMapFeature(EventEmittable emitter, Context context) {
+        super(emitter, context);
     }
 
     public void addToMap(RNNaverMapView map) {
