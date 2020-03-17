@@ -19,6 +19,7 @@
 #import "RNNaverMapMarker.h"
 #import "RNNaverMapPolylineOverlay.h"
 #import "RNNaverMapPathOverlay.h"
+#import "RNNaverMapCircleOverlay.h"
 
 @interface RNNaverMapView()
 @end
@@ -28,13 +29,14 @@
   NSMutableArray<UIView *> *_reactSubviews;
 }
 
-- (instancetype)init
+- (nonnull instancetype)initWithFrame:(CGRect)frame
 {
-  if ((self = [super init])) {
+  if ((self = [super initWithFrame:frame])) {
     _reactSubviews = [NSMutableArray new];
     _markers = [NSMutableArray array];
     _polylines = [NSMutableArray array];
     _paths = [NSMutableArray array];
+    _circles = [NSMutableArray array];
   }
   return self;
 }
@@ -54,6 +56,10 @@
     RNNaverMapPathOverlay *overlay = (RNNaverMapPathOverlay*)subview;
     overlay.realOverlay.mapView = self.mapView;
     [self.paths addObject:overlay];
+  } else if ([subview isKindOfClass:[RNNaverMapCircleOverlay class]]) {
+    RNNaverMapCircleOverlay *overlay = (RNNaverMapCircleOverlay*)subview;
+    overlay.realOverlay.mapView = self.mapView;
+    [self.circles addObject:overlay];
   } else {
     NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
     for (int i = 0; i < childSubviews.count; i++) {
@@ -78,6 +84,10 @@
     RNNaverMapPathOverlay *overlay = (RNNaverMapPathOverlay*)subview;
     overlay.realOverlay.mapView = nil;
     [self.paths removeObject:overlay];
+  } else if ([subview isKindOfClass:[RNNaverMapCircleOverlay class]]) {
+    RNNaverMapCircleOverlay *overlay = (RNNaverMapCircleOverlay*)subview;
+    overlay.realOverlay.mapView = nil;
+    [self.circles removeObject:overlay];
   } else {
     NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
     for (int i = 0; i < childSubviews.count; i++) {

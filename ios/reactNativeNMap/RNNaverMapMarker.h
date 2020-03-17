@@ -6,6 +6,7 @@
 //
 
 #import <React/RCTBridge.h>
+#import <React/RCTComponent.h>
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
 
@@ -21,5 +22,6 @@
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, strong) UIColor *pinColor;
 @property (nonatomic, assign) CGPoint anchor;
+@property (nonatomic, copy) RCTDirectEventBlock onClick;
 
 @end

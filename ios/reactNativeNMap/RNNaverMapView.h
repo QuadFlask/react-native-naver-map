@@ -13,17 +13,21 @@
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
 #import <NMapsMap/NMFCameraUpdate.h>
+#import <NMapsMap/NMFMapViewDelegate.h>
 
 #import "RCTConvert+NMFMapView.h"
 
 @interface RNNaverMapView : NMFNaverMapView
 
 @property (nonatomic, weak) RCTBridge *bridge;
-@property (nonatomic, copy) RCTBubblingEventBlock onMapReady;
-@property (nonatomic, copy) RCTDirectEventBlock onRegionChange;
+@property (nonatomic, copy) RCTDirectEventBlock onInitialized;
+@property (nonatomic, copy) RCTDirectEventBlock onCameraChange;
+@property (nonatomic, copy) RCTDirectEventBlock onCameraIdle;
+@property (nonatomic, copy) RCTDirectEventBlock onMapClick;
 @property (nonatomic, strong) NSMutableArray *markers;
 @property (nonatomic, strong) NSMutableArray *polylines;
 @property (nonatomic, strong) NSMutableArray *paths;
+@property (nonatomic, strong) NSMutableArray *circles;
 
 @property (nonatomic, assign) BOOL showsCompass;
 @property (nonatomic, assign) BOOL zoomEnabled;

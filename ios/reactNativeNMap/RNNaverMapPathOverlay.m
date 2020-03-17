@@ -29,7 +29,7 @@
 }
 
 - (void)setCoordinates:(NSArray<NMGLatLng *>*) coordinates {
-  _realOverlay.points = coordinates;
+  _realOverlay.path = [NMGLineString lineStringWithPoints:coordinates];
 }
 
 - (void) setWidth: (CGFloat) width {

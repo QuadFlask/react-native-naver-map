@@ -27,6 +27,14 @@
 {
   if ((self = [super init])) {
     _realMarker = [NMFMarker new];
+
+    __block RNNaverMapMarker *this = self;
+    _realMarker.touchHandler = ^BOOL(NMFOverlay *overlay) {
+      if (this.onClick != nil) {
+        this.onClick(@{});
+      }
+      return NO;
+    };
   }
   return self;
 }
@@ -40,8 +48,7 @@
 }
 
 - (void)setPinColor:(UIColor *)pinColor {
-  _pinColor = pinColor;
-//  _realMarker.iconTintColor = pinColor;
+  _realMarker.iconTintColor = pinColor;
 }
 
 - (void)setAnchor:(CGPoint)anchor {
@@ -49,7 +56,7 @@
   _realMarker.anchor = anchor;
 }
 
-- (void)setMapVie:(NMFMapView*) mapView {
+- (void)setMapView:(NMFMapView*) mapView {
   _realMarker.mapView = mapView;
 }
 

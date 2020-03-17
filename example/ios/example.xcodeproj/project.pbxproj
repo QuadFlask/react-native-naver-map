@@ -19,6 +19,17 @@
 		2DCD954D1E0B4F2C00145EB5 /* exampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* exampleTests.m */; };
 		5DC0FB234513D999521C8893 /* libPods-example-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE256A9B34E4DFC36D7B44D /* libPods-example-tvOS.a */; };
 		B1E2FC0033EDCDB33AACE0EF /* libPods-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6820DD26F474546325E038 /* libPods-exampleTests.a */; };
+		CD13A8A22420FE3100153B95 /* RNNaverMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A88E2420FE3000153B95 /* RNNaverMapMarkerManager.m */; };
+		CD13A8A32420FE3100153B95 /* RNNaverMapPolylineOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8912420FE3000153B95 /* RNNaverMapPolylineOverlayManager.m */; };
+		CD13A8A42420FE3100153B95 /* RNNaverMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8922420FE3000153B95 /* RNNaverMapMarker.m */; };
+		CD13A8A52420FE3100153B95 /* RCTConvert+NMFMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8932420FE3000153B95 /* RCTConvert+NMFMapView.m */; };
+		CD13A8A62420FE3100153B95 /* RNNaverMapPathOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8942420FE3000153B95 /* RNNaverMapPathOverlayManager.m */; };
+		CD13A8A72420FE3100153B95 /* RNNaverMapCircleOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8972420FE3000153B95 /* RNNaverMapCircleOverlayManager.m */; };
+		CD13A8A82420FE3100153B95 /* RNNaverMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89A2420FE3000153B95 /* RNNaverMapView.m */; };
+		CD13A8A92420FE3100153B95 /* RNNaverMapPathOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89D2420FE3000153B95 /* RNNaverMapPathOverlay.m */; };
+		CD13A8AA2420FE3100153B95 /* RNNaverMapPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89E2420FE3000153B95 /* RNNaverMapPolylineOverlay.m */; };
+		CD13A8AB2420FE3100153B95 /* RNNaverMapCircleOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89F2420FE3000153B95 /* RNNaverMapCircleOverlay.m */; };
+		CD13A8AC2420FE3100153B95 /* RNNaverMapViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8A12420FE3000153B95 /* RNNaverMapViewManager.m */; };
 		E74CD751B5709794C2629F89 /* libPods-example-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B009B1E1AA284F52E34DDF2 /* libPods-example-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +73,27 @@
 		857D5C5C2CF18C81839E77C9 /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
 		96353EFDEB6D7D51C591657A /* libPods-example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE256A9B34E4DFC36D7B44D /* libPods-example-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD13A88D2420FE3000153B95 /* RNNaverMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapMarkerManager.h; path = ../../ios/reactNativeNMap/RNNaverMapMarkerManager.h; sourceTree = "<group>"; };
+		CD13A88E2420FE3000153B95 /* RNNaverMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapMarkerManager.m; path = ../../ios/reactNativeNMap/RNNaverMapMarkerManager.m; sourceTree = "<group>"; };
+		CD13A88F2420FE3000153B95 /* RNNaverMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapView.h; path = ../../ios/reactNativeNMap/RNNaverMapView.h; sourceTree = "<group>"; };
+		CD13A8902420FE3000153B95 /* RNNaverMapPathOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPathOverlay.h; path = ../../ios/reactNativeNMap/RNNaverMapPathOverlay.h; sourceTree = "<group>"; };
+		CD13A8912420FE3000153B95 /* RNNaverMapPolylineOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolylineOverlayManager.m; path = ../../ios/reactNativeNMap/RNNaverMapPolylineOverlayManager.m; sourceTree = "<group>"; };
+		CD13A8922420FE3000153B95 /* RNNaverMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapMarker.m; path = ../../ios/reactNativeNMap/RNNaverMapMarker.m; sourceTree = "<group>"; };
+		CD13A8932420FE3000153B95 /* RCTConvert+NMFMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+NMFMapView.m"; path = "../../ios/reactNativeNMap/RCTConvert+NMFMapView.m"; sourceTree = "<group>"; };
+		CD13A8942420FE3000153B95 /* RNNaverMapPathOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPathOverlayManager.m; path = ../../ios/reactNativeNMap/RNNaverMapPathOverlayManager.m; sourceTree = "<group>"; };
+		CD13A8952420FE3000153B95 /* RNNaverMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapMarker.h; path = ../../ios/reactNativeNMap/RNNaverMapMarker.h; sourceTree = "<group>"; };
+		CD13A8962420FE3000153B95 /* RNNaverMapCircleOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapCircleOverlay.h; path = ../../ios/reactNativeNMap/RNNaverMapCircleOverlay.h; sourceTree = "<group>"; };
+		CD13A8972420FE3000153B95 /* RNNaverMapCircleOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapCircleOverlayManager.m; path = ../../ios/reactNativeNMap/RNNaverMapCircleOverlayManager.m; sourceTree = "<group>"; };
+		CD13A8982420FE3000153B95 /* RNNaverMapCircleOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapCircleOverlayManager.h; path = ../../ios/reactNativeNMap/RNNaverMapCircleOverlayManager.h; sourceTree = "<group>"; };
+		CD13A8992420FE3000153B95 /* RNNaverMapPolylineOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolylineOverlayManager.h; path = ../../ios/reactNativeNMap/RNNaverMapPolylineOverlayManager.h; sourceTree = "<group>"; };
+		CD13A89A2420FE3000153B95 /* RNNaverMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapView.m; path = ../../ios/reactNativeNMap/RNNaverMapView.m; sourceTree = "<group>"; };
+		CD13A89B2420FE3000153B95 /* RNNaverMapPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolylineOverlay.h; path = ../../ios/reactNativeNMap/RNNaverMapPolylineOverlay.h; sourceTree = "<group>"; };
+		CD13A89C2420FE3000153B95 /* RNNaverMapPathOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPathOverlayManager.h; path = ../../ios/reactNativeNMap/RNNaverMapPathOverlayManager.h; sourceTree = "<group>"; };
+		CD13A89D2420FE3000153B95 /* RNNaverMapPathOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPathOverlay.m; path = ../../ios/reactNativeNMap/RNNaverMapPathOverlay.m; sourceTree = "<group>"; };
+		CD13A89E2420FE3000153B95 /* RNNaverMapPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolylineOverlay.m; path = ../../ios/reactNativeNMap/RNNaverMapPolylineOverlay.m; sourceTree = "<group>"; };
+		CD13A89F2420FE3000153B95 /* RNNaverMapCircleOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapCircleOverlay.m; path = ../../ios/reactNativeNMap/RNNaverMapCircleOverlay.m; sourceTree = "<group>"; };
+		CD13A8A02420FE3000153B95 /* RCTConvert+NMFMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+NMFMapView.h"; path = "../../ios/reactNativeNMap/RCTConvert+NMFMapView.h"; sourceTree = "<group>"; };
+		CD13A8A12420FE3000153B95 /* RNNaverMapViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapViewManager.m; path = ../../ios/reactNativeNMap/RNNaverMapViewManager.m; sourceTree = "<group>"; };
 		DF266A4F3C443D8F1DD32F8B /* Pods-example-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-tvOS.release.xcconfig"; path = "Target Support Files/Pods-example-tvOS/Pods-example-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -125,6 +157,27 @@
 		13B07FAE1A68108700A75B9A /* example */ = {
 			isa = PBXGroup;
 			children = (
+				CD13A8A02420FE3000153B95 /* RCTConvert+NMFMapView.h */,
+				CD13A8932420FE3000153B95 /* RCTConvert+NMFMapView.m */,
+				CD13A8962420FE3000153B95 /* RNNaverMapCircleOverlay.h */,
+				CD13A89F2420FE3000153B95 /* RNNaverMapCircleOverlay.m */,
+				CD13A8982420FE3000153B95 /* RNNaverMapCircleOverlayManager.h */,
+				CD13A8972420FE3000153B95 /* RNNaverMapCircleOverlayManager.m */,
+				CD13A8952420FE3000153B95 /* RNNaverMapMarker.h */,
+				CD13A8922420FE3000153B95 /* RNNaverMapMarker.m */,
+				CD13A88D2420FE3000153B95 /* RNNaverMapMarkerManager.h */,
+				CD13A88E2420FE3000153B95 /* RNNaverMapMarkerManager.m */,
+				CD13A8902420FE3000153B95 /* RNNaverMapPathOverlay.h */,
+				CD13A89D2420FE3000153B95 /* RNNaverMapPathOverlay.m */,
+				CD13A89C2420FE3000153B95 /* RNNaverMapPathOverlayManager.h */,
+				CD13A8942420FE3000153B95 /* RNNaverMapPathOverlayManager.m */,
+				CD13A89B2420FE3000153B95 /* RNNaverMapPolylineOverlay.h */,
+				CD13A89E2420FE3000153B95 /* RNNaverMapPolylineOverlay.m */,
+				CD13A8992420FE3000153B95 /* RNNaverMapPolylineOverlayManager.h */,
+				CD13A8912420FE3000153B95 /* RNNaverMapPolylineOverlayManager.m */,
+				CD13A88F2420FE3000153B95 /* RNNaverMapView.h */,
+				CD13A89A2420FE3000153B95 /* RNNaverMapView.m */,
+				CD13A8A12420FE3000153B95 /* RNNaverMapViewManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -148,7 +201,6 @@
 				EDABC8F3D8D0AB4286D2C49E /* Pods-exampleTests.debug.xcconfig */,
 				77FA2B558ED0C9434CF2A022 /* Pods-exampleTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,6 +282,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				4B0F86F65B19E9F37BCF5F37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -308,6 +361,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -386,6 +440,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		4B0F86F65B19E9F37BCF5F37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-frameworks.sh",
+				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		8D0FBC23D07B7590E672202A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -528,8 +600,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD13A8A82420FE3100153B95 /* RNNaverMapView.m in Sources */,
+				CD13A8A72420FE3100153B95 /* RNNaverMapCircleOverlayManager.m in Sources */,
+				CD13A8A32420FE3100153B95 /* RNNaverMapPolylineOverlayManager.m in Sources */,
+				CD13A8A62420FE3100153B95 /* RNNaverMapPathOverlayManager.m in Sources */,
+				CD13A8AA2420FE3100153B95 /* RNNaverMapPolylineOverlay.m in Sources */,
+				CD13A8A52420FE3100153B95 /* RCTConvert+NMFMapView.m in Sources */,
+				CD13A8AB2420FE3100153B95 /* RNNaverMapCircleOverlay.m in Sources */,
+				CD13A8AC2420FE3100153B95 /* RNNaverMapViewManager.m in Sources */,
+				CD13A8A42420FE3100153B95 /* RNNaverMapMarker.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				CD13A8A22420FE3100153B95 /* RNNaverMapMarkerManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				CD13A8A92420FE3100153B95 /* RNNaverMapPathOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +711,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
+					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
+					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
+					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
+					"\"${PODS_ROOT}/Headers/Public/glog\"",
+					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+				);
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -647,6 +750,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
+					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
+					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTBlob\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
+					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
+					"\"${PODS_ROOT}/Headers/Public/glog\"",
+					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+				);
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

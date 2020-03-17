@@ -11,12 +11,14 @@
 
 #import <NMapsMap/NMFNaverMapView.h>
 #import <NMapsMap/NMFCameraUpdate.h>
+#import <NMapsMap/NMFCameraPosition.h>
 #import <NMapsMap/NMGLatLng.h>
+#import <NMapsMap/NMFMapViewDelegate.h>
 
 #import "RCTConvert+NMFMapView.h"
 #import "RNNaverMapView.h"
 
-@interface RNNaverMapViewManager : RCTViewManager
+@interface RNNaverMapViewManager : RCTViewManager <NMFMapViewDelegate>
 
 @end
 
@@ -149,6 +151,28 @@ RCT_EXPORT_METHOD(animateToTwoCoordinates:(nonnull NSNumber *)reactTag
       [((RNNaverMapView *)view).mapView moveCamera: cameraUpdate];
     }
   }];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(onInitialized, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onCameraChange, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onCameraIdle, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onMapClick, RCTDirectEventBlock);
+
+- (void)mapViewIdle:(nonnull NMFMapView *)mapView {
+  ((RNNaverMapView*)mapView.delegate).onCameraIdle(@{
+    @"latitude" : @(mapView.cameraPosition.target.lat),
+    @"longitude": @(mapView.cameraPosition.target.lng),
+    @"zoom"     : @(mapView.cameraPosition.zoom)
+  });
+}
+
+- (void)didTapMapView:(CGPoint)point LatLng:(NMGLatLng *)latlng mapView:(nonnull NMFMapView *)mapView {
+  ((RNNaverMapView*)mapView.delegate).onMapClick(@{
+    @"x"        : @(point.x),
+    @"y"        : @(point.y),
+    @"latitude" : @(latlng.lat),
+    @"longitude": @(latlng.lng)
+  });
 }
 
 @end

@@ -27,7 +27,7 @@
 }
 
 - (void)setCoordinates:(NSArray<NMGLatLng *>*) coordinates {
-  _realOverlay.points = coordinates;
+  _realOverlay.line = [NMGLineString lineStringWithPoints:coordinates];
 }
 
 - (void)setStrokeWidth:(CGFloat) strokeWidth {
