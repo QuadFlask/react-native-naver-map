@@ -32,6 +32,7 @@
     _realMarker.touchHandler = ^BOOL(NMFOverlay *overlay) {
       if (this.onClick != nil) {
         this.onClick(@{});
+        return YES;
       }
       return NO;
     };

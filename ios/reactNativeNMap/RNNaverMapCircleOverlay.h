@@ -6,6 +6,7 @@
 //
 
 #import <React/RCTBridge.h>
+#import <React/RCTComponent.h>
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCircleOverlay.h>
 
@@ -22,5 +23,6 @@
 @property (nonatomic, assign) CGFloat outlineWidth;
 @property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) NSInteger zIndex;
+@property (nonatomic, copy) RCTDirectEventBlock onClick;
 
 @end

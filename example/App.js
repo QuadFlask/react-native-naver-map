@@ -17,7 +17,7 @@ const App = () => {
         <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')}/>
         <Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>
         <Marker coordinate={P2} pinColor="red" onClick={() => console.warn('onClick! p2')}/>
-        <Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')}/>
+        <Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>
         <Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>
         {
             Platform.OS === 'android' &&

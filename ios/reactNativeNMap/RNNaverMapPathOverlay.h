@@ -6,6 +6,7 @@
 //
 
 #import <React/RCTBridge.h>
+#import <React/RCTComponent.h>
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPath.h>
 
@@ -25,5 +26,6 @@
 @property (nonatomic, assign) UIColor* passedOutlineColor;
 @property (nonatomic, assign) NSString* pattern;
 @property (nonatomic, assign) CGFloat patternInterval;
+@property (nonatomic, copy) RCTDirectEventBlock onClick;
 
 @end

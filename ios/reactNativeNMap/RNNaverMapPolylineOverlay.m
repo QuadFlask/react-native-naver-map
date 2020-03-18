@@ -22,6 +22,15 @@
 {
   if ((self = [super init])) {
     _realOverlay = [NMFPolylineOverlay new];
+
+    __block RNNaverMapPolylineOverlay *this = self;
+    _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
+      if (this.onClick != nil) {
+        this.onClick(@{});
+        return YES;
+      }
+      return NO;
+    };
   }
   return self;
 }

@@ -9,7 +9,6 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTUtils.h>
-#import <React/UIView+React.h>
 #import <NMapsMap/NMFNaverMapView.h>
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCircleOverlay.h>
@@ -23,6 +22,15 @@
 {
   if ((self = [super init])) {
     _realOverlay = [NMFCircleOverlay new];
+
+    __block RNNaverMapCircleOverlay *this = self;
+    _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
+      if (this.onClick != nil) {
+        this.onClick(@{});
+        return YES;
+      }
+      return NO;
+    };
   }
   return self;
 }
