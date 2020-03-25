@@ -54,6 +54,6 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.naver.maps:map-sdk:3.6.0'
+    implementation "com.naver.maps:map-sdk:${rootProject.ext.hasProperty('mapSdkVersion') ? rootProject.ext.mapSdkVersion : '3.7.1'}"
     implementation "com.google.android.gms:play-services-location:16.0.0"
 }

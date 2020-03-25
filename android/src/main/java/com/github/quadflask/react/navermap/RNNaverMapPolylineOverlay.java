@@ -24,4 +24,16 @@ public class RNNaverMapPolylineOverlay extends ClickableRNNaverMapFeature<Polyli
     public void setLineColor(int color) {
         feature.setColor(color);
     }
+
+    public void setCapType(PolylineOverlay.LineCap value) {
+        feature.setCapType(value);
+    }
+
+    public void setJoinType(PolylineOverlay.LineJoin value) {
+        feature.setJoinType(value);
+    }
+
+    public void setPattern(int[] pattern) {
+        feature.setPattern(pattern);
+    }
 }

@@ -23,11 +23,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.overlay.CircleOverlay;
-import com.naver.maps.map.overlay.InfoWindow;
-import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.PathOverlay;
-import com.naver.maps.map.overlay.PolylineOverlay;
+import com.naver.maps.map.overlay.*;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
@@ -342,8 +338,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private final Map<Marker, RNNaverMapMarker> markerMap = new HashMap<>();
     private final Map<PolylineOverlay, RNNaverMapPolylineOverlay> polylineMap = new HashMap<>();
     private final Map<CircleOverlay, RNNaverMapCircleOverlay> circleMap = new HashMap<>();
-
     private final Map<PathOverlay, RNNaverMapPathOverlay> pathOverlayMap = new HashMap<>();
+    private final Map<PolygonOverlay, RNNaverMapPolygonOverlay> polygonMap = new HashMap<>();
 
     public void addFeature(View child, int index) {
         getMapAsync(e -> {
@@ -367,6 +363,11 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 annotation.addToMap(this);
                 features.add(index, annotation);
                 pathOverlayMap.put(annotation.getFeature(), annotation);
+            } else if (child instanceof RNNaverMapPolygonOverlay) {
+                RNNaverMapPolygonOverlay annotation = (RNNaverMapPolygonOverlay) child;
+                annotation.addToMap(this);
+                features.add(index, annotation);
+                polygonMap.put(annotation.getFeature(), annotation);
             }
         });
     }
@@ -381,6 +382,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             polylineMap.remove(feature.getFeature());
         } else if (feature instanceof RNNaverMapPathOverlay) {
             pathOverlayMap.remove(feature.getFeature());
+        } else if (feature instanceof RNNaverMapPolygonOverlay) {
+            polygonMap.remove(feature.getFeature());
         }
         feature.removeFromMap();
     }

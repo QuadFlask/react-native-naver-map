@@ -5,14 +5,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
+import androidx.annotation.NonNull;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
-
-import androidx.annotation.NonNull;
+import com.naver.maps.map.overlay.PolylineOverlay;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toLatLngList;
 
@@ -64,5 +62,23 @@ public class RNNaverMapPolylineOverlayManager extends EventEmittableViewGroupMan
     @ReactProp(name = "strokeColor", defaultInt = Color.RED, customType = "Color")
     public void setStrokeColor(RNNaverMapPolylineOverlay view, int color) {
         view.setLineColor(color);
+    }
+
+    @ReactProp(name = "capType", defaultInt = 0)
+    public void setCapType(RNNaverMapPolylineOverlay view, int capType) {
+        view.setCapType(PolylineOverlay.LineCap.values()[capType]);
+    }
+
+    @ReactProp(name = "joinType", defaultInt = 0)
+    public void setJoinType(RNNaverMapPolylineOverlay view, int joinType) {
+        view.setJoinType(PolylineOverlay.LineJoin.values()[joinType]);
+    }
+
+    @ReactProp(name = "pattern")
+    public void setPattern(RNNaverMapPolylineOverlay view, ReadableArray pattern) {
+        int[] patternArray = new int[pattern.size()];
+        for (int i = 0; i < pattern.size(); i++)
+            patternArray[i] = pattern.getInt(i);
+        view.setPattern(patternArray);
     }
 }
