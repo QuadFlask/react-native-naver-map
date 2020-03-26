@@ -5,6 +5,7 @@ const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
 const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
 const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
+const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
 export const TrackingMode = {
     None: 0,
     NoFollow: 1,
@@ -93,6 +94,11 @@ export class Circle extends Component {
 export class Polyline extends Component {
     render() {
         return React.createElement(RNNaverMapPolylineOverlay, Object.assign({}, this.props));
+    }
+}
+export class Polygon extends Component {
+    render() {
+        return React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props));
     }
 }
 export class Path extends Component {

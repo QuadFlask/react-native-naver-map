@@ -16,6 +16,7 @@ const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
 const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
 const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
+const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
 
 export interface Coord {
     latitude: number;
@@ -244,6 +245,20 @@ interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
 export class Polyline extends Component<PolylineProps> {
     render() {
         return <RNNaverMapPolylineOverlay {...this.props} />;
+    }
+}
+
+interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
+    coordinates: Coord[];
+    outlineWidth?: number;
+    outlineColor?: string
+    color?: string;
+    holes?: Coord[][];
+}
+
+export class Polygon extends Component<PolygonProps> {
+    render() {
+        return <RNNaverMapPolygonOverlay {...this.props} />;
     }
 }
 

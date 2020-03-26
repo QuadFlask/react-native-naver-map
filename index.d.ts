@@ -161,6 +161,16 @@ interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
 export declare class Polyline extends Component<PolylineProps> {
     render(): JSX.Element;
 }
+interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
+    coordinates: Coord[];
+    outlineWidth?: number;
+    outlineColor?: string;
+    color?: string;
+    holes?: Coord[][];
+}
+export declare class Polygon extends Component<PolygonProps> {
+    render(): JSX.Element;
+}
 export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
     width?: number;

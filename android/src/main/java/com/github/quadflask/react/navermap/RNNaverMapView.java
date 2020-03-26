@@ -6,7 +6,6 @@ import android.view.Choreographer;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -23,7 +22,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.overlay.*;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
@@ -43,11 +42,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private FusedLocationSource locationSource;
     private LifecycleEventListener lifecycleListener;
     private NaverMap naverMap;
-    private List<Marker> markers = new ArrayList<>();
-    private List<CircleOverlay> circleOverlays = new ArrayList<>();
-    private List<PolylineOverlay> polylineOverlays = new ArrayList<>();
-    private Map<Integer, Pair<Marker, InfoWindow>> infoWindows = new HashMap<>();
-    private PathOverlay path;
 
     private static boolean contextHasBug(Context context) {
         return context == null ||
@@ -187,65 +181,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
-    public void setMarkers(List<Marker> markersArray) {
-        getMapAsync(e -> {
-            for (Marker marker : markers) {
-                marker.setMap(null);
-            }
-            markers.clear();
-
-            if (markersArray != null && markersArray.size() > 0) {
-                markers = markersArray;
-                for (Marker marker : markers) {
-                    marker.setMap(naverMap);
-                }
-            }
-        });
-    }
-
-    public void setCircle(List<CircleOverlay> circleArray) {
-        getMapAsync(e -> {
-            for (CircleOverlay circleOverlay : circleOverlays) {
-                circleOverlay.setMap(null);
-            }
-            circleOverlays.clear();
-
-            if (circleArray != null && circleArray.size() > 0) {
-                circleOverlays = circleArray;
-                for (CircleOverlay circleOverlay : circleOverlays) {
-                    circleOverlay.setMap(naverMap);
-                }
-            }
-        });
-    }
-
-    public void setPolyLine(List<PolylineOverlay> polyLineArray) {
-        getMapAsync(e -> {
-            for (PolylineOverlay polylineOverlay : polylineOverlays) {
-                polylineOverlay.setMap(null);
-            }
-            polylineOverlays.clear();
-
-            if (polyLineArray != null && polyLineArray.size() > 0) {
-                polylineOverlays = polyLineArray;
-                for (PolylineOverlay polylineOverlay : polylineOverlays) {
-                    polylineOverlay.setMap(naverMap);
-                }
-            }
-        });
-    }
-
-    public void setPath(PathOverlay path) {
-        getMapAsync(e -> {
-            if (this.path != null)
-                this.path.setMap(null);
-            if (path != null) {
-                this.path = path;
-                this.path.setMap(naverMap);
-            }
-        });
-    }
-
     public void onInitialized() {
         emitEvent("onInitialized", null);
     }
@@ -305,86 +240,20 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }
 
-    public void openInfoWindow(int id, LatLng at, final String string) {
-        final Pair<Marker, InfoWindow> oldInfoWindow = infoWindows.get(id);
-        if (oldInfoWindow != null) {
-            closeInfoWindow(id);
-        }
-        InfoWindow infoWindow = new InfoWindow();
-        infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(themedReactContext) {
-            @NonNull
-            @Override
-            public CharSequence getText(@NonNull InfoWindow infoWindow) {
-                return string;
-            }
-        });
-        infoWindow.setPosition(at);
-        infoWindow.open(naverMap);
-        infoWindows.put(id, Pair.create(null, infoWindow));
-    }
-
-    public void closeInfoWindow(int id) {
-        final Pair<Marker, InfoWindow> infoWindow = infoWindows.get(id);
-        if (infoWindow != null) {
-            if (infoWindow.first != null)
-                infoWindow.first.setMap(null);
-            infoWindow.second.close();
-            infoWindow.second.setMap(null);
-            infoWindows.remove(id);
-        }
-    }
-
     private final List<RNNaverMapFeature> features = new ArrayList<>();
-    private final Map<Marker, RNNaverMapMarker> markerMap = new HashMap<>();
-    private final Map<PolylineOverlay, RNNaverMapPolylineOverlay> polylineMap = new HashMap<>();
-    private final Map<CircleOverlay, RNNaverMapCircleOverlay> circleMap = new HashMap<>();
-    private final Map<PathOverlay, RNNaverMapPathOverlay> pathOverlayMap = new HashMap<>();
-    private final Map<PolygonOverlay, RNNaverMapPolygonOverlay> polygonMap = new HashMap<>();
 
     public void addFeature(View child, int index) {
         getMapAsync(e -> {
-            if (child instanceof RNNaverMapMarker) {
-                RNNaverMapMarker annotation = (RNNaverMapMarker) child;
+            if (child instanceof RNNaverMapFeature) {
+                RNNaverMapFeature annotation = (RNNaverMapFeature) child;
                 annotation.addToMap(this);
                 features.add(index, annotation);
-                markerMap.put(annotation.getFeature(), annotation);
-            } else if (child instanceof RNNaverMapCircleOverlay) {
-                RNNaverMapCircleOverlay annotation = (RNNaverMapCircleOverlay) child;
-                annotation.addToMap(this);
-                features.add(index, annotation);
-                circleMap.put(annotation.getFeature(), annotation);
-            } else if (child instanceof RNNaverMapPolylineOverlay) {
-                RNNaverMapPolylineOverlay annotation = (RNNaverMapPolylineOverlay) child;
-                annotation.addToMap(this);
-                features.add(index, annotation);
-                polylineMap.put(annotation.getFeature(), annotation);
-            } else if (child instanceof RNNaverMapPathOverlay) {
-                RNNaverMapPathOverlay annotation = (RNNaverMapPathOverlay) child;
-                annotation.addToMap(this);
-                features.add(index, annotation);
-                pathOverlayMap.put(annotation.getFeature(), annotation);
-            } else if (child instanceof RNNaverMapPolygonOverlay) {
-                RNNaverMapPolygonOverlay annotation = (RNNaverMapPolygonOverlay) child;
-                annotation.addToMap(this);
-                features.add(index, annotation);
-                polygonMap.put(annotation.getFeature(), annotation);
             }
         });
     }
 
     public void removeFeatureAt(int index) {
         RNNaverMapFeature feature = features.remove(index);
-        if (feature instanceof RNNaverMapMarker) {
-            markerMap.remove(feature.getFeature());
-        } else if (feature instanceof RNNaverMapCircleOverlay) {
-            circleMap.remove(feature.getFeature());
-        } else if (feature instanceof RNNaverMapPolylineOverlay) {
-            polylineMap.remove(feature.getFeature());
-        } else if (feature instanceof RNNaverMapPathOverlay) {
-            pathOverlayMap.remove(feature.getFeature());
-        } else if (feature instanceof RNNaverMapPolygonOverlay) {
-            polygonMap.remove(feature.getFeature());
-        }
         feature.removeFromMap();
     }
 

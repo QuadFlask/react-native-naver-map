@@ -7,20 +7,18 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.facebook.react.views.view.ReactViewGroup;
 
 public abstract class EventEmittableViewGroupManager<T extends ViewGroup> extends ViewGroupManager<T>
         implements EventEmittable {
-    private final ReactApplicationContext appContext;
     private final DisplayMetrics metrics;
 
     public EventEmittableViewGroupManager(ReactApplicationContext reactContext) {
         super();
-        this.appContext = reactContext;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             metrics = new DisplayMetrics();
             ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE))
@@ -48,8 +46,8 @@ public abstract class EventEmittableViewGroupManager<T extends ViewGroup> extend
     }
 
     @Override
-    public boolean emitEvent(int id, String eventName, WritableMap param) {
-        appContext.getJSModule(RCTEventEmitter.class).receiveEvent(id, eventName, param);
+    public boolean emitEvent(ReactContext context, int id, String eventName, WritableMap param) {
+        context.getJSModule(RCTEventEmitter.class).receiveEvent(id, eventName, param);
         return false;
     }
 }

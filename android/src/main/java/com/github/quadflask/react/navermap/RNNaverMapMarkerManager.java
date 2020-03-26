@@ -17,12 +17,10 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
 public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
-    private final ReactApplicationContext appContext;
     private final DisplayMetrics metrics;
 
     public RNNaverMapMarkerManager(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.appContext = reactContext;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             metrics = new DisplayMetrics();
             ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE))
@@ -49,7 +47,7 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
     @NonNull
     @Override
     protected RNNaverMapMarker createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapMarker(this, appContext);
+        return new RNNaverMapMarker(this, reactContext);
     }
 
     @ReactProp(name = "coordinate")

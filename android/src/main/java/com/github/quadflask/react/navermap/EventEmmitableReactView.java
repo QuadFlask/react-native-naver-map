@@ -2,6 +2,7 @@ package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.views.view.ReactViewGroup;
 
@@ -14,6 +15,6 @@ abstract class EventEmmitableReactView extends ReactViewGroup {
     }
 
     protected void emitEvent(String eventName, WritableMap param) {
-        emitter.emitEvent(getId(), eventName, param);
+        emitter.emitEvent((ReactContext) getContext(), getId(), eventName, param);
     }
 }
