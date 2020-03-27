@@ -215,4 +215,13 @@ export interface CircleProps {
 }
 ```
 
-
+### `Polygon`
+```ts
+export interface PolygonProps {
+    coordinate: Coord[]
+    outlineWidth?: number;
+    outlineColor?: string
+    color?: string;
+    holes?: Coord[][];
+}
+```
