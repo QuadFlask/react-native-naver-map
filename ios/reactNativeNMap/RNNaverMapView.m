@@ -20,6 +20,7 @@
 #import "RNNaverMapPolylineOverlay.h"
 #import "RNNaverMapPathOverlay.h"
 #import "RNNaverMapCircleOverlay.h"
+#import "RNNaverMapPolygonOverlay.h"
 
 @interface RNNaverMapView()
 @end
@@ -33,10 +34,6 @@
 {
   if ((self = [super initWithFrame:frame])) {
     _reactSubviews = [NSMutableArray new];
-    _markers = [NSMutableArray array];
-    _polylines = [NSMutableArray array];
-    _paths = [NSMutableArray array];
-    _circles = [NSMutableArray array];
   }
   return self;
 }
@@ -47,19 +44,18 @@
   if ([subview isKindOfClass:[RNNaverMapMarker class]]) {
     RNNaverMapMarker *marker = (RNNaverMapMarker*)subview;
     marker.realMarker.mapView = self.mapView;
-    [self.markers addObject:marker];
   } else if ([subview isKindOfClass:[RNNaverMapPolylineOverlay class]]) {
     RNNaverMapPolylineOverlay *overlay = (RNNaverMapPolylineOverlay*)subview;
     overlay.realOverlay.mapView = self.mapView;
-    [self.polylines addObject:overlay];
   } else if ([subview isKindOfClass:[RNNaverMapPathOverlay class]]) {
     RNNaverMapPathOverlay *overlay = (RNNaverMapPathOverlay*)subview;
     overlay.realOverlay.mapView = self.mapView;
-    [self.paths addObject:overlay];
   } else if ([subview isKindOfClass:[RNNaverMapCircleOverlay class]]) {
     RNNaverMapCircleOverlay *overlay = (RNNaverMapCircleOverlay*)subview;
     overlay.realOverlay.mapView = self.mapView;
-    [self.circles addObject:overlay];
+  } else if ([subview isKindOfClass:[RNNaverMapPolygonOverlay class]]) {
+     RNNaverMapPolygonOverlay *overlay = (RNNaverMapPolygonOverlay*)subview;
+     overlay.realOverlay.mapView = self.mapView;
   } else {
     NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
     for (int i = 0; i < childSubviews.count; i++) {
@@ -75,19 +71,18 @@
   if ([subview isKindOfClass:[RNNaverMapMarker class]]) {
     RNNaverMapMarker *marker = (RNNaverMapMarker*)subview;
     marker.realMarker.mapView = nil;
-    [self.markers removeObject:marker];
   } else if ([subview isKindOfClass:[RNNaverMapPolylineOverlay class]]) {
     RNNaverMapPolylineOverlay *overlay = (RNNaverMapPolylineOverlay*)subview;
     overlay.realOverlay.mapView = nil;
-    [self.polylines removeObject:overlay];
   } else if ([subview isKindOfClass:[RNNaverMapPathOverlay class]]) {
     RNNaverMapPathOverlay *overlay = (RNNaverMapPathOverlay*)subview;
     overlay.realOverlay.mapView = nil;
-    [self.paths removeObject:overlay];
   } else if ([subview isKindOfClass:[RNNaverMapCircleOverlay class]]) {
     RNNaverMapCircleOverlay *overlay = (RNNaverMapCircleOverlay*)subview;
     overlay.realOverlay.mapView = nil;
-    [self.circles removeObject:overlay];
+  } else if ([subview isKindOfClass:[RNNaverMapPolygonOverlay class]]) {
+    RNNaverMapPolygonOverlay *overlay = (RNNaverMapPolygonOverlay*)subview;
+    overlay.realOverlay.mapView = nil;
   } else {
     NSArray<id<RCTComponent>> *childSubviews = [subview reactSubviews];
     for (int i = 0; i < childSubviews.count; i++) {

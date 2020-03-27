@@ -17,7 +17,7 @@
 @property (nonatomic, weak) RCTBridge *bridge;
 @property (nonatomic, strong) NMFCircleOverlay *realOverlay;
 
-@property (nonatomic, assign) NMGLatLng *center;
+@property (nonatomic, assign) NMGLatLng *coordinate;
 @property (nonatomic, assign) CGFloat radius;
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) CGFloat outlineWidth;

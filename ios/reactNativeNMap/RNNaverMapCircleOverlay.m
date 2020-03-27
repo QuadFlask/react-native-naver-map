@@ -21,7 +21,7 @@
 - (instancetype)init
 {
   if ((self = [super init])) {
-    _realOverlay = [NMFCircleOverlay new];
+    _realOverlay = [NMFCircleOverlay circleOverlay:NMGLatLngMake(37.5666102, 126.9783881) radius:500];
 
     __block RNNaverMapCircleOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
@@ -35,8 +35,8 @@
   return self;
 }
 
-- (void)setCenter:(NMGLatLng*) center {
-  _realOverlay.center = center;
+- (void)setCoordinate:(NMGLatLng*) coordinate {
+  _realOverlay.center = coordinate;
 }
 
 - (void)setRadius:(CGFloat) radius {

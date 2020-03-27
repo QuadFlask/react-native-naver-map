@@ -20,10 +20,7 @@ const App = () => {
         <Marker coordinate={P2} pinColor="red" onClick={() => console.warn('onClick! p2')}/>
         <Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>
         <Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>
-        {
-            Platform.OS === 'android' &&
-            <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>
-        }
+        <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>
         <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.warn('onClick! polygon')}/>
     </NaverMapView>
 };

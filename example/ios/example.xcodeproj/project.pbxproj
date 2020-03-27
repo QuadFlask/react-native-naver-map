@@ -30,6 +30,8 @@
 		CD13A8AA2420FE3100153B95 /* RNNaverMapPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89E2420FE3000153B95 /* RNNaverMapPolylineOverlay.m */; };
 		CD13A8AB2420FE3100153B95 /* RNNaverMapCircleOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A89F2420FE3000153B95 /* RNNaverMapCircleOverlay.m */; };
 		CD13A8AC2420FE3100153B95 /* RNNaverMapViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD13A8A12420FE3000153B95 /* RNNaverMapViewManager.m */; };
+		CDD22151242DBF80004F9706 /* RNNaverMapPolygonOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD2214F242DBF80004F9706 /* RNNaverMapPolygonOverlay.m */; };
+		CDD22152242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD22150242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.m */; };
 		E74CD751B5709794C2629F89 /* libPods-example-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B009B1E1AA284F52E34DDF2 /* libPods-example-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,10 @@
 		CD13A89F2420FE3000153B95 /* RNNaverMapCircleOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapCircleOverlay.m; path = ../../ios/reactNativeNMap/RNNaverMapCircleOverlay.m; sourceTree = "<group>"; };
 		CD13A8A02420FE3000153B95 /* RCTConvert+NMFMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+NMFMapView.h"; path = "../../ios/reactNativeNMap/RCTConvert+NMFMapView.h"; sourceTree = "<group>"; };
 		CD13A8A12420FE3000153B95 /* RNNaverMapViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapViewManager.m; path = ../../ios/reactNativeNMap/RNNaverMapViewManager.m; sourceTree = "<group>"; };
+		CDD2214D242DBF80004F9706 /* RNNaverMapPolygonOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolygonOverlay.h; path = ../../ios/reactNativeNMap/RNNaverMapPolygonOverlay.h; sourceTree = "<group>"; };
+		CDD2214E242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNNaverMapPolygonOverlayManager.h; path = ../../ios/reactNativeNMap/RNNaverMapPolygonOverlayManager.h; sourceTree = "<group>"; };
+		CDD2214F242DBF80004F9706 /* RNNaverMapPolygonOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolygonOverlay.m; path = ../../ios/reactNativeNMap/RNNaverMapPolygonOverlay.m; sourceTree = "<group>"; };
+		CDD22150242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNNaverMapPolygonOverlayManager.m; path = ../../ios/reactNativeNMap/RNNaverMapPolygonOverlayManager.m; sourceTree = "<group>"; };
 		DF266A4F3C443D8F1DD32F8B /* Pods-example-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-tvOS.release.xcconfig"; path = "Target Support Files/Pods-example-tvOS/Pods-example-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -157,6 +163,10 @@
 		13B07FAE1A68108700A75B9A /* example */ = {
 			isa = PBXGroup;
 			children = (
+				CDD2214D242DBF80004F9706 /* RNNaverMapPolygonOverlay.h */,
+				CDD2214F242DBF80004F9706 /* RNNaverMapPolygonOverlay.m */,
+				CDD2214E242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.h */,
+				CDD22150242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.m */,
 				CD13A8A02420FE3000153B95 /* RCTConvert+NMFMapView.h */,
 				CD13A8932420FE3000153B95 /* RCTConvert+NMFMapView.m */,
 				CD13A8962420FE3000153B95 /* RNNaverMapCircleOverlay.h */,
@@ -601,7 +611,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD13A8A82420FE3100153B95 /* RNNaverMapView.m in Sources */,
+				CDD22151242DBF80004F9706 /* RNNaverMapPolygonOverlay.m in Sources */,
 				CD13A8A72420FE3100153B95 /* RNNaverMapCircleOverlayManager.m in Sources */,
+				CDD22152242DBF80004F9706 /* RNNaverMapPolygonOverlayManager.m in Sources */,
 				CD13A8A32420FE3100153B95 /* RNNaverMapPolylineOverlayManager.m in Sources */,
 				CD13A8A62420FE3100153B95 /* RNNaverMapPathOverlayManager.m in Sources */,
 				CD13A8AA2420FE3100153B95 /* RNNaverMapPolylineOverlay.m in Sources */,
