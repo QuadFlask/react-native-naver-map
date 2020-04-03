@@ -17,12 +17,12 @@
 
 #import "RCTConvert+NMFMapView.h"
 
-@interface RNNaverMapView : NMFNaverMapView
+@interface RNNaverMapView : NMFNaverMapView <NMFMapViewDelegate>
 
 @property (nonatomic, weak) RCTBridge *bridge;
 @property (nonatomic, copy) RCTDirectEventBlock onInitialized;
 @property (nonatomic, copy) RCTDirectEventBlock onCameraChange;
-@property (nonatomic, copy) RCTDirectEventBlock onCameraIdle;
+@property (nonatomic, copy) RCTDirectEventBlock onTouch;
 @property (nonatomic, copy) RCTDirectEventBlock onMapClick;
 
 @property (nonatomic, assign) BOOL showsCompass;

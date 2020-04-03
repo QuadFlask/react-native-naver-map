@@ -14,6 +14,7 @@
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
 #import <NMapsMap/NMFCameraUpdate.h>
+#import <NMapsMap/NMFCameraPosition.h>
 
 #import "RCTConvert+NMFMapView.h"
 #import "RNNaverMapMarker.h"
@@ -93,6 +94,33 @@
 }
 - (NSArray<id<RCTComponent>> *)reactSubviews {
   return _reactSubviews;
+}
+
+- (void)mapViewIdle:(nonnull NMFMapView *)mapView {
+  if (((RNNaverMapView*)self).onCameraChange != nil)
+    ((RNNaverMapView*)self).onCameraChange(@{
+      @"latitude" : @(mapView.cameraPosition.target.lat),
+      @"longitude": @(mapView.cameraPosition.target.lng),
+      @"zoom"     : @(mapView.cameraPosition.zoom)
+    });
+}
+
+- (void)didTapMapView:(CGPoint)point LatLng:(NMGLatLng *)latlng {
+  if (((RNNaverMapView*)self).onMapClick != nil)
+    ((RNNaverMapView*)self).onMapClick(@{
+      @"x"        : @(point.x),
+      @"y"        : @(point.y),
+      @"latitude" : @(latlng.lat),
+      @"longitude": @(latlng.lng)
+    });
+}
+
+- (void)mapView:(nonnull NMFMapView *)mapView regionWillChangeAnimated:(BOOL)animated byReason:(NSInteger)reason {
+  if (((RNNaverMapView*)self).onTouch != nil)
+    ((RNNaverMapView*)self).onTouch(@{
+      @"animated": @(animated),
+      @"reason": @(reason)
+    });
 }
 
 @end
