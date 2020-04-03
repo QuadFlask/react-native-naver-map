@@ -101,7 +101,9 @@ function MyMap() {
     return <NaverMapView style={{width: '100%', height: '100%'}}
                          showsMyLocationButton={true}
                          center={{...P0, zoom: 16}}
-                         onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}>
+                         onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
+                         onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
+                         onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}>
         <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')}/>
         <Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>
         <Marker coordinate={P2} pinColor="red" onClick={() => console.warn('onClick! p2')}/>
@@ -240,8 +242,10 @@ export interface CircleProps {
     outlineWidth?: number;
     outlineColor?: string;
     zIndex?: number;
+    onClick?: () => void
 }
 ```
+> iOS 에서 위치 변경 버그가 있습니다
 
 ### `Polygon`
 ```ts
@@ -251,5 +255,6 @@ export interface PolygonProps {
     outlineColor?: string
     color?: string;
     holes?: Coord[][];
+    onClick?: () => void
 }
 ```
