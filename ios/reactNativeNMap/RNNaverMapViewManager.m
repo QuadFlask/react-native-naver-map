@@ -42,7 +42,7 @@ RCT_CUSTOM_VIEW_PROPERTY(center, NMFCameraUpdate*, RNNaverMapView)
 RCT_CUSTOM_VIEW_PROPERTY(showsMyLocationButton, BOOL, RNNaverMapView)
 {
   if (json == nil) return;
-  view.showLocationButton = json;
+  view.showLocationButton = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(mapPadding, UIEdgeInsets, RNNaverMapView)
@@ -71,19 +71,19 @@ RCT_CUSTOM_VIEW_PROPERTY(mapType, int, RNNaverMapView)
 RCT_CUSTOM_VIEW_PROPERTY(compass, BOOL, RNNaverMapView)
 {
   if (json == nil) view.showCompass = NO;
-  view.showCompass = json;
+  view.showCompass = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(scaleBar, BOOL, RNNaverMapView)
 {
   if (json == nil) view.showScaleBar = NO;
-  view.showScaleBar = json;
+  view.showScaleBar = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(zoomControl, BOOL, RNNaverMapView)
 {
   if (json == nil) view.showZoomControls = NO;
-  view.showZoomControls = json;
+  view.showZoomControls = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(buildingHeight, NSNumber*, RNNaverMapView)
@@ -95,7 +95,7 @@ RCT_CUSTOM_VIEW_PROPERTY(buildingHeight, NSNumber*, RNNaverMapView)
 RCT_CUSTOM_VIEW_PROPERTY(nightMode, BOOL, RNNaverMapView)
 {
   if (json == nil) view.mapView.nightModeEnabled = NO;
-  view.mapView.nightModeEnabled = json;
+  view.mapView.nightModeEnabled = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(tilt, BOOL, RNNaverMapView)

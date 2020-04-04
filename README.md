@@ -165,7 +165,7 @@ interface NaverMapViewProps {
     compass?: boolean;
     scaleBar?: boolean;
     zoomControl?: boolean;
-    mapType?: number;
+    mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
 }
@@ -178,7 +178,6 @@ animateToCoordinates: (coords: Coord[], bounds?: {
     left: number;
     right: number;
 }) => void;
-watchCameraChange: () => void;
 setLocationTrackingMode: (mode: number) => void;
 showsMyLocationButton: (show: boolean) => void;
 handleOnCameraChange: (event: React.SyntheticEvent<{}, {
@@ -245,7 +244,6 @@ export interface CircleProps {
     onClick?: () => void
 }
 ```
-> iOS 에서 위치 변경 버그가 있습니다
 
 ### `Polygon`
 ```ts

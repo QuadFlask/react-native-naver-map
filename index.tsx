@@ -23,29 +23,29 @@ export interface Coord {
     longitude: number;
 }
 
-export const TrackingMode = {
-    None: 0,
-    NoFollow: 1,
-    Follow: 2,
-    Face: 3,
-};
+export enum TrackingMode {
+    None = 0,
+    NoFollow = 1,
+    Follow = 2,
+    Face = 3,
+}
 
-export const MapType = {
-    Basic: 0,
-    Navi: 1,
-    Satellite: 2,
-    Hybrid: 3,
-    Terrain: 4,
-};
+export enum MapType {
+    Basic = 0,
+    Navi = 1,
+    Satellite = 2,
+    Hybrid = 3,
+    Terrain = 4,
+}
 
-export const LayerGroup = {
-    LAYER_GROUP_BUILDING: 'building',
-    LAYER_GROUP_TRANSIT: 'transit',
-    LAYER_GROUP_BICYCLE: 'bike',
-    LAYER_GROUP_TRAFFIC: 'ctt',
-    LAYER_GROUP_CADASTRAL: 'landparcel',
-    LAYER_GROUP_MOUNTAIN: 'mountain',
-};
+export enum LayerGroup {
+    LAYER_GROUP_BUILDING= 'building',
+    LAYER_GROUP_TRANSIT= 'transit',
+    LAYER_GROUP_BICYCLE= 'bike',
+    LAYER_GROUP_TRAFFIC= 'ctt',
+    LAYER_GROUP_CADASTRAL= 'landparcel',
+    LAYER_GROUP_MOUNTAIN= 'mountain',
+}
 
 export enum Gravity {
     NO_GRAVITY = 0x0000,
@@ -94,7 +94,7 @@ export interface NaverMapViewProps {
     compass?: boolean;
     scaleBar?: boolean;
     zoomControl?: boolean;
-    mapType?: number;
+    mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
 }

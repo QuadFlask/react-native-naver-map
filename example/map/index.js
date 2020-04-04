@@ -6,27 +6,30 @@ const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
 const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
 const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
-export const TrackingMode = {
-    None: 0,
-    NoFollow: 1,
-    Follow: 2,
-    Face: 3,
-};
-export const MapType = {
-    Basic: 0,
-    Navi: 1,
-    Satellite: 2,
-    Hybrid: 3,
-    Terrain: 4,
-};
-export const LayerGroup = {
-    LAYER_GROUP_BUILDING: 'building',
-    LAYER_GROUP_TRANSIT: 'transit',
-    LAYER_GROUP_BICYCLE: 'bike',
-    LAYER_GROUP_TRAFFIC: 'ctt',
-    LAYER_GROUP_CADASTRAL: 'landparcel',
-    LAYER_GROUP_MOUNTAIN: 'mountain',
-};
+export var TrackingMode;
+(function (TrackingMode) {
+    TrackingMode[TrackingMode["None"] = 0] = "None";
+    TrackingMode[TrackingMode["NoFollow"] = 1] = "NoFollow";
+    TrackingMode[TrackingMode["Follow"] = 2] = "Follow";
+    TrackingMode[TrackingMode["Face"] = 3] = "Face";
+})(TrackingMode || (TrackingMode = {}));
+export var MapType;
+(function (MapType) {
+    MapType[MapType["Basic"] = 0] = "Basic";
+    MapType[MapType["Navi"] = 1] = "Navi";
+    MapType[MapType["Satellite"] = 2] = "Satellite";
+    MapType[MapType["Hybrid"] = 3] = "Hybrid";
+    MapType[MapType["Terrain"] = 4] = "Terrain";
+})(MapType || (MapType = {}));
+export var LayerGroup;
+(function (LayerGroup) {
+    LayerGroup["LAYER_GROUP_BUILDING"] = "building";
+    LayerGroup["LAYER_GROUP_TRANSIT"] = "transit";
+    LayerGroup["LAYER_GROUP_BICYCLE"] = "bike";
+    LayerGroup["LAYER_GROUP_TRAFFIC"] = "ctt";
+    LayerGroup["LAYER_GROUP_CADASTRAL"] = "landparcel";
+    LayerGroup["LAYER_GROUP_MOUNTAIN"] = "mountain";
+})(LayerGroup || (LayerGroup = {}));
 export var Gravity;
 (function (Gravity) {
     Gravity[Gravity["NO_GRAVITY"] = 0] = "NO_GRAVITY";
@@ -54,9 +57,6 @@ export default class NaverMapView extends Component {
         };
         this.animateToCoordinates = (coords, bounds) => {
             this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
-        };
-        this.watchCameraChange = () => {
-            this.dispatchViewManagerCommand('watchCameraChange', []);
         };
         this.setLocationTrackingMode = (mode) => {
             this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);

@@ -16,6 +16,7 @@
 
 @property (nonatomic, weak) RCTBridge *bridge;
 @property (nonatomic, strong) NMFCircleOverlay *realOverlay;
+@property (nonatomic, strong) NMFCircleOverlay *oldOverlay;
 
 @property (nonatomic, assign) NMGLatLng *coordinate;
 @property (nonatomic, assign) CGFloat radius;

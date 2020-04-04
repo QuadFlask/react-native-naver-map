@@ -21,22 +21,28 @@
 - (instancetype)init
 {
   if ((self = [super init])) {
-    _realOverlay = [NMFCircleOverlay circleOverlay:NMGLatLngMake(37.5666102, 126.9783881) radius:500];
-
-    __block RNNaverMapCircleOverlay *this = self;
-    _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
-        return YES;
-      }
-      return NO;
-    };
+    _realOverlay = [NMFCircleOverlay circleOverlay:NMGLatLngMake(37.5666102, 126.9783881) radius:100];
   }
   return self;
 }
 
 - (void)setCoordinate:(NMGLatLng*) coordinate {
-  _realOverlay.center = coordinate;
+  // FIXME coordinate 변경이 제대로 반영이 안되는 문제가 있어 새로 객체 할당하는 방법으로 임시 수정
+  _oldOverlay = _realOverlay;
+  _realOverlay = [NMFCircleOverlay circleOverlay:coordinate radius:_realOverlay.radius];
+  _realOverlay.fillColor = _oldOverlay.fillColor;
+  _realOverlay.outlineColor = _oldOverlay.outlineColor;
+  _realOverlay.outlineWidth = _oldOverlay.outlineWidth;
+  _realOverlay.zIndex = _oldOverlay.zIndex;
+  
+  __block RNNaverMapCircleOverlay *this = self;
+  _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
+    if (this.onClick != nil) {
+      this.onClick(@{});
+      return YES;
+    }
+    return NO;
+  };
 }
 
 - (void)setRadius:(CGFloat) radius {

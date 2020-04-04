@@ -5,27 +5,27 @@ export interface Coord {
     latitude: number;
     longitude: number;
 }
-export declare const TrackingMode: {
-    None: number;
-    NoFollow: number;
-    Follow: number;
-    Face: number;
-};
-export declare const MapType: {
-    Basic: number;
-    Navi: number;
-    Satellite: number;
-    Hybrid: number;
-    Terrain: number;
-};
-export declare const LayerGroup: {
-    LAYER_GROUP_BUILDING: string;
-    LAYER_GROUP_TRANSIT: string;
-    LAYER_GROUP_BICYCLE: string;
-    LAYER_GROUP_TRAFFIC: string;
-    LAYER_GROUP_CADASTRAL: string;
-    LAYER_GROUP_MOUNTAIN: string;
-};
+export declare enum TrackingMode {
+    None = 0,
+    NoFollow = 1,
+    Follow = 2,
+    Face = 3
+}
+export declare enum MapType {
+    Basic = 0,
+    Navi = 1,
+    Satellite = 2,
+    Hybrid = 3,
+    Terrain = 4
+}
+export declare enum LayerGroup {
+    LAYER_GROUP_BUILDING = "building",
+    LAYER_GROUP_TRANSIT = "transit",
+    LAYER_GROUP_BICYCLE = "bike",
+    LAYER_GROUP_TRAFFIC = "ctt",
+    LAYER_GROUP_CADASTRAL = "landparcel",
+    LAYER_GROUP_MOUNTAIN = "mountain"
+}
 export declare enum Gravity {
     NO_GRAVITY = 0,
     AXIS_SPECIFIED = 1,
@@ -75,7 +75,7 @@ export interface NaverMapViewProps {
     compass?: boolean;
     scaleBar?: boolean;
     zoomControl?: boolean;
-    mapType?: number;
+    mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
 }
@@ -90,7 +90,6 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         left: number;
         right: number;
     }) => void;
-    watchCameraChange: () => void;
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
