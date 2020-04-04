@@ -116,10 +116,6 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
     };
 
-    watchCameraChange = () => {
-        this.dispatchViewManagerCommand('watchCameraChange', []);
-    };
-
     setLocationTrackingMode = (mode: number) => {
         this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
     };

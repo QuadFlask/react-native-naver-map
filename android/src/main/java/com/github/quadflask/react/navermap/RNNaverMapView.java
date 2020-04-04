@@ -100,6 +100,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         this.naverMap = naverMap;
         this.naverMap.setLocationSource(locationSource);
         this.naverMap.setOnMapClickListener(this);
+        this.naverMap.addOnCameraIdleListener(this);
         this.naverMap.addOnCameraChangeListener((reason, animated) -> {
             if (reason == -1 && System.currentTimeMillis() - lastTouch > 1000) { // changed by user
                 WritableMap param = Arguments.createMap();
@@ -183,13 +184,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     public void onInitialized() {
         emitEvent("onInitialized", null);
-    }
-
-    public void watchCameraChange() {
-        getMapAsync(e -> {
-            naverMap.removeOnCameraIdleListener(this);
-            naverMap.addOnCameraIdleListener(this);
-        });
     }
 
     public void showsMyLocationButton(boolean show) {

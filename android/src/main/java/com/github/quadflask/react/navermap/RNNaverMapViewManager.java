@@ -36,7 +36,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     private static final int ANIMATE_TO_COORDINATE = 2;
     private static final int ANIMATE_TO_TWO_COORDINATES = 3;
     private static final int SET_LOCATION_TRACKING_MODE = 4;
-    private static final int WATCH_CAMERA_CHANGE = 5;
     private static final int ANIMATE_TO_COORDINATES = 6;
 
     public RNNaverMapViewManager(ReactApplicationContext context) {
@@ -246,10 +245,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
             case SET_LOCATION_TRACKING_MODE:
                 mapView.setLocationTrackingMode(args.getInt(0));
                 break;
-
-            case WATCH_CAMERA_CHANGE:
-                mapView.watchCameraChange();
-                break;
         }
     }
 
@@ -260,7 +255,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
                 .put("animateToCoordinate", ANIMATE_TO_COORDINATE)
                 .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
                 .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
-                .put("watchCameraChange", WATCH_CAMERA_CHANGE)
                 .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
                 .build();
     }
