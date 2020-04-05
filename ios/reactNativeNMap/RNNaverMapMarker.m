@@ -23,6 +23,12 @@
   UIView *_iconView;
 }
 
+  static NSMutableDictionary *_overlayImageHolder;
+
+  +(void)initialize {
+    _overlayImageHolder = [[NSMutableDictionary alloc] init];
+  }
+
 - (instancetype)init
 {
   if ((self = [super init])) {
@@ -42,6 +48,14 @@
 
 - (void)setCoordinate:(NMGLatLng*) coordinate {
   _realMarker.position = coordinate;
+}
+
+- (void)setWidth:(CGFloat) width {
+  _realMarker.width = width;
+}
+
+- (void)setHeight:(CGFloat) height {
+  _realMarker.height = height;
 }
 
 - (void)setRotation:(CGFloat) rotation {
@@ -70,10 +84,15 @@
     _reloadImageCancellationBlock = nil;
   }
 
-  NSLog(@"image : %@", image);
-
   if (!_image) {
     if (_iconImageView) [_iconImageView removeFromSuperview];
+    return;
+  }
+  
+  NMFOverlayImage *overlayImage = [_overlayImageHolder valueForKey:image];
+  if (overlayImage != nil) {
+    if (self->_iconImageView) [self->_iconImageView removeFromSuperview];
+    self->_realMarker.iconImage = overlayImage;
     return;
   }
 
@@ -90,7 +109,10 @@
                                                                  }
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                    if (self->_iconImageView) [self->_iconImageView removeFromSuperview];
-                                                                   self->_realMarker.iconImage = [NMFOverlayImage overlayImageWithImage: image];
+                                                                   NMFOverlayImage *overlayImage = [NMFOverlayImage overlayImageWithImage: image];
+                                                                   self->_realMarker.iconImage = overlayImage;
+
+                                                                   [_overlayImageHolder setObject:overlayImage forKey:self->_image];
                                                                  });
                                                                }];
 }

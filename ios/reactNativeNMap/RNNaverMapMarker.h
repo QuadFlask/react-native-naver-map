@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NMFMarker *realMarker;
 
 @property (nonatomic, assign) NMGLatLng *coordinate;
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat rotation;
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, strong) UIColor *pinColor;
