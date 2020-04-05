@@ -34,6 +34,8 @@
   _realOverlay.outlineColor = _oldOverlay.outlineColor;
   _realOverlay.outlineWidth = _oldOverlay.outlineWidth;
   _realOverlay.zIndex = _oldOverlay.zIndex;
+  _realOverlay.mapView = _oldOverlay.mapView;
+  _oldOverlay.mapView = nil;
   
   __block RNNaverMapCircleOverlay *this = self;
   _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
