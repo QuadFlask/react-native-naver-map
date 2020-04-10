@@ -1,4 +1,4 @@
-### Version of kakao-login libraries
+### Version of react-native-naver-map libraries
 
 <!-- 사용하고 있는 리액트네이티브 네이버 맵 버전을 적어주세요 -->
 
