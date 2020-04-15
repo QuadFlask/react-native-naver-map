@@ -12,9 +12,9 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapViewProps {
-    private ReactApplicationContext appContext;
-    private ThemedReactContext themedReactContext;
-    private FusedLocationSource locationSource;
+    private final ReactApplicationContext appContext;
+    private final ThemedReactContext themedReactContext;
+    private final FusedLocationSource locationSource;
     private RNNaverMapView mapView;
     private RNNaverMapView prevMapView;
     private boolean isAttachedToWindow = false;
@@ -54,9 +54,12 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         isAttachedToWindow = true;
-        mapView = new RNNaverMapView(themedReactContext, appContext, locationSource);
-        mapView.restoreFrom(prevMapView);
-        addView(mapView);
+        if (mapView == null) {
+            mapView = new RNNaverMapView(themedReactContext, appContext, locationSource);
+            mapView.restoreFrom(prevMapView);
+            addView(mapView);
+        }
+        mapView.setId(getId());
         setupLayoutHack();
     }
 

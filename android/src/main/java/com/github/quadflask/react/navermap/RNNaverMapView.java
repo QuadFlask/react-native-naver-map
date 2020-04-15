@@ -20,17 +20,39 @@ import java.util.List;
 public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener, RNNaverMapViewProps {
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
-    private LifecycleEventListener lifecycleListener;
+    private ReactApplicationContext appContext;
     private NaverMap naverMap;
     private long lastTouch = 0;
 
     public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource) {
         super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
         this.themedReactContext = themedReactContext;
+        this.appContext = appContext;
         this.locationSource = locationSource;
         super.onCreate(null);
         super.onStart();
         getMapAsync(this);
+
+        themedReactContext.addLifecycleEventListener(new LifecycleEventListener() {
+            @Override
+            public void onHostResume() {
+                // onResume();
+            }
+
+            @Override
+            public void onHostPause() {
+                // onPause();
+            }
+
+            @Override
+            public void onHostDestroy() {
+                // onStop();
+                // onDestroy();
+                if (locationSource != null)
+                    locationSource.deactivate();
+                themedReactContext.removeLifecycleEventListener(this);
+            }
+        });
     }
 
     @Override
@@ -49,29 +71,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             }
         });
         onInitialized();
-
-        lifecycleListener = new LifecycleEventListener() {
-            @Override
-            public void onHostResume() {
-                // onResume();
-            }
-
-            @Override
-            public void onHostPause() {
-                // onPause();
-            }
-
-            @Override
-            public void onHostDestroy() {
-                // onStop();
-                // onDestroy();
-                if (locationSource != null)
-                    locationSource.deactivate();
-                themedReactContext.removeLifecycleEventListener(lifecycleListener);
-                themedReactContext = null;
-            }
-        };
-        themedReactContext.addLifecycleEventListener(lifecycleListener);
     }
 
     @Override

@@ -27,7 +27,7 @@ import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
 public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContainer> {
     private final ReactApplicationContext appContext;
-    private static FusedLocationSource locationSource;
+    private final FusedLocationSource locationSource;
 
     private static final int ANIMATE_TO_REGION = 1;
     private static final int ANIMATE_TO_COORDINATE = 2;
@@ -297,12 +297,5 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
 
     private java.util.Map<String, Object> bubbled(String callbackName) {
         return MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", callbackName));
-    }
-
-    private void getDp(ReadableMap option, String key, Consumer<Integer> consumer) {
-        getInt(option, key, number -> {
-            float density = appContext.getResources().getDisplayMetrics().density;
-            consumer.accept(Math.round(density * number));
-        });
     }
 }
