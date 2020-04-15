@@ -1,9 +1,10 @@
 package com.github.quadflask.react.navermap;
 
-import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 import com.airbnb.android.react.maps.SizeReportingShadowNode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
@@ -21,14 +22,10 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Consumer;
-
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
-public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
+public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContainer> {
     private final ReactApplicationContext appContext;
     private static FusedLocationSource locationSource;
 
@@ -44,14 +41,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
         locationSource = new FusedLocationSource(context.getCurrentActivity(), 0x1000);
     }
 
-    public static void onCreate(Activity activity) {
-        locationSource = new FusedLocationSource(activity, 0x1000);
-    }
-
-    public static boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        return locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
     @NonNull
     @Override
     public String getName() {
@@ -60,12 +49,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
 
     @NonNull
     @Override
-    protected RNNaverMapView createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapView(reactContext, appContext, locationSource);
+    protected RNNaverMapViewContainer createViewInstance(@NonNull ThemedReactContext reactContext) {
+        return new RNNaverMapViewContainer(reactContext, appContext, locationSource);
     }
 
     @ReactProp(name = "center")
-    public void setCenter(RNNaverMapView mapView, @Nullable ReadableMap option) {
+    public void setCenter(RNNaverMapViewContainer mapView, @Nullable ReadableMap option) {
         if (option != null) {
             if (option.hasKey("zoom") && option.hasKey("tilt") && option.hasKey("bearing")) {
                 mapView.setCenter(toNaverLatLng(option), option.getDouble("zoom"), option.getDouble("tilt"), option.getDouble("bearing"));
@@ -76,53 +65,53 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @ReactProp(name = "showsMyLocationButton", defaultBoolean = false)
-    public void showsMyLocationButton(RNNaverMapView mapView, boolean show) {
+    public void showsMyLocationButton(RNNaverMapViewContainer mapView, boolean show) {
         mapView.showsMyLocationButton(show);
     }
 
     @ReactProp(name = "compass", defaultBoolean = false)
-    public void setCompassEnabled(RNNaverMapView mapView, boolean show) {
+    public void setCompassEnabled(RNNaverMapViewContainer mapView, boolean show) {
         mapView.setCompassEnabled(show);
     }
 
     @ReactProp(name = "scaleBar", defaultBoolean = false)
-    public void setScaleBarEnabled(RNNaverMapView mapView, boolean show) {
+    public void setScaleBarEnabled(RNNaverMapViewContainer mapView, boolean show) {
         mapView.setScaleBarEnabled(show);
     }
 
     @ReactProp(name = "zoomControl", defaultBoolean = false)
-    public void setZoomControlEnabled(RNNaverMapView mapView, boolean show) {
+    public void setZoomControlEnabled(RNNaverMapViewContainer mapView, boolean show) {
         mapView.setZoomControlEnabled(show);
     }
 
     @ReactProp(name = "mapType", defaultInt = 0)
-    public void setMapType(RNNaverMapView mapView, int mapType) {
+    public void setMapType(RNNaverMapViewContainer mapView, int mapType) {
         mapView.setMapType(NaverMap.MapType.values()[mapType]);
     }
 
     @ReactProp(name = "buildingHeight", defaultFloat = 1.0f)
-    public void setBuildingHeight(RNNaverMapView mapView, float height) {
+    public void setBuildingHeight(RNNaverMapViewContainer mapView, float height) {
         mapView.setBuildingHeight(height);
     }
 
     @ReactProp(name = "locationTrackingMode", defaultInt = 0)
-    public void locationTrackingMode(RNNaverMapView mapView, int mode) {
+    public void locationTrackingMode(RNNaverMapViewContainer mapView, int mode) {
         if (mode >= 0)
             mapView.setLocationTrackingMode(mode);
     }
 
     @ReactProp(name = "tilt", defaultInt = 0)
-    public void setTilt(RNNaverMapView mapView, int tilt) {
+    public void setTilt(RNNaverMapViewContainer mapView, int tilt) {
         mapView.setTilt(tilt);
     }
 
     @ReactProp(name = "bearing", defaultInt = 0)
-    public void setBearing(RNNaverMapView mapView, int bearing) {
+    public void setBearing(RNNaverMapViewContainer mapView, int bearing) {
         mapView.setBearing(bearing);
     }
 
     @ReactProp(name = "layerGroup")
-    public void setLayerGroupEnabled(RNNaverMapView mapView, @Nullable ReadableMap option) {
+    public void setLayerGroupEnabled(RNNaverMapViewContainer mapView, @Nullable ReadableMap option) {
         final List<String> layerGroups = Arrays.asList(
                 NaverMap.LAYER_GROUP_BUILDING,
                 NaverMap.LAYER_GROUP_TRANSIT,
@@ -143,26 +132,26 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @ReactProp(name = "nightMode", defaultBoolean = false)
-    public void setNightModeEnabled(RNNaverMapView mapView, boolean enable) {
+    public void setNightModeEnabled(RNNaverMapViewContainer mapView, boolean enable) {
         mapView.setNightModeEnabled(enable);
     }
 
     @ReactProp(name = "mapPadding")
-    public void setMapPadding(RNNaverMapView mapView, @Nullable ReadableMap padding) {
+    public void setMapPadding(RNNaverMapViewContainer mapView, @Nullable ReadableMap padding) {
         final Rect rect = getRect(padding, mapView.getResources().getDisplayMetrics().density);
 
         mapView.setMapPadding(rect.left, rect.top, rect.right, rect.bottom);
     }
 
     @ReactProp(name = "logoMargin")
-    public void setLogoMargin(RNNaverMapView mapView, @Nullable ReadableMap margin) {
+    public void setLogoMargin(RNNaverMapViewContainer mapView, @Nullable ReadableMap margin) {
         final Rect rect = getRect(margin, mapView.getResources().getDisplayMetrics().density);
 
         mapView.setLogoMargin(rect.left, rect.top, rect.right, rect.bottom);
     }
 
     @ReactProp(name = "logoGravity")
-    public void setLogoGravity(RNNaverMapView mapView, int gravity) {
+    public void setLogoGravity(RNNaverMapViewContainer mapView, int gravity) {
         mapView.setLogoGravity(gravity);
     }
 
@@ -191,7 +180,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @Override
-    public void receiveCommand(@NonNull RNNaverMapView mapView, int commandId, @Nullable ReadableArray args) {
+    public void receiveCommand(@NonNull RNNaverMapViewContainer mapView, int commandId, @Nullable ReadableArray args) {
         switch (commandId) {
             case ANIMATE_TO_REGION: {
                 final ReadableMap region = args.getMap(0);
@@ -262,7 +251,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     @Override
     public java.util.Map<String, Object> getExportedCustomBubblingEventTypeConstants() {
         final MapBuilder.Builder<String, Object> builder = MapBuilder.builder();
-        for (String eventName : RNNaverMapView.EVENT_NAMES)
+        for (String eventName : RNNaverMapViewProps.EVENT_NAMES)
             builder.put(eventName, bubbled(eventName));
         return builder.build();
     }
@@ -275,22 +264,22 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @Override
-    public void addView(RNNaverMapView parent, View child, int index) {
+    public void addView(RNNaverMapViewContainer parent, View child, int index) {
         parent.addFeature(child, index);
     }
 
     @Override
-    public int getChildCount(RNNaverMapView view) {
+    public int getChildCount(RNNaverMapViewContainer view) {
         return view.getFeatureCount();
     }
 
     @Override
-    public View getChildAt(RNNaverMapView view, int index) {
+    public View getChildAt(RNNaverMapViewContainer view, int index) {
         return view.getFeatureAt(index);
     }
 
     @Override
-    public void removeViewAt(RNNaverMapView parent, int index) {
+    public void removeViewAt(RNNaverMapViewContainer parent, int index) {
         parent.removeFeatureAt(index);
     }
 
@@ -300,7 +289,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapView> {
     }
 
     @Override
-    public void onDropViewInstance(RNNaverMapView view) {
+    public void onDropViewInstance(RNNaverMapViewContainer view) {
         view.onStop();
 //        view.onDestroy();
         super.onDropViewInstance(view);

@@ -1,13 +1,31 @@
+import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "./map";
 import {PermissionsAndroid, Platform, Text} from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 const P0 = {latitude: 37.564362, longitude: 126.977011};
 const P1 = {latitude: 37.565051, longitude: 126.978567};
 const P2 = {latitude: 37.565383, longitude: 126.976292};
 const P4 = {latitude: 37.564834, longitude: 126.977218};
 
+const Tab = createBottomTabNavigator();
+
 const App = () => {
+    return <NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name={"map"} component={MapViewScreen}/>
+            <Tab.Screen name={"text"} component={TextScreen}/>
+        </Tab.Navigator>
+    </NavigationContainer>
+}
+
+const TextScreen = ()=> {
+    return <Text>text</Text>
+}
+
+const MapViewScreen = () => {
     useEffect(() => {
         requestLocationPermission();
     }, []);

@@ -10,8 +10,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.9",
+    "@react-navigation/bottom-tabs": "^5.2.6",
+    "@react-navigation/native": "^5.1.5",
     "react": "16.9.0",
-    "react-native": "0.61.2"
+    "react-native": "0.61.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-reanimated": "^1.8.0",
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -25,5 +32,11 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "resolutions": {
+    "@react-native-community/cli": "3.0.0-alpha.2",
+    "@react-native-community/cli-platform-android": "3.0.0-alpha.2",
+    "@react-native-community/cli-platform-ios": "3.0.0-alpha.2",
+    "@react-native-community/cli-tools": "2.8.3"
   }
 }

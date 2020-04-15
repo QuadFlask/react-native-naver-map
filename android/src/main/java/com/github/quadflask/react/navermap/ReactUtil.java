@@ -1,11 +1,14 @@
 package com.github.quadflask.react.navermap;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
 import androidx.core.util.Consumer;
 
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
 
 import java.util.ArrayList;
@@ -106,5 +109,28 @@ public class ReactUtil {
         double lat = (b.latitude - a.latitude) * fraction + a.latitude;
         double lng = (b.longitude - a.longitude) * fraction + a.longitude;
         return new LatLng(lat, lng);
+    }
+
+    private static boolean contextHasBug(Context context) {
+        return context == null ||
+                context.getResources() == null ||
+                context.getResources().getConfiguration() == null;
+    }
+
+    public static Context getNonBuggyContext(ThemedReactContext reactContext, ReactApplicationContext appContext) {
+        Context superContext = reactContext;
+        if (!contextHasBug(appContext.getCurrentActivity())) {
+            superContext = appContext.getCurrentActivity();
+        } else if (contextHasBug(superContext)) {
+            // we have the bug! let's try to find a better context to use
+            if (!contextHasBug(reactContext.getCurrentActivity())) {
+                superContext = reactContext.getCurrentActivity();
+            } else if (!contextHasBug(reactContext.getApplicationContext())) {
+                superContext = reactContext.getApplicationContext();
+            } else {
+                // ¯\_(ツ)_/¯
+            }
+        }
+        return superContext;
     }
 }

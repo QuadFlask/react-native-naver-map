@@ -1,12 +1,8 @@
 package com.github.quadflask.react.navermap;
 
-import android.content.Context;
 import android.graphics.PointF;
-import android.view.Choreographer;
 import android.view.View;
-
 import androidx.annotation.NonNull;
-
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -15,85 +11,27 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
-import com.naver.maps.map.CameraAnimation;
-import com.naver.maps.map.CameraPosition;
-import com.naver.maps.map.CameraUpdate;
-import com.naver.maps.map.LocationTrackingMode;
-import com.naver.maps.map.MapView;
-import com.naver.maps.map.NaverMap;
-import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.overlay.Overlay;
+import com.naver.maps.map.*;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener {
-    public static final String[] EVENT_NAMES = new String[]{
-            "onInitialized",
-            "onCameraChange",
-            "onMapClick",
-            "onTouch"
-    };
-
+public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener, RNNaverMapViewProps {
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
     private LifecycleEventListener lifecycleListener;
     private NaverMap naverMap;
-
-    private static boolean contextHasBug(Context context) {
-        return context == null ||
-                context.getResources() == null ||
-                context.getResources().getConfiguration() == null;
-    }
-
-    private static Context getNonBuggyContext(ThemedReactContext reactContext, ReactApplicationContext appContext) {
-        Context superContext = reactContext;
-        if (!contextHasBug(appContext.getCurrentActivity())) {
-            superContext = appContext.getCurrentActivity();
-        } else if (contextHasBug(superContext)) {
-            // we have the bug! let's try to find a better context to use
-            if (!contextHasBug(reactContext.getCurrentActivity())) {
-                superContext = reactContext.getCurrentActivity();
-            } else if (!contextHasBug(reactContext.getApplicationContext())) {
-                superContext = reactContext.getApplicationContext();
-            } else {
-                // ¯\_(ツ)_/¯
-            }
-        }
-        return superContext;
-    }
+    private long lastTouch = 0;
 
     public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource) {
-        super(getNonBuggyContext(themedReactContext, appContext));
+        super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;
         super.onCreate(null);
         super.onStart();
         getMapAsync(this);
-
-        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
-            @Override
-            public void doFrame(long frameTimeNanos) {
-                manuallyLayoutChildren();
-                getViewTreeObserver().dispatchOnGlobalLayout();
-                Choreographer.getInstance().postFrameCallback(this);
-            }
-        });
     }
-
-    void manuallyLayoutChildren() {
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            child.measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY));
-            child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-        }
-    }
-
-    long lastTouch = 0;
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
@@ -102,7 +40,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         this.naverMap.setOnMapClickListener(this);
         this.naverMap.addOnCameraIdleListener(this);
         this.naverMap.addOnCameraChangeListener((reason, animated) -> {
-            if (reason == -1 && System.currentTimeMillis() - lastTouch > 1000) { // changed by user
+            if (reason == -1 && System.currentTimeMillis() - lastTouch > 500) { // changed by user
                 WritableMap param = Arguments.createMap();
                 param.putInt("reason", reason);
                 param.putBoolean("animated", animated);
@@ -110,7 +48,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 lastTouch = System.currentTimeMillis();
             }
         });
-        this.onInitialized();
+        onInitialized();
 
         lifecycleListener = new LifecycleEventListener() {
             @Override
@@ -136,6 +74,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         themedReactContext.addLifecycleEventListener(lifecycleListener);
     }
 
+    @Override
     public void setCenter(LatLng latLng) {
         getMapAsync(e -> {
             CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng).animate(CameraAnimation.Easing);
@@ -143,6 +82,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    @Override
     public void setCenter(LatLng latLng, Double zoom, Double tilt, Double bearing) {
         getMapAsync(e -> {
             if (zoom != null && tilt != null && bearing != null) {
@@ -152,6 +92,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    @Override
     public void zoomTo(LatLngBounds latLngBounds, int paddingInPx) {
         getMapAsync(e -> {
             CameraUpdate cameraUpdate = CameraUpdate.fitBounds(latLngBounds, paddingInPx)
@@ -160,6 +101,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    @Override
     public void setTilt(int tilt) {
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
@@ -168,6 +110,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    @Override
     public void setBearing(int bearing) {
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
@@ -176,85 +119,110 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         });
     }
 
+    @Override
+    public void setZoom(float zoom) {
+        getMapAsync(e -> {
+            naverMap.moveCamera(CameraUpdate.zoomTo(zoom));
+        });
+    }
+
+    @Override
     public void setMapPadding(int left, int top, int right, int bottom) {
         getMapAsync(e -> {
             naverMap.setContentPadding(left, top, right, bottom);
         });
     }
 
+    @Override
     public void onInitialized() {
         emitEvent("onInitialized", null);
     }
 
+    @Override
     public void showsMyLocationButton(boolean show) {
         getMapAsync(e -> naverMap.getUiSettings().setLocationButtonEnabled(show));
     }
 
+    @Override
     public void setCompassEnabled(boolean show) {
         getMapAsync(e -> naverMap.getUiSettings().setCompassEnabled(show));
     }
 
+    @Override
     public void setScaleBarEnabled(boolean show) {
         getMapAsync(e -> naverMap.getUiSettings().setScaleBarEnabled(show));
     }
 
+    @Override
     public void setZoomControlEnabled(boolean show) {
         getMapAsync(e -> naverMap.getUiSettings().setZoomControlEnabled(show));
     }
 
+    @Override
     public void setLocationTrackingMode(int mode) {
         getMapAsync(e -> naverMap.setLocationTrackingMode(LocationTrackingMode.values()[mode]));
     }
 
+    @Override
     public void setMapType(NaverMap.MapType value) {
         getMapAsync(e -> naverMap.setMapType(value));
     }
 
+    @Override
     public void setBuildingHeight(float height) {
         getMapAsync(e -> naverMap.setBuildingHeight(height));
     }
 
+    @Override
     public void setLayerGroupEnabled(String layerGroup, boolean enable) {
         getMapAsync(e -> naverMap.setLayerGroupEnabled(layerGroup, enable));
     }
 
+    @Override
     public void setNightModeEnabled(boolean enable) {
         getMapAsync(e -> naverMap.setNightModeEnabled(enable));
     }
 
+    @Override
     public void setLogoMargin(int left, int top, int right, int bottom) {
         getMapAsync(e -> naverMap.getUiSettings().setLogoMargin(left, top, right, bottom));
     }
 
+    @Override
     public void setLogoGravity(int gravity) {
         getMapAsync(e -> naverMap.getUiSettings().setLogoGravity(gravity));
     }
 
+    @Override
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }
 
-    private final List<RNNaverMapFeature> features = new ArrayList<>();
+    private final List<RNNaverMapFeature<?>> features = new ArrayList<>();
 
+    @Override
     public void addFeature(View child, int index) {
         getMapAsync(e -> {
             if (child instanceof RNNaverMapFeature) {
-                RNNaverMapFeature annotation = (RNNaverMapFeature) child;
+                RNNaverMapFeature<?> annotation = (RNNaverMapFeature<?>) child;
                 annotation.addToMap(this);
                 features.add(index, annotation);
             }
         });
     }
 
+    @Override
     public void removeFeatureAt(int index) {
-        RNNaverMapFeature feature = features.remove(index);
+        RNNaverMapFeature<?> feature = features.remove(index);
         feature.removeFromMap();
     }
 
+    @Override
     public int getFeatureCount() {
         return features.size();
     }
 
+    @Override
     public View getFeatureAt(int index) {
         return features.get(index);
     }
@@ -280,6 +248,33 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         param.putDouble("longitude", latLng.longitude);
 
         emitEvent("onMapClick", param);
+    }
+
+    public void restoreFrom(RNNaverMapView prevState) {
+        if (prevState != null && prevState.naverMap != null) {
+            CameraPosition cameraPosition = prevState.naverMap.getCameraPosition();
+            setCenter(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, cameraPosition.bearing);
+
+            setLocationTrackingMode(prevState.naverMap.getLocationTrackingMode().ordinal());
+            setMapType(prevState.naverMap.getMapType());
+            setBuildingHeight(prevState.naverMap.getBuildingHeight());
+            setNightModeEnabled(prevState.naverMap.isNightModeEnabled());
+            int[] padding = prevState.getMap().getContentPadding();
+            setMapPadding(padding[0], padding[1], padding[2], padding[3]);
+
+            UiSettings uiSettings = prevState.naverMap.getUiSettings();
+            showsMyLocationButton(uiSettings.isLocationButtonEnabled());
+            setCompassEnabled(uiSettings.isCompassEnabled());
+            setScaleBarEnabled(uiSettings.isScaleBarEnabled());
+            setZoomControlEnabled(uiSettings.isZoomControlEnabled());
+            setLogoGravity(uiSettings.getLogoGravity());
+            int[] logoMargin = uiSettings.getLogoMargin();
+            setLogoMargin(logoMargin[0], logoMargin[1], logoMargin[2], logoMargin[3]);
+
+            for (int i = 0; i < prevState.features.size(); i++) {
+                addFeature(prevState.features.get(i), i);
+            }
+        }
     }
 
     private void emitEvent(String eventName, WritableMap param) {
