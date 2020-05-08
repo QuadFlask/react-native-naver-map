@@ -127,6 +127,10 @@ export interface Coord {
     latitude: number;
     longitude: number;
 }
+export interface Region extends Coord {
+    latitudeDelta: number;
+    longitudeDelta: number;
+}
 export interface Rect {
     left?: number;
     top?: number;
@@ -178,6 +182,7 @@ animateToCoordinates: (coords: Coord[], bounds?: {
     left: number;
     right: number;
 }) => void;
+animateToRegion: (region: Region) => void;
 setLocationTrackingMode: (mode: number) => void;
 showsMyLocationButton: (show: boolean) => void;
 handleOnCameraChange: (event: React.SyntheticEvent<{}, {

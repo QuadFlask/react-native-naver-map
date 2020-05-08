@@ -23,6 +23,11 @@ export interface Coord {
     longitude: number;
 }
 
+export interface Region extends Coord {
+    latitudeDelta: number;
+    longitudeDelta: number;
+}
+
 export enum TrackingMode {
     None = 0,
     NoFollow = 1,
@@ -115,6 +120,10 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     animateToCoordinates = (coords: Coord[], bounds?: { top: number, bottom: number, left: number, right: number, }) => {
         this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
     };
+
+    animateToRegion = (region: Region) => {
+        this.dispatchViewManagerCommand('animateToRegion', [region]);
+    }
 
     setLocationTrackingMode = (mode: number) => {
         this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);

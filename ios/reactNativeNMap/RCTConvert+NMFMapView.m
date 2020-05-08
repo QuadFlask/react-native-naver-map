@@ -8,6 +8,7 @@
 #import <NMapsMap/NMFCameraUpdate.h>
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCameraPosition.h>
+#import <NMapsMap/NMGLatLngBounds.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -37,6 +38,17 @@
 {
   json = [self NSDictionary:json];
   return NMGLatLngMake([self double: json[@"latitude"]], [self double:json[@"longitude"]]);
+}
+
++ (NMGLatLngBounds*) NMGLatLngBounds: (id)json
+{
+    json = [self NSDictionary:json];
+    double lat = [self double: json[@"latitude"]];
+    double latDelta = [self double: json[@"latitudeDelta"]];
+    double lng = [self double: json[@"longitude"]];
+    double lngDelta = [self double: json[@"longitudeDelta"]];
+    return NMGLatLngBoundsMake(lat - latDelta / 2, lng - lngDelta / 2,  // southwest
+                               lat + latDelta / 2, lng + lngDelta / 2); // northeast
 }
 
 @end
