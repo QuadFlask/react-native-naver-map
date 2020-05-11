@@ -13,5 +13,6 @@
 
 + (NMFCameraUpdate *) NMFCameraUpdate: (id) json;
 + (NMGLatLng *) NMGLatLng: (id)json;
++ (NMGLatLngBounds *) NMGLatLngBounds: (id)json;
 
 @end

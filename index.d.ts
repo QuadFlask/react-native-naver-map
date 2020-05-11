@@ -5,6 +5,10 @@ export interface Coord {
     latitude: number;
     longitude: number;
 }
+export interface Region extends Coord {
+    latitudeDelta: number;
+    longitudeDelta: number;
+}
 export declare enum TrackingMode {
     None = 0,
     NoFollow = 1,
@@ -90,6 +94,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         left: number;
         right: number;
     }) => void;
+    animateToRegion: (region: Region) => void;
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;

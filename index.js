@@ -58,6 +58,9 @@ export default class NaverMapView extends Component {
         this.animateToCoordinates = (coords, bounds) => {
             this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
         };
+        this.animateToRegion = (region) => {
+            this.dispatchViewManagerCommand('animateToRegion', [region]);
+        }
         this.setLocationTrackingMode = (mode) => {
             this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
         };

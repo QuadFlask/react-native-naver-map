@@ -189,6 +189,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 final double latDelta = region.getDouble("latitudeDelta");
                 final double lngDelta = region.getDouble("longitudeDelta");
 
+                LatLngBounds bounds = new LatLngBounds(
+                    new LatLng(lat - latDelta / 2, lng - lngDelta / 2), // southwest
+                    new LatLng(lat + latDelta / 2, lng + lngDelta / 2)  // northeast
+                );
+                mapView.moveCameraFitBound(bounds, 0, 0, 0, 0);
+
                 break;
             }
             case ANIMATE_TO_TWO_COORDINATES: {
