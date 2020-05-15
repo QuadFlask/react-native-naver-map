@@ -79,13 +79,6 @@ allprojects {
 <plist>
 ```
 
-#### ⚠️ 주의
-
-현재 iOS pod 설정이 제대로 되어있지 않아 링크가 되지 않습니다. 
-
-현재로선 ios 폴더의 *.m, *.h 파일을 프로젝트에 복사 하신뒤 사용하실 수 있습니다.
-
-
 ## 예제
 
 > [example/App.js](https://github.com/QuadFlask/react-native-naver-map/blob/master/example/App.js) 
