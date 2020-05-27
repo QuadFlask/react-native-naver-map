@@ -17,6 +17,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Arrays;
@@ -50,7 +51,11 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     @NonNull
     @Override
     protected RNNaverMapViewContainer createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapViewContainer(reactContext, appContext, locationSource);
+        return new RNNaverMapViewContainer(reactContext, appContext, locationSource, getNaverMapViewOptions());
+    }
+
+    protected NaverMapOptions getNaverMapViewOptions() {
+        return null;
     }
 
     @ReactProp(name = "center")
@@ -190,8 +195,8 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 final double lngDelta = region.getDouble("longitudeDelta");
 
                 LatLngBounds bounds = new LatLngBounds(
-                    new LatLng(lat - latDelta / 2, lng - lngDelta / 2), // southwest
-                    new LatLng(lat + latDelta / 2, lng + lngDelta / 2)  // northeast
+                        new LatLng(lat - latDelta / 2, lng - lngDelta / 2), // southwest
+                        new LatLng(lat + latDelta / 2, lng + lngDelta / 2)  // northeast
                 );
                 mapView.moveCameraFitBound(bounds, 0, 0, 0, 0);
 
