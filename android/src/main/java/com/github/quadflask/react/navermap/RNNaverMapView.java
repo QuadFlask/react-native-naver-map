@@ -20,14 +20,12 @@ import java.util.List;
 public class RNNaverMapView extends MapView implements OnMapReadyCallback, NaverMap.OnCameraIdleListener, NaverMap.OnMapClickListener, RNNaverMapViewProps {
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
-    private ReactApplicationContext appContext;
     private NaverMap naverMap;
     private long lastTouch = 0;
 
-    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource) {
-        super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
+    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
+        super(ReactUtil.getNonBuggyContext(themedReactContext, appContext), naverMapOptions);
         this.themedReactContext = themedReactContext;
-        this.appContext = appContext;
         this.locationSource = locationSource;
         super.onCreate(null);
         super.onStart();

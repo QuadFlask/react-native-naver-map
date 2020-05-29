@@ -5,6 +5,10 @@ export interface Coord {
     latitude: number;
     longitude: number;
 }
+export interface Region extends Coord {
+    latitudeDelta: number;
+    longitudeDelta: number;
+}
 export declare enum TrackingMode {
     None = 0,
     NoFollow = 1,
@@ -78,6 +82,7 @@ export interface NaverMapViewProps {
     mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
+    useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps> {
     ref?: RNNaverMapView;
@@ -90,6 +95,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         left: number;
         right: number;
     }) => void;
+    animateToRegion: (region: Region) => void;
     setLocationTrackingMode: (mode: number) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;

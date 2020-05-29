@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { requireNativeComponent, findNodeHandle, UIManager, Platform, NativeModules, Image, } from 'react-native';
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+const RNNaverMapViewTexture = Platform.select({
+    android: () => requireNativeComponent('RNNaverMapViewTexture'),
+    ios: () => RNNaverMapView
+})();
 const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
 const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
@@ -58,6 +62,9 @@ export default class NaverMapView extends Component {
         this.animateToCoordinates = (coords, bounds) => {
             this.dispatchViewManagerCommand("animateToCoordinates", [coords, bounds]);
         };
+        this.animateToRegion = (region) => {
+            this.dispatchViewManagerCommand('animateToRegion', [region]);
+        };
         this.setLocationTrackingMode = (mode) => {
             this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
         };
@@ -77,8 +84,9 @@ export default class NaverMapView extends Component {
         this.handleOnMapClick = (event) => this.props.onMapClick && this.props.onMapClick(event.nativeEvent);
     }
     render() {
-        const { onInitialized, center, tilt, bearing, mapPadding, logoMargin, nightMode, } = this.props;
-        return React.createElement(RNNaverMapView, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
+        const { onInitialized, center, tilt, bearing, mapPadding, logoMargin, nightMode, useTextureView, } = this.props;
+        const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
+        return React.createElement(ViewClass, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {

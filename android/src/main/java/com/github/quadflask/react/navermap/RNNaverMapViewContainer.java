@@ -9,22 +9,25 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapViewProps {
     private final ReactApplicationContext appContext;
     private final ThemedReactContext themedReactContext;
     private final FusedLocationSource locationSource;
+    private final NaverMapOptions naverMapOptions;
     private RNNaverMapView mapView;
     private RNNaverMapView prevMapView;
     private boolean isAttachedToWindow = false;
 
-    public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource) {
+    public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
         super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
         this.appContext = appContext;
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;
-        mapView = new RNNaverMapView(themedReactContext, appContext, locationSource);
+        this.naverMapOptions = naverMapOptions;
+        mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
         addView(mapView);
     }
 
@@ -55,7 +58,7 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
         super.onAttachedToWindow();
         isAttachedToWindow = true;
         if (mapView == null) {
-            mapView = new RNNaverMapView(themedReactContext, appContext, locationSource);
+            mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
             mapView.restoreFrom(prevMapView);
             addView(mapView);
         }

@@ -12,6 +12,10 @@ import {
 } from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+const RNNaverMapViewTexture = Platform.select({
+    android: () => requireNativeComponent('RNNaverMapViewTexture'),
+    ios: () => RNNaverMapView
+})();
 const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
 const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
@@ -44,12 +48,12 @@ export enum MapType {
 }
 
 export enum LayerGroup {
-    LAYER_GROUP_BUILDING= 'building',
-    LAYER_GROUP_TRANSIT= 'transit',
-    LAYER_GROUP_BICYCLE= 'bike',
-    LAYER_GROUP_TRAFFIC= 'ctt',
-    LAYER_GROUP_CADASTRAL= 'landparcel',
-    LAYER_GROUP_MOUNTAIN= 'mountain',
+    LAYER_GROUP_BUILDING = 'building',
+    LAYER_GROUP_TRANSIT = 'transit',
+    LAYER_GROUP_BICYCLE = 'bike',
+    LAYER_GROUP_TRAFFIC = 'ctt',
+    LAYER_GROUP_CADASTRAL = 'landparcel',
+    LAYER_GROUP_MOUNTAIN = 'mountain',
 }
 
 export enum Gravity {
@@ -102,6 +106,7 @@ export interface NaverMapViewProps {
     mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
+    useTextureView?: boolean;
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps> {
@@ -169,9 +174,12 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             mapPadding,
             logoMargin,
             nightMode,
+            useTextureView,
         } = this.props;
 
-        return <RNNaverMapView
+        const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
+
+        return <ViewClass
             ref={this.resolveRef}
             {...this.props}
             onInitialized={onInitialized}

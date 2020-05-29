@@ -20,6 +20,7 @@ public class RNNaverMapPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.asList(
                 new RNNaverMapViewManager(reactContext),
+                new RNNaverMapViewTextureManager(reactContext),
                 new RNNaverMapPolylineOverlayManager(reactContext),
                 new RNNaverMapPathOverlayManager(reactContext),
                 new RNNaverMapMarkerManager(reactContext),

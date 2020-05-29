@@ -82,6 +82,7 @@ export interface NaverMapViewProps {
     mapType?: MapType;
     buildingHeight?: number;
     nightMode?: boolean;
+    useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps> {
     ref?: RNNaverMapView;
