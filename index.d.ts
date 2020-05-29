@@ -88,6 +88,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
     private resolveRef;
+    animateToCoordinate: (coord: Coord) => void;
     animateToTwoCoordinates: (c1: Coord, c2: Coord) => void;
     animateToCoordinates: (coords: Coord[], bounds?: {
         top: number;

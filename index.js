@@ -56,6 +56,9 @@ export default class NaverMapView extends Component {
             this.ref = ref;
             this.nodeHandle = findNodeHandle(ref);
         };
+        this.animateToCoordinate = (coord) => {
+            this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+        };
         this.animateToTwoCoordinates = (c1, c2) => {
             this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
         };
