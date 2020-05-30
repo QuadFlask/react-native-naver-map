@@ -118,6 +118,10 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         this.nodeHandle = findNodeHandle(ref);
     };
 
+    animateToCoordinate = (coord: Coord) => {
+      this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+    }
+
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {
         this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
     };
