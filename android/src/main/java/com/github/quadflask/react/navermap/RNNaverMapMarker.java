@@ -33,6 +33,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
+import com.naver.maps.map.overlay.Align;
 
 public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;
@@ -134,6 +135,14 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> {
 
     public void setHeight(int height) {
         feature.setHeight(height);
+    }
+
+    public void setCaption(String text, int textSize, int color, int haloColor, Align align) {
+        feature.setCaptionText(text);
+        feature.setCaptionTextSize(textSize);
+        feature.setCaptionColor(color);
+        feature.setCaptionHaloColor(haloColor);
+        feature.setCaptionAligns(align);
     }
 
     public void setImage(String uri) {

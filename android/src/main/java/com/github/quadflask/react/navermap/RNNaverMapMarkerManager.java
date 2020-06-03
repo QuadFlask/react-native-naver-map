@@ -13,6 +13,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.naver.maps.map.overlay.Align;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
@@ -113,5 +114,17 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
     @ReactProp(name = "alpha", defaultFloat = 1f)
     public void setAlpha(RNNaverMapMarker view, float alpha) {
         view.setAlpha(alpha);
+    }
+
+    @ReactProp(name = "caption")
+    public void setCaption(RNNaverMapMarker view, ReadableMap map) {
+        if (map == null) return;
+        if (!map.hasKey("text")) return;
+        String text = map.getString("text");
+        int textSize = map.hasKey("textSize") ? map.getInt("textSize") : 16;
+        int color = map.hasKey("color") ? map.getInt("color") : Color.BLACK;
+        int haloColor = map.hasKey("haloColor") ? map.getInt("haloColor") : Color.WHITE;
+        // TODO: process `align`
+        view.setCaption(text, textSize, color, haloColor, Align.Bottom);
     }
 }
