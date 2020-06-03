@@ -136,8 +136,8 @@ export interface MarkerProps extends MapOverlay {
         text?: string;
         align?: number;
         textSize?: number;
-        color?: number;
-        haloColor?: number;
+        color?: string;
+        haloColor?: string;
     };
     subCaption?: {
         text?: string;

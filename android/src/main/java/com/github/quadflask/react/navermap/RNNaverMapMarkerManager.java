@@ -16,6 +16,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.naver.maps.map.overlay.Align;
 
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
+import static com.github.quadflask.react.navermap.ReactUtil.parseColorString;
 
 public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
     private final DisplayMetrics metrics;
@@ -122,8 +123,8 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         if (!map.hasKey("text")) return;
         String text = map.getString("text");
         int textSize = map.hasKey("textSize") ? map.getInt("textSize") : 16;
-        int color = map.hasKey("color") ? map.getInt("color") : Color.BLACK;
-        int haloColor = map.hasKey("haloColor") ? map.getInt("haloColor") : Color.WHITE;
+        int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
+        int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
         // TODO: process `align`
         view.setCaption(text, textSize, color, haloColor, Align.Bottom);
     }
