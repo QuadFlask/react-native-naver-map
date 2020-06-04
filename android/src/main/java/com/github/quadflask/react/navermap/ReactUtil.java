@@ -36,15 +36,17 @@ public class ReactUtil {
     }
 
     public static Align[] parseAligns(int align) {
-        if (align <= 0) return new Align[]{Align.Bottom};
+        if (align <= 0 || align >= 512) return new Align[]{Align.Bottom};
         List<Align> aligns = new ArrayList<>();
         int index = 0;
         while (align > 0) {
             if (align % 2 == 1) {
                 aligns.add(Align.values()[index]);
             }
-            align >>= 2;
+            align >>= 1;
+            index++;
         }
+
         return aligns.toArray(new Align[aligns.size()]);
     }
 

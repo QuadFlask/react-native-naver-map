@@ -131,6 +131,7 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
         int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
         Align[] aligns = map.hasKey("aligns") ? parseAligns(map.getInt("aligns")) : DEFAULT_CAPTION_ALIGN;
+
         view.setCaption(text, textSize, color, haloColor, aligns);
     }
 }
