@@ -3,6 +3,7 @@ package com.github.quadflask.react.navermap;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
+
 import androidx.core.util.Consumer;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -10,6 +11,7 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.overlay.Align;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,19 @@ public class ReactUtil {
             return a << 24 | rgb;
         }
         return Color.BLACK;
+    }
+
+    public static Align[] parseAligns(int align) {
+        if (align <= 0) return new Align[]{Align.Bottom};
+        List<Align> aligns = new ArrayList<>();
+        int index = 0;
+        while (align > 0) {
+            if (align % 2 == 1) {
+                aligns.add(Align.values()[index]);
+            }
+            align >>= 2;
+        }
+        return aligns.toArray(new Align[aligns.size()]);
     }
 
     public static LatLng toNaverLatLng(ReadableMap map) {

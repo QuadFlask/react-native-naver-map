@@ -2,9 +2,10 @@ package com.github.quadflask.react.navermap;
 
 import android.graphics.Rect;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Consumer;
+
 import com.airbnb.android.react.maps.SizeReportingShadowNode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
@@ -21,6 +22,7 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
@@ -35,6 +37,14 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     private static final int ANIMATE_TO_TWO_COORDINATES = 3;
     private static final int SET_LOCATION_TRACKING_MODE = 4;
     private static final int ANIMATE_TO_COORDINATES = 6;
+    private static final List<String> LAYER_GROUPS = Collections.unmodifiableList(Arrays.asList(
+            NaverMap.LAYER_GROUP_BUILDING,
+            NaverMap.LAYER_GROUP_TRANSIT,
+            NaverMap.LAYER_GROUP_BICYCLE,
+            NaverMap.LAYER_GROUP_TRAFFIC,
+            NaverMap.LAYER_GROUP_CADASTRAL,
+            NaverMap.LAYER_GROUP_MOUNTAIN
+    ));
 
     public RNNaverMapViewManager(ReactApplicationContext context) {
         super();
@@ -117,20 +127,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
 
     @ReactProp(name = "layerGroup")
     public void setLayerGroupEnabled(RNNaverMapViewContainer mapView, @Nullable ReadableMap option) {
-        final List<String> layerGroups = Arrays.asList(
-                NaverMap.LAYER_GROUP_BUILDING,
-                NaverMap.LAYER_GROUP_TRANSIT,
-                NaverMap.LAYER_GROUP_BICYCLE,
-                NaverMap.LAYER_GROUP_TRAFFIC,
-                NaverMap.LAYER_GROUP_CADASTRAL,
-                NaverMap.LAYER_GROUP_MOUNTAIN
-        );
         if (option != null) {
-            for (String layerGroup : layerGroups) {
+            for (String layerGroup : LAYER_GROUPS) {
                 mapView.setLayerGroupEnabled(layerGroup, option.getBoolean(layerGroup));
             }
         } else {
-            for (String layerGroup : layerGroups) {
+            for (String layerGroup : LAYER_GROUPS) {
                 mapView.setLayerGroupEnabled(layerGroup, false);
             }
         }
