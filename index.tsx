@@ -232,7 +232,7 @@ export interface MarkerProps extends MapOverlay {
     animated?: boolean;
     caption?: {
         text?: string;
-        aligns?: Align;
+        align?: Align;
         textSize?: number;
         color?: string;
         haloColor?: string;
