@@ -44,6 +44,17 @@ export declare enum Gravity {
     CENTER_VERTICAL = 16,
     CENTER_HORIZONTAL = 1
 }
+export declare enum Align {
+    Center = 0,
+    Left = 1,
+    Right = 2,
+    Top = 3,
+    Bottom = 4,
+    TopLeft = 5,
+    TopRight = 6,
+    BottomRight = 7,
+    BottomLeft = 8
+}
 export interface Rect {
     left?: number;
     top?: number;
@@ -88,6 +99,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
     private resolveRef;
+    animateToCoordinate: (coord: Coord) => void;
     animateToTwoCoordinates: (c1: Coord, c2: Coord) => void;
     animateToCoordinates: (coords: Coord[], bounds?: {
         top: number;
@@ -133,10 +145,10 @@ export interface MarkerProps extends MapOverlay {
     animated?: boolean;
     caption?: {
         text?: string;
-        align?: number;
+        aligns?: Align;
         textSize?: number;
-        color?: number;
-        haloColor?: number;
+        color?: string;
+        haloColor?: string;
     };
     subCaption?: {
         text?: string;

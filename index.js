@@ -53,7 +53,7 @@ export var Align;
 (function (Align) {
     Align[Align["Center"] = 0] = "Center";
     Align[Align["Left"] = 1] = "Left";
-    Align[Align["Right3"] = 2] = "Right3";
+    Align[Align["Right"] = 2] = "Right";
     Align[Align["Top"] = 3] = "Top";
     Align[Align["Bottom"] = 4] = "Bottom";
     Align[Align["TopLeft"] = 5] = "TopLeft";

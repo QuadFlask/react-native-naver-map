@@ -72,15 +72,15 @@ export enum Gravity {
 }
 
 export enum Align {
-    Center = 1,
-    Left = 2,
-    Right3 = 4,
-    Top = 8,
-    Bottom = 16,
-    TopLeft = 32,
-    TopRight = 64,
-    BottomRight = 128,
-    BottomLeft = 256,
+    Center,
+    Left,
+    Right,
+    Top,
+    Bottom,
+    TopLeft,
+    TopRight,
+    BottomRight,
+    BottomLeft,
 }
 
 export interface Rect {
@@ -232,7 +232,7 @@ export interface MarkerProps extends MapOverlay {
     animated?: boolean;
     caption?: {
         text?: string;
-        align?: Align;
+        aligns?: Align;
         textSize?: number;
         color?: string;
         haloColor?: string;

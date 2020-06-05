@@ -15,12 +15,12 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.naver.maps.map.overlay.Align;
 
-import static com.github.quadflask.react.navermap.ReactUtil.parseAligns;
-import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
+import static com.github.quadflask.react.navermap.ReactUtil.parseAlign;
 import static com.github.quadflask.react.navermap.ReactUtil.parseColorString;
+import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
 public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
-    private static final Align[] DEFAULT_CAPTION_ALIGN = new Align[]{Align.Bottom};
+    private static final Align DEFAULT_CAPTION_ALIGN = Align.Bottom;
 
     private final DisplayMetrics metrics;
 
@@ -130,8 +130,8 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         int textSize = map.hasKey("textSize") ? map.getInt("textSize") : 16;
         int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
         int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
-        Align[] aligns = map.hasKey("aligns") ? parseAligns(map.getInt("aligns")) : DEFAULT_CAPTION_ALIGN;
+        Align align = map.hasKey("align") ? parseAlign(map.getInt("align")) : DEFAULT_CAPTION_ALIGN;
 
-        view.setCaption(text, textSize, color, haloColor, aligns);
+        view.setCaption(text, textSize, color, haloColor, align);
     }
 }
