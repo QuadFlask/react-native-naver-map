@@ -71,6 +71,18 @@ export enum Gravity {
     CENTER_HORIZONTAL = AXIS_SPECIFIED << AXIS_X_SHIFT,
 }
 
+export enum Align {
+    Center,
+    Left,
+    Right,
+    Top,
+    Bottom,
+    TopLeft,
+    TopRight,
+    BottomRight,
+    BottomLeft,
+}
+
 export interface Rect {
     left?: number;
     top?: number;
@@ -119,7 +131,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     };
 
     animateToCoordinate = (coord: Coord) => {
-      this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+        this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
     }
 
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {
@@ -220,7 +232,7 @@ export interface MarkerProps extends MapOverlay {
     animated?: boolean;
     caption?: {
         text?: string;
-        align?: number;
+        align?: Align;
         textSize?: number;
         color?: string;
         haloColor?: string;
