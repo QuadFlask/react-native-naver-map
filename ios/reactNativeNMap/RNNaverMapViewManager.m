@@ -109,7 +109,7 @@ RCT_CUSTOM_VIEW_PROPERTY(bearing, BOOL, RNNaverMapView)
 }
 
 RCT_EXPORT_METHOD(setLocationTrackingMode:(nonnull NSNumber *)reactTag
-                  withMode: (NSNumber *) mode
+                  withMode: (nonnull NSNumber *) mode
                   )
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
