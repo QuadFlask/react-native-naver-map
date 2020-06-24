@@ -202,6 +202,13 @@ interface MarkerProps {
     flat?: boolean
     image?: ImageSourcePropType
     onClick?: () => void
+    caption?: { // android only
+        text?: string;
+        align?: Align;
+        textSize?: number;
+        color?: string;
+        haloColor?: string;
+    };
 }
 ```
 
