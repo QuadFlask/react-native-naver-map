@@ -62,6 +62,11 @@ public class ReactUtil {
         return defaultValue;
     }
 
+    public static Double getDoubleOrNull(ReadableMap option, String key) {
+        if (option.hasKey(key)) return option.getDouble(key);
+        return null;
+    }
+
     public static void getNumber(ReadableMap option, String key, Consumer<Double> consumer) {
         if (option.hasKey(key))
             consumer.accept(option.getDouble(key));

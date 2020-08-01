@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.github.quadflask.react.navermap.ReactUtil.getDoubleOrNull;
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
@@ -71,11 +72,11 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     @ReactProp(name = "center")
     public void setCenter(RNNaverMapViewContainer mapView, @Nullable ReadableMap option) {
         if (option != null) {
-            if (option.hasKey("zoom") && option.hasKey("tilt") && option.hasKey("bearing")) {
-                mapView.setCenter(toNaverLatLng(option), option.getDouble("zoom"), option.getDouble("tilt"), option.getDouble("bearing"));
-            } else {
-                mapView.setCenter(toNaverLatLng(option));
-            }
+            mapView.setCenter(
+                    toNaverLatLng(option),
+                    getDoubleOrNull(option, "zoom"),
+                    getDoubleOrNull(option, "tilt"),
+                    getDoubleOrNull(option, "bearing"));
         }
     }
 

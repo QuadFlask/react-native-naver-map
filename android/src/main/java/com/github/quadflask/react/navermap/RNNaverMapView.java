@@ -2,7 +2,9 @@ package com.github.quadflask.react.navermap;
 
 import android.graphics.PointF;
 import android.view.View;
+
 import androidx.annotation.NonNull;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -82,10 +84,13 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     @Override
     public void setCenter(LatLng latLng, Double zoom, Double tilt, Double bearing) {
         getMapAsync(e -> {
-            if (zoom != null && tilt != null && bearing != null) {
-                naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(latLng, zoom, tilt, bearing))
-                        .animate(CameraAnimation.Easing));
-            }
+            CameraPosition cam = naverMap.getCameraPosition();
+            double zoomValue = zoom == null ? cam.zoom : zoom;
+            double tiltValue = tilt == null ? cam.tilt : tilt;
+            double bearingValue = bearing == null ? cam.bearing : bearing;
+
+            naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(latLng, zoomValue, tiltValue, bearingValue))
+                    .animate(CameraAnimation.Easing));
         });
     }
 
