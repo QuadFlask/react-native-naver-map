@@ -4,16 +4,23 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.airbnb.android.react.maps.SizeReportingShadowNode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.naver.maps.map.overlay.Align;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.github.quadflask.react.navermap.ReactUtil.parseAlign;
 import static com.github.quadflask.react.navermap.ReactUtil.parseColorString;
@@ -133,5 +140,34 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         Align align = map.hasKey("align") ? parseAlign(map.getInt("align")) : DEFAULT_CAPTION_ALIGN;
 
         view.setCaption(text, textSize, color, haloColor, align);
+    }
+
+    @Override
+    public void addView(RNNaverMapMarker parent, View child, int index) {
+//        super.addView(parent, child, index);
+        parent.setCustomView(child, index);
+    }
+
+    @Override
+    public void removeView(RNNaverMapMarker parent, View view) {
+//        super.removeView(parent, view);
+        parent.removeCustomView(view);
+    }
+
+    @Override
+    public LayoutShadowNode createShadowNodeInstance() {
+        // A custom shadow node is needed in order to pass back the width/height of the map to the
+        // view manager so that it can start applying camera moves with bounds.
+        return new SizeReportingShadowNode();
+    }
+
+    @Override
+    public void updateExtraData(RNNaverMapMarker view, Object extraData) {
+//        super.updateExtraData(root, extraData);
+        Map<String, Float> data = (HashMap<String, Float>) extraData;
+        float width = data.get("width");
+        float height = data.get("height");
+        view.update((int) width, (int) height);
+        Log.e("MarkerManager", "updateExtraData: " + width + ", " + height);
     }
 }
