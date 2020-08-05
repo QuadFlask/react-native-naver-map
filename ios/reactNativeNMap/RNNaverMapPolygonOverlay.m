@@ -37,13 +37,8 @@
   return self;
 }
 
-- (void)setCoordinates:(NSArray<NMGLatLng *>*) coordinates {
-  _realOverlay.polygon = [NMGPolygon polygonWithRing:[NMGLineString lineStringWithPoints:coordinates]];
-}
-
-- (void)setHoles:(NSArray<NSArray<NMGLatLng *>*>*) holes {
-// TODO
-//  _realOverlay.line = [NMGLineString lineStringWithPoints:coordinates];
+- (void)setPolygonWithRing:(NMGLineString*) exteriorRing interiorRings:(NSArray<NMGLineString*>*) interiorRings {
+  _realOverlay.polygon = [NMGPolygon polygonWithRing:exteriorRing interiorRings:interiorRings];
 }
 
 - (void)setOutlineWidth:(CGFloat) outlineWidth {

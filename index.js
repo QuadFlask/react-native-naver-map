@@ -121,7 +121,15 @@ export class Polyline extends Component {
 }
 export class Polygon extends Component {
     render() {
-        return React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props));
+        return Platform.select({
+            android: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props)),
+            ios: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props, {
+                coordinates: {
+                    exteriorRing: this.props.coordinates,
+                    interiorRings: this.props.holes,
+                }
+            })),
+        })();
     }
 }
 export class Path extends Component {

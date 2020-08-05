@@ -287,7 +287,16 @@ interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
 
 export class Polygon extends Component<PolygonProps> {
     render() {
-        return <RNNaverMapPolygonOverlay {...this.props} />;
+        return Platform.select({
+            android: () => <RNNaverMapPolygonOverlay {...this.props} />,
+            ios: () => <RNNaverMapPolygonOverlay
+                {...this.props}
+                coordinates={{
+                    exteriorRing: this.props.coordinates,
+                    interiorRings: this.props.holes,
+                }}
+            />
+        })();
     }
 }
 
