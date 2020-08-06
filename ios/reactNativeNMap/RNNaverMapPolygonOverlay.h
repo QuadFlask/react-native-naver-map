@@ -18,11 +18,11 @@
 @property (nonatomic, weak) RCTBridge *bridge;
 @property (nonatomic, strong) NMFPolygonOverlay *realOverlay;
 
-@property (nonatomic, assign) NSArray<NMGLatLng *> *coordinates;
-@property (nonatomic, assign) NSArray<NSArray<NMGLatLng *>*> *holes;
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) CGFloat outlineWidth;
 @property (nonatomic, copy) RCTDirectEventBlock onClick;
+
+- (void)setPolygonWithRing:(NMGLineString*) exteriorRing interiorRings:(NSArray<NMGLineString*>*) interiorRings;
 
 @end

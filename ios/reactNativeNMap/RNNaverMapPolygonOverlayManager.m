@@ -24,14 +24,31 @@ RCT_EXPORT_MODULE()
   return overlay;
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(coordinates, NSArray<NMGLatLng*>, RNNaverMapPolygonOverlay) {
-  NSArray *inputArray = [RCTConvert NSArray:json];
-  NSUInteger size = inputArray.count;
-  NSMutableArray<NMGLatLng*> *points = [NSMutableArray arrayWithCapacity: size];
-  for (int i=0; i<size; i++) {
-    [points addObject:[RCTConvert NMGLatLng: inputArray[i]]];
-  }
-  view.coordinates = points;
+RCT_CUSTOM_VIEW_PROPERTY(coordinates, NSDictionary, RNNaverMapPolygonOverlay) {
+    NSDictionary *dic = [RCTConvert NSDictionary:json];
+
+    // process exterior ring
+    NSArray *exteriorRing = [RCTConvert NSArray:dic[@"exteriorRing"]];
+    NSUInteger size = exteriorRing.count;
+    NSMutableArray<NMGLatLng*> *points = [NSMutableArray arrayWithCapacity: size];
+    for (int i=0; i<size; i++) {
+        [points addObject:[RCTConvert NMGLatLng: exteriorRing[i]]];
+    }
+    NMGLineString *exRing = [NMGLineString lineStringWithPoints:points];
+
+    // process interior rings
+    NSArray<NSArray*> *interiorRings = [RCTConvert NSArrayArray:dic[@"interiorRings"]];
+    NSMutableArray<NMGLineString*> *inRings = [[NSMutableArray alloc] init];
+    for (NSArray *interiorRing in interiorRings) {
+        NSMutableArray<NMGLatLng*> *ring = [[NSMutableArray alloc] init];
+        for (id coord in interiorRing) {
+            [ring addObject:[RCTConvert NMGLatLng:coord]];
+        }
+        [inRings addObject:[NMGLineString lineStringWithPoints:ring]];
+    }
+
+    // set polygon
+    [view setPolygonWithRing:exRing interiorRings:inRings];
 }
 RCT_EXPORT_VIEW_PROPERTY(outlineWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(color, UIColor)
