@@ -96,7 +96,7 @@
     return;
   }
 
-  _reloadImageCancellationBlock = [_bridge.imageLoader loadImageWithURLRequest:[RCTConvert NSURLRequest:_image]
+  _reloadImageCancellationBlock = [[_bridge moduleForClass:[RCTImageLoader class]] loadImageWithURLRequest:[RCTConvert NSURLRequest:_image]
                                                                           size:self.bounds.size
                                                                          scale:RCTScreenScale()
                                                                        clipped:YES
