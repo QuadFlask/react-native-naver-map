@@ -163,6 +163,8 @@ interface NaverMapViewProps {
     scaleBar?: boolean;
     zoomControl?: boolean;
     mapType?: MapType;
+    minZoomLevel?: number;
+    maxZoomLevel?: number;
     buildingHeight?: number;
     nightMode?: boolean;
     useTextureView?: boolean; // android only
