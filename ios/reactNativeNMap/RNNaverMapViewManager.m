@@ -98,6 +98,18 @@ RCT_CUSTOM_VIEW_PROPERTY(nightMode, BOOL, RNNaverMapView)
   view.mapView.nightModeEnabled = [json boolValue];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(minZoomLevel, NSNumber*, RNNaverMapView)
+{
+  if (json == nil) return;
+  view.mapView.minZoomLevel = [json floatValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(maxZoomLevel, NSNumber*, RNNaverMapView)
+{
+  if (json == nil) return;
+  view.mapView.maxZoomLevel = [json floatValue];
+}
+
 RCT_CUSTOM_VIEW_PROPERTY(tilt, BOOL, RNNaverMapView)
 {
   // TODO
