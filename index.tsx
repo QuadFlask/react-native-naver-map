@@ -117,6 +117,8 @@ export interface NaverMapViewProps {
     zoomControl?: boolean;
     mapType?: MapType;
     buildingHeight?: number;
+    minZoomLevel?: number;
+    maxZoomLevel?: number;
     nightMode?: boolean;
     useTextureView?: boolean;
 }
