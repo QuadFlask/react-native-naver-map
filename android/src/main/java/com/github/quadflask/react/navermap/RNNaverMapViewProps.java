@@ -45,6 +45,10 @@ public interface RNNaverMapViewProps {
 
     void setBuildingHeight(float height);
 
+    void setMinZoom(float minZoomLevel);
+
+    void setMaxZoom(float maxZoomLevel);
+
     void setLayerGroupEnabled(String layerGroup, boolean enable);
 
     void setNightModeEnabled(boolean enable);
