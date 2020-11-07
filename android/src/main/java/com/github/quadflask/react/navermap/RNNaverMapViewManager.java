@@ -105,6 +105,16 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
         mapView.setMapType(NaverMap.MapType.values()[mapType]);
     }
 
+    @ReactProp(name = "minZoomLevel", defaultFloat = 1.0f)
+    public void setMinZoom(RNNaverMapViewContainer mapView, float minZoomLevel) {
+        mapView.setMinZoom(minZoomLevel);
+    }
+
+    @ReactProp(name = "maxZoomLevel", defaultFloat = 1.0f)
+    public void setMaxZoom(RNNaverMapViewContainer mapView, float maxZoomLevel) {
+        mapView.setMaxZoom(maxZoomLevel);
+    }
+
     @ReactProp(name = "buildingHeight", defaultFloat = 1.0f)
     public void setBuildingHeight(RNNaverMapViewContainer mapView, float height) {
         mapView.setBuildingHeight(height);

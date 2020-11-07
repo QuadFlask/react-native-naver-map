@@ -167,6 +167,18 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
+    public void setMinZoom(float minZoom) {
+        if (mapView != null)
+            mapView.setMinZoom(minZoom);
+    }
+
+    @Override
+    public void setMaxZoom(float maxZoom) {
+        if (mapView != null)
+            mapView.setMaxZoom(maxZoom);
+    }
+
+    @Override
     public void setBuildingHeight(float height) {
         if (mapView != null)
             mapView.setBuildingHeight(height);

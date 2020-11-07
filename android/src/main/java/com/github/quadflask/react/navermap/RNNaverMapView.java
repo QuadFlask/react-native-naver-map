@@ -171,6 +171,16 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     @Override
+    public void setMinZoom(float minZoomLevel) {
+        getMapAsync(e -> naverMap.setMinZoom(minZoomLevel));
+    }
+
+    @Override
+    public void setMaxZoom(float maxZoomLevel) {
+        getMapAsync(e -> naverMap.setMaxZoom(maxZoomLevel));
+    }
+
+    @Override
     public void setBuildingHeight(float height) {
         getMapAsync(e -> naverMap.setBuildingHeight(height));
     }
