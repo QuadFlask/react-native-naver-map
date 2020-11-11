@@ -26,4 +26,10 @@
 @property (nonatomic, assign) CGPoint anchor;
 @property (nonatomic, copy) RCTDirectEventBlock onClick;
 
+- (void)setCaptionText:(NSString *) text;
+- (void)setCaptionTextSize:(CGFloat) size;
+- (void)setCaptionColor:(UIColor *) color;
+- (void)setCaptionHaloColor:(UIColor *) color;
+- (void)setCaptionAligns:(NSArray<NMFAlignType *> *) aligns;
+
 @end

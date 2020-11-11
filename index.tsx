@@ -1,15 +1,5 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {
-    requireNativeComponent,
-    findNodeHandle,
-    UIManager,
-    StyleProp,
-    ViewStyle,
-    Platform,
-    NativeModules,
-    ImageSourcePropType,
-    Image,
-} from 'react-native';
+import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
@@ -249,7 +239,15 @@ export interface MarkerProps extends MapOverlay {
 
 export class Marker extends Component<MarkerProps> {
     render() {
-        return <RNNaverMapMarker {...this.props} image={getImageUri(this.props.image)}/>
+        return <RNNaverMapMarker
+            {...this.props}
+            image={getImageUri(this.props.image)}
+            caption={this.props.caption && {
+                ...this.props.caption,
+                textSize: this.props.caption.textSize ?? 12,
+                color: parseColor(this.props.caption.color),
+                haloColor: parseColor(this.props.caption.haloColor),
+            }}/>
     }
 }
 
@@ -332,4 +330,10 @@ function getImageUri(src?: ImageSourcePropType): string | null {
         imageUri = image.uri;
     }
     return imageUri;
+}
+
+function parseColor(color?: string | null): string | null | undefined | number {
+    if (color && Platform.OS === 'ios')
+        return processColor(color);
+    return color;
 }

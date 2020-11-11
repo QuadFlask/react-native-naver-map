@@ -75,6 +75,26 @@
   _realMarker.mapView = mapView;
 }
 
+- (void)setCaptionText:(NSString *) text {
+  _realMarker.captionText = text;
+}
+
+- (void)setCaptionTextSize:(CGFloat) size {
+  _realMarker.captionTextSize = size;
+}
+
+- (void)setCaptionColor:(UIColor *) color {
+  _realMarker.captionColor = color == nil ? UIColor.blackColor : color;
+}
+
+- (void)setCaptionHaloColor:(UIColor *) haloColor {
+  _realMarker.captionHaloColor = haloColor == nil ? UIColor.whiteColor : haloColor;
+}
+
+- (void)setCaptionAligns:(NSArray<NMFAlignType *> *) aligns {
+  _realMarker.captionAligns = aligns;
+}
+
 - (void)setImage:(NSString *)image
 {
   _image = image;
@@ -88,7 +108,7 @@
     if (_iconImageView) [_iconImageView removeFromSuperview];
     return;
   }
-  
+
   NMFOverlayImage *overlayImage = [_overlayImageHolder valueForKey:image];
   if (overlayImage != nil) {
     if (self->_iconImageView) [self->_iconImageView removeFromSuperview];

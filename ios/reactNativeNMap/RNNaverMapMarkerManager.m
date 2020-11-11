@@ -23,6 +23,25 @@ RCT_EXPORT_MODULE()
   return marker;
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(caption, NSDictionary, RNNaverMapMarker)
+{
+  NSDictionary *dic = [RCTConvert NSDictionary:json];
+  NSString *text = [RCTConvert NSString:dic[@"text"]];
+  CGFloat textSize = [RCTConvert CGFloat:dic[@"textSize"]];
+  UIColor *color = [RCTConvert UIColor:dic[@"color"]];
+  UIColor *haloColor = [RCTConvert UIColor:dic[@"haloColor"]];
+  NMFAlignType *align = [RCTConvert NMFAlignType:dic[@"align"]];
+  NSMutableArray<NMFAlignType *> *alignTypes = [NSMutableArray arrayWithCapacity: 1];
+
+  [alignTypes addObject: align];
+
+  [view setCaptionText: text];
+  [view setCaptionTextSize:textSize];
+  [view setCaptionColor:color];
+  [view setCaptionHaloColor:haloColor];
+  [view setCaptionAligns:alignTypes];
+}
+
 RCT_EXPORT_VIEW_PROPERTY(coordinate, NMGLatLng)
 RCT_EXPORT_VIEW_PROPERTY(width, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(height, CGFloat)

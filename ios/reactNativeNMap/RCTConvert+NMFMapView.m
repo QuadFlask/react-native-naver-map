@@ -9,6 +9,7 @@
 #import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCameraPosition.h>
 #import <NMapsMap/NMGLatLngBounds.h>
+#import <NMapsMap/NMFOverlay.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -49,6 +50,22 @@
     double lngDelta = [self double: json[@"longitudeDelta"]];
     return NMGLatLngBoundsMake(lat - latDelta / 2, lng - lngDelta / 2,  // southwest
                                lat + latDelta / 2, lng + lngDelta / 2); // northeast
+}
+
++ (NMFAlignType *) NMFAlignType: (id)json
+{
+  json = [self NSNumber:json];
+  if ([json  isEqual: @(0)]) return NMFAlignType.center;
+  if ([json  isEqual: @(1)]) return NMFAlignType.left;
+  if ([json  isEqual: @(2)]) return NMFAlignType.right;
+  if ([json  isEqual: @(3)]) return NMFAlignType.top;
+  if ([json  isEqual: @(4)]) return NMFAlignType.bottom;
+  if ([json  isEqual: @(5)]) return NMFAlignType.topLeft;
+  if ([json  isEqual: @(6)]) return NMFAlignType.topRight;
+  if ([json  isEqual: @(7)]) return NMFAlignType.bottomRight;
+  if ([json  isEqual: @(8)]) return NMFAlignType.bottomLeft;
+
+  return NMFAlignType.bottom;
 }
 
 @end

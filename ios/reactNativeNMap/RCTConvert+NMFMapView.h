@@ -8,11 +8,13 @@
 #import <React/RCTConvert.h>
 
 #import <NMapsMap/NMFMapView.h>
+#import <NMapsMap/NMFOverlay.h>
 
 @interface RCTConvert(NMFMapView)
 
 + (NMFCameraUpdate *) NMFCameraUpdate: (id) json;
 + (NMGLatLng *) NMGLatLng: (id)json;
 + (NMGLatLngBounds *) NMGLatLngBounds: (id)json;
++ (NMFAlignType *) NMFAlignType: (id)json;
 
 @end

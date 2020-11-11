@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, findNodeHandle, UIManager, Platform, NativeModules, Image, } from 'react-native';
+import { findNodeHandle, Image, NativeModules, Platform, processColor, requireNativeComponent, UIManager, } from 'react-native';
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
     android: () => requireNativeComponent('RNNaverMapViewTexture'),
@@ -106,7 +106,8 @@ export default class NaverMapView extends Component {
 }
 export class Marker extends Component {
     render() {
-        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image) }));
+        var _a;
+        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }) }));
     }
 }
 export class Circle extends Component {
@@ -142,4 +143,9 @@ function getImageUri(src) {
         imageUri = image.uri;
     }
     return imageUri;
+}
+function parseColor(color) {
+    if (color && Platform.OS === 'ios')
+        return processColor(color);
+    return color;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 declare const RNNaverMapView: any;
 export interface Coord {
     latitude: number;
