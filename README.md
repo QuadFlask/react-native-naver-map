@@ -204,7 +204,7 @@ interface MarkerProps {
     flat?: boolean
     image?: ImageSourcePropType
     onClick?: () => void
-    caption?: { // android only
+    caption?: {
         text?: string;
         align?: Align;
         textSize?: number;
