@@ -209,6 +209,36 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
+    public void setScrollGesturesEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setScrollGesturesEnabled(enabled);
+    }
+
+    @Override
+    public void setZoomGesturesEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setZoomGesturesEnabled(enabled);
+    }
+
+    @Override
+    public void setTiltGesturesEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setTiltGesturesEnabled(enabled);
+    }
+
+    @Override
+    public void setRotateGesturesEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setRotateGesturesEnabled(enabled);
+    }
+
+    @Override
+    public void setStopGesturesEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setStopGesturesEnabled(enabled);
+    }
+
+    @Override
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         if (mapView != null)
             mapView.moveCameraFitBound(bounds, left, top, right, bottom);

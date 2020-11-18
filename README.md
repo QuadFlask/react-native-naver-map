@@ -167,6 +167,11 @@ interface NaverMapViewProps {
     maxZoomLevel?: number;
     buildingHeight?: number;
     nightMode?: boolean;
+    scrollGesturesEnabled?: boolean;
+    zoomGesturesEnabled?: boolean;
+    tiltGesturesEnabled?: boolean;
+    rotateGesturesEnabled?: boolean;
+    stopGesturesEnabled?: boolean;
     useTextureView?: boolean; // android only
 }
 /// component method

@@ -1,6 +1,7 @@
 package com.github.quadflask.react.navermap;
 
 import android.view.View;
+
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
@@ -56,6 +57,16 @@ public interface RNNaverMapViewProps {
     void setLogoMargin(int left, int top, int right, int bottom);
 
     void setLogoGravity(int gravity);
+
+    void setScrollGesturesEnabled(boolean enabled);
+
+    void setZoomGesturesEnabled(boolean enabled);
+
+    void setTiltGesturesEnabled(boolean enabled);
+
+    void setRotateGesturesEnabled(boolean enabled);
+
+    void setStopGesturesEnabled(boolean enabled);
 
     void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom);
 

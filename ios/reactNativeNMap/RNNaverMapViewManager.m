@@ -100,14 +100,44 @@ RCT_CUSTOM_VIEW_PROPERTY(nightMode, BOOL, RNNaverMapView)
 
 RCT_CUSTOM_VIEW_PROPERTY(minZoomLevel, NSNumber*, RNNaverMapView)
 {
-  if (json == nil) return;
+  if (json == nil) view.mapView.minZoomLevel = 0;
   view.mapView.minZoomLevel = [json floatValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(maxZoomLevel, NSNumber*, RNNaverMapView)
 {
-  if (json == nil) return;
+  if (json == nil) view.mapView.maxZoomLevel = 20;
   view.mapView.maxZoomLevel = [json floatValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(scrollGesturesEnabled, BOOL, RNNaverMapView)
+{
+  if (json == nil) view.mapView.scrollGestureEnabled = YES;
+  view.mapView.scrollGestureEnabled = [json boolValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(zoomGesturesEnabled, BOOL, RNNaverMapView)
+{
+  if (json == nil) view.mapView.zoomGestureEnabled = YES;
+  view.mapView.zoomGestureEnabled = [json boolValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(tiltGesturesEnabled, BOOL, RNNaverMapView)
+{
+  if (json == nil) view.mapView.tiltGestureEnabled = YES;
+  view.mapView.tiltGestureEnabled = [json boolValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(rotateGesturesEnabled, BOOL, RNNaverMapView)
+{
+  if (json == nil) view.mapView.rotateGestureEnabled = YES;
+  view.mapView.rotateGestureEnabled = [json boolValue];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(stopGesturesEnabled, BOOL, RNNaverMapView)
+{
+  if (json == nil) view.mapView.stopGestureEnabled = YES;
+  view.mapView.stopGestureEnabled = [json boolValue];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(tilt, BOOL, RNNaverMapView)

@@ -95,6 +95,11 @@ export interface NaverMapViewProps {
     minZoomLevel?: number;
     maxZoomLevel?: number;
     nightMode?: boolean;
+    scrollGesturesEnabled?: boolean;
+    zoomGesturesEnabled?: boolean;
+    tiltGesturesEnabled?: boolean;
+    rotateGesturesEnabled?: boolean;
+    stopGesturesEnabled?: boolean;
     useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps> {

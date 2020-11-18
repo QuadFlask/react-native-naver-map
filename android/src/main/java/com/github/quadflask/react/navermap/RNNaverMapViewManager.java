@@ -173,6 +173,31 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
         mapView.setLogoGravity(gravity);
     }
 
+    @ReactProp(name = "scrollGesturesEnabled", defaultBoolean = true)
+    public void setScrollGesturesEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setScrollGesturesEnabled(enabled);
+    }
+
+    @ReactProp(name = "zoomGesturesEnabled", defaultBoolean = true)
+    public void setZoomGesturesEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setZoomGesturesEnabled(enabled);
+    }
+
+    @ReactProp(name = "tiltGesturesEnabled", defaultBoolean = true)
+    public void setTiltGesturesEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setTiltGesturesEnabled(enabled);
+    }
+
+    @ReactProp(name = "rotateGesturesEnabled", defaultBoolean = true)
+    public void setRotateGesturesEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setRotateGesturesEnabled(enabled);
+    }
+
+    @ReactProp(name = "stopGesturesEnabled", defaultBoolean = true)
+    public void setStopGesturesEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setStopGesturesEnabled(enabled);
+    }
+
     private Rect getRect(@Nullable ReadableMap padding, float density) {
         int left = 0;
         int top = 0;

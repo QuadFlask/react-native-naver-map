@@ -206,6 +206,31 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     @Override
+    public void setScrollGesturesEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.getUiSettings().setScrollGesturesEnabled(enabled));
+    }
+
+    @Override
+    public void setZoomGesturesEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.getUiSettings().setZoomGesturesEnabled(enabled));
+    }
+
+    @Override
+    public void setTiltGesturesEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.getUiSettings().setTiltGesturesEnabled(enabled));
+    }
+
+    @Override
+    public void setRotateGesturesEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.getUiSettings().setRotateGesturesEnabled(enabled));
+    }
+
+    @Override
+    public void setStopGesturesEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.getUiSettings().setStopGesturesEnabled(enabled));
+    }
+
+    @Override
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }
