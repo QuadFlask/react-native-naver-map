@@ -280,6 +280,16 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         param.putDouble("longitude", cameraPosition.target.longitude);
         param.putDouble("zoom", cameraPosition.zoom);
 
+        LatLngBounds coveringBounds = naverMap.getCoveringBounds();
+        param.putDouble("lt0", coveringBounds.getNorthWest().latitude);
+        param.putDouble("lt1", coveringBounds.getNorthWest().longitude);
+        param.putDouble("rt0", coveringBounds.getNorthEast().latitude);
+        param.putDouble("rt1", coveringBounds.getNorthEast().longitude);
+        param.putDouble("rb0", coveringBounds.getSouthEast().latitude);
+        param.putDouble("rb1", coveringBounds.getSouthEast().longitude);
+        param.putDouble("lb0", coveringBounds.getSouthWest().latitude);
+        param.putDouble("lb1", coveringBounds.getSouthWest().longitude);
+
         emitEvent("onCameraChange", param);
     }
 
