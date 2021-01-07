@@ -23,6 +23,7 @@
 @property (nonatomic, assign) CGFloat rotation;
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, strong) UIColor *pinColor;
+@property (nonatomic, assign) CGFloat alpha;
 @property (nonatomic, assign) CGPoint anchor;
 @property (nonatomic, copy) RCTDirectEventBlock onClick;
 

@@ -66,6 +66,10 @@
   _realMarker.iconTintColor = pinColor;
 }
 
+- (void)setAlpha:(CGFloat)alpha {
+  _realMarker.alpha = alpha;
+}
+
 - (void)setAnchor:(CGPoint)anchor {
   _anchor = anchor;
   _realMarker.anchor = anchor;
