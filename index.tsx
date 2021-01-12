@@ -141,6 +141,10 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
     }
 
+    animateToPosition = (coord: Coord, zoom: number) => {
+        this.dispatchViewManagerCommand('animateToPosition', [coord, zoom]);
+    }
+
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {
         this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
     };

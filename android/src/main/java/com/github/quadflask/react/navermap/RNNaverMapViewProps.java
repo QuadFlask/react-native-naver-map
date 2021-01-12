@@ -72,6 +72,8 @@ public interface RNNaverMapViewProps {
 
     void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom);
 
+    void scrollToAndZoom(LatLng latLng, float zoom);
+
     void addFeature(View child, int index);
 
     void removeFeatureAt(int index);

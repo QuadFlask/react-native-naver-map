@@ -3,10 +3,7 @@ package com.github.quadflask.react.navermap;
 import android.graphics.Rect;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.airbnb.android.react.maps.SizeReportingShadowNode;
+import com.airbnb.android.react.maps.SizeReportingShadowNode2;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -25,6 +22,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import static com.github.quadflask.react.navermap.ReactUtil.getDoubleOrNull;
 import static com.github.quadflask.react.navermap.ReactUtil.getInt;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
@@ -39,6 +39,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     private static final int SET_LOCATION_TRACKING_MODE = 4;
     private static final int ANIMATE_TO_COORDINATES = 6;
     private static final int SET_LAYER_GROUP_ENABLED = 7;
+    private static final int ANIMATE_TO_POSITION = 8;
     private static final List<String> LAYER_GROUPS = Collections.unmodifiableList(Arrays.asList(
             NaverMap.LAYER_GROUP_BUILDING,
             NaverMap.LAYER_GROUP_TRANSIT,
@@ -286,7 +287,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 int bottom = getInt(edgePadding, "bottom", 0);
 
                 mapView.moveCameraFitBound(builder.build(), left, top, right, bottom);
+                break;
+            case ANIMATE_TO_POSITION:
+                LatLng latLng = toNaverLatLng(args.getMap(0));
+                Double zoom = args.getDouble(1);
 
+                mapView.scrollToAndZoom(latLng, zoom.floatValue());
                 break;
             case ANIMATE_TO_COORDINATE:
                 mapView.setCenter(toNaverLatLng(args.getMap(0)));
@@ -330,6 +336,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 .put("animateToRegion", ANIMATE_TO_REGION)
                 .put("animateToCoordinate", ANIMATE_TO_COORDINATE)
                 .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
+                .put("animateToPosition", ANIMATE_TO_POSITION)
                 .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
                 .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
                 .put("setLayerGroupEnabled", SET_LAYER_GROUP_ENABLED)
@@ -348,7 +355,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     public LayoutShadowNode createShadowNodeInstance() {
         // A custom shadow node is needed in order to pass back the width/height of the map to the
         // view manager so that it can start applying camera moves with bounds.
-        return new SizeReportingShadowNode();
+        return new SizeReportingShadowNode2();
     }
 
     @Override

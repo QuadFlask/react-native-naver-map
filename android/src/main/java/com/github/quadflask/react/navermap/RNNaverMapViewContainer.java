@@ -264,6 +264,12 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
+    public void scrollToAndZoom(LatLng latLng, float zoom) {
+        if (mapView != null)
+            mapView.scrollToAndZoom(latLng, zoom);
+    }
+
+    @Override
     public void addFeature(View child, int index) {
         if (mapView != null)
             mapView.addFeature(child, index);

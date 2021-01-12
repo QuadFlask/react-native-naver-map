@@ -59,6 +59,8 @@ const MapViewScreen = ({navigation}) => {
                     mapView.current.setLayerGroupEnabled(LayerGroup.LAYER_GROUP_BICYCLE, enableLayerGroup);
                     mapView.current.setLayerGroupEnabled(LayerGroup.LAYER_GROUP_TRANSIT, enableLayerGroup);
                     setEnableLayerGroup(!enableLayerGroup)
+
+                    mapView.current.animateToPosition(P0, 11);
                 }}
                 caption={{ text: "test caption", align: Align.Left }}
             />

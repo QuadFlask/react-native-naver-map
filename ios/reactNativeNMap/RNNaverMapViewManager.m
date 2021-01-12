@@ -217,6 +217,25 @@ RCT_EXPORT_METHOD(animateToCoordinate:(nonnull NSNumber *)reactTag
   }];
 }
 
+RCT_EXPORT_METHOD(animateToPosition:(nonnull NSNumber *)reactTag
+                  withCoord: (NMGLatLng *) coord
+                  withZoom: (nonnull NSNumber *) zoom
+                  )
+{
+ [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+   id view = viewRegistry[reactTag];
+   if (![view isKindOfClass:[RNNaverMapView class]]) {
+     RCTLogError(@"Invalid view returned from registry, expecting NMFMapView, got: %@", view);
+   } else {
+     NMFCameraPosition* cameraPosition = [NMFCameraPosition cameraPosition:coord zoom: [zoom doubleValue]];
+     NMFCameraUpdate* cameraUpdate = [NMFCameraUpdate
+                                      cameraUpdateWithPosition: cameraPosition];
+     cameraUpdate.animation = NMFCameraUpdateAnimationEaseIn;
+     [((RNNaverMapView *)view).mapView moveCamera: cameraUpdate];
+   }
+ }];
+}
+
 RCT_EXPORT_METHOD(animateToTwoCoordinates:(nonnull NSNumber *)reactTag
                   withCoord1: (NMGLatLng *) coord1
                   withCoord2: (NMGLatLng *) coord2
@@ -241,7 +260,7 @@ RCT_EXPORT_METHOD(animateToTwoCoordinates:(nonnull NSNumber *)reactTag
 }
 
 RCT_EXPORT_METHOD(animateToRegion:(nonnull NSNumber *)reactTag
-                  withBounds: (NMGLatLngBounds *) bounds
+                  withBounds: (nonnull NMGLatLngBounds *) bounds
                   )
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
@@ -257,6 +276,7 @@ RCT_EXPORT_METHOD(animateToRegion:(nonnull NSNumber *)reactTag
     }
   }];
 }
+
 
 RCT_EXPORT_VIEW_PROPERTY(onInitialized, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onCameraChange, RCTDirectEventBlock);
