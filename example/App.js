@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import NaverMapView, {Circle, Marker, Path, Polyline, Polygon, Align} from "./map";
-import {PermissionsAndroid, Platform, Text, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, PermissionsAndroid, Platform, Text, TouchableOpacity, View} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -10,6 +10,7 @@ const P0 = {latitude: 37.564362, longitude: 126.977011};
 const P1 = {latitude: 37.565051, longitude: 126.978567};
 const P2 = {latitude: 37.565383, longitude: 126.976292};
 const P4 = {latitude: 37.564834, longitude: 126.977218};
+const P5 = {latitude: 37.562834, longitude: 126.976218};
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -54,6 +55,20 @@ const MapViewScreen = ({navigation}) => {
             <Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>
             <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>
             <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.warn('onClick! polygon')}/>
+            <Marker coordinate={P5} onClick={() => console.warn('onClick! p0')} width={96} height={96}>
+                <View style={{backgroundColor: 'rgba(255,0,0,0.2)', borderRadius: 80}}>
+                    <View style={{backgroundColor: 'rgba(0,0,255,0.3)', borderWidth: 2, borderColor: 'black', flexDirection: 'row'}}>
+                        <Image source={require("./marker.png")} style={{
+                            width: 32, height: 32,
+                            backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',
+                            borderWidth: 2, borderColor: 'black'}} fadeDuration={0}/>
+                        <Text>Image</Text>
+                    </View>
+                    <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>
+                        <Text>image background</Text>
+                    </ImageBackground>
+                </View>
+            </Marker>
         </NaverMapView>
         <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}} onPress={() => navigation.navigate('stack')}>
             <View style={{backgroundColor: 'gray', padding: 4}}>

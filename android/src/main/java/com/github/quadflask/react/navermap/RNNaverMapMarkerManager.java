@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
@@ -133,5 +134,15 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         Align align = map.hasKey("align") ? parseAlign(map.getInt("align")) : DEFAULT_CAPTION_ALIGN;
 
         view.setCaption(text, textSize, color, haloColor, align);
+    }
+
+    @Override
+    public void addView(RNNaverMapMarker parent, View child, int index) {
+        parent.setCustomView(child, index);
+    }
+
+    @Override
+    public void removeView(RNNaverMapMarker parent, View view) {
+        parent.removeCustomView(view);
     }
 }

@@ -2,9 +2,11 @@ package com.github.quadflask.react.navermap;
 
 import android.graphics.PointF;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.airbnb.android.react.maps.ViewAttacherGroup;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -23,6 +25,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
+    private ViewAttacherGroup attacherGroup;
     private long lastTouch = 0;
 
     public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
@@ -53,6 +56,17 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 themedReactContext.removeLifecycleEventListener(this);
             }
         });
+
+        // Set up a parent view for triggering visibility in subviews that depend on it.
+        // Mainly ReactImageView depends on Fresco which depends on onVisibilityChanged() event
+        attacherGroup = new ViewAttacherGroup(this.themedReactContext);
+        LayoutParams attacherLayoutParams = new LayoutParams(0, 0);
+        attacherLayoutParams.width = 0;
+        attacherLayoutParams.height = 0;
+        attacherLayoutParams.leftMargin = 99999999;
+        attacherLayoutParams.topMargin = 99999999;
+        attacherGroup.setLayoutParams(attacherLayoutParams);
+        addView(attacherGroup);
     }
 
     @Override
@@ -244,6 +258,15 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 RNNaverMapFeature<?> annotation = (RNNaverMapFeature<?>) child;
                 annotation.addToMap(this);
                 features.add(index, annotation);
+                int visibility = annotation.getVisibility();
+                annotation.setVisibility(View.INVISIBLE);
+                ViewGroup annotationParent = (ViewGroup)annotation.getParent();
+                if (annotationParent != null) {
+                    annotationParent.removeView(annotation);
+                }
+                // Add to the parent group
+                attacherGroup.addView(annotation);
+                annotation.setVisibility(visibility);
             }
         });
     }

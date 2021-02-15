@@ -48,12 +48,12 @@ repositories {
     jcenter()
     mavenCentral()
     maven {
-        url 'https://navercorp.bintray.com/maps'
+        url 'https://naver.jfrog.io/artifactory/maven/'
     }
 }
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation "com.naver.maps:map-sdk:${rootProject.ext.hasProperty('mapSdkVersion') ? rootProject.ext.mapSdkVersion : '3.10.1'}"
+    implementation "com.naver.maps:map-sdk:${rootProject.ext.hasProperty('mapSdkVersion') ? rootProject.ext.mapSdkVersion : '3.10.2'}"
     implementation "com.google.android.gms:play-services-location:16.0.0"
 }

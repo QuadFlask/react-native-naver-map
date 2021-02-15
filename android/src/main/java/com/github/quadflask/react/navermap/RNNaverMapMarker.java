@@ -4,10 +4,15 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.util.Log;
 import android.util.Property;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
@@ -16,6 +21,8 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
+import com.airbnb.android.react.maps.TrackableView;
+import com.airbnb.android.react.maps.ViewChangesTracker;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -35,7 +42,7 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.overlay.Align;
 
-public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> {
+public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> implements TrackableView {
     private final DraweeHolder<GenericDraweeHierarchy> imageHolder;
     private boolean animated = false;
     private int duration = 500;
@@ -216,5 +223,69 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> {
 
     private int getRidFromName(String name) {
         return getContext().getResources().getIdentifier(name, "drawable", getContext().getPackageName());
+    }
+
+    public void setCustomView(View view, int index) {
+        super.addView(view, index);
+        if (view.getLayoutParams() == null) {
+            view.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+        ViewChangesTracker.getInstance().addMarker(this);
+        customView = view;
+        customView.addOnLayoutChangeListener(onLayoutChangeListener);
+    }
+
+    public void removeCustomView(View view) {
+        super.removeView(view);
+        customView.removeOnLayoutChangeListener(onLayoutChangeListener);
+        customView = null;
+        ViewChangesTracker.getInstance().removeMarker(this);
+        setOverlayImage(null);
+        if (customViewBitmap != null && !customViewBitmap.isRecycled())
+            customViewBitmap.recycle();
+    }
+
+    @Override
+    public boolean updateCustomForTracking() {
+        return true;
+    }
+
+    @Override
+    public void update(int width, int height) {
+        updateCustomView();
+    }
+
+    private View customView;
+    private Bitmap customViewBitmap;
+    private View.OnLayoutChangeListener onLayoutChangeListener = (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+        Log.e("MapMarker", "onLayoutChangeListener: " + left + ", " + top + ", " + right + ", " + bottom);
+    };
+
+    private void updateCustomView() {
+        Log.d("MapMarker", "updateCustomView");
+        if (customViewBitmap == null
+                || customViewBitmap.isRecycled()
+                || customViewBitmap.getWidth() != feature.getWidth()
+                || customViewBitmap.getHeight() != feature.getHeight()) {
+            customViewBitmap = Bitmap.createBitmap(Math.max(1, feature.getWidth()), Math.max(1, feature.getHeight()), Bitmap.Config.ARGB_4444);
+        }
+
+        if (customView != null) {
+            customViewBitmap.eraseColor(Color.TRANSPARENT);
+            Canvas canvas = new Canvas(customViewBitmap);
+            this.draw(canvas);
+            setOverlayImage(OverlayImage.fromBitmap(customViewBitmap));
+        }
+    }
+
+    @Override
+    public void requestLayout() {
+        super.requestLayout();
+        if (getChildCount() == 0 && customView != null) {
+            customView = null;
+            updateCustomView();
+        }
     }
 }
