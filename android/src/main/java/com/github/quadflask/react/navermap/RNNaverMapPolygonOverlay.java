@@ -1,15 +1,25 @@
 package com.github.quadflask.react.navermap;
 
 import android.content.Context;
+
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.overlay.PolygonOverlay;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class RNNaverMapPolygonOverlay extends ClickableRNNaverMapFeature<PolygonOverlay> {
     public RNNaverMapPolygonOverlay(EventEmittable emitter, Context context) {
         super(emitter, context);
         feature = new PolygonOverlay();
+    }
+
+    @Override
+    public boolean onClick(@NonNull Overlay overlay) {
+        emitEvent("onClick", null);
+        return false;
     }
 
     public void setCoords(List<LatLng> coords) {
