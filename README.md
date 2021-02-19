@@ -220,6 +220,23 @@ interface MarkerProps {
     };
 }
 ```
+> 안드로이드 플랫폼에서 마커내 커스텀 뷰를 지원합니다. `0.0.57`
+> ```js
+> <Marker coordinate={P5} width={96} height={96}>
+>     <View style={{backgroundColor: 'rgba(255,0,0,0.2)', borderRadius: 80}}>
+>         <View style={{backgroundColor: 'rgba(0,0,255,0.3)', borderWidth: 2, borderColor: 'black', flexDirection: 'row'}}>
+>             <Image source={require("./marker.png")} style={{
+>                 width: 32, height: 32,
+>                 backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',
+>                 borderWidth: 2, borderColor: 'black'}} fadeDuration={0}/>
+>             <Text>Image</Text>
+>         </View>
+>         <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>
+>             <Text>image background</Text>
+>         </ImageBackground>
+>     </View>
+> </Marker> 
+> ```
 
 ### `Polyline`
 ```ts
