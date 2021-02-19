@@ -12,7 +12,7 @@ public class ViewChangesTracker {
     private LinkedList<TrackableView> markers = new LinkedList<>();
     private boolean hasScheduledFrame = false;
     private Runnable updateRunnable;
-    private final long fps = 1;
+    private final long fps = 10;
 
     private ViewChangesTracker() {
         handler = new Handler(Looper.myLooper());
