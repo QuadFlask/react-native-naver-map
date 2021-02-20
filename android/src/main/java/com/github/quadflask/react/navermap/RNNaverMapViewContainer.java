@@ -1,6 +1,7 @@
 package com.github.quadflask.react.navermap;
 
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -29,7 +30,7 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;
         this.naverMapOptions = naverMapOptions;
-        mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
+        this.mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
         addView(mapView);
     }
 
@@ -53,6 +54,19 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
                     MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY));
             child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (mapView != null && mapView.getMap().getUiSettings().isScrollGesturesEnabled()) {
+            switch (ev.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_UP:
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                    break;
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override

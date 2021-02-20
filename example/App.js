@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import NaverMapView, {Circle, Marker, Path, Polyline, Polygon, Align} from "./map";
-import {Image, ImageBackground, PermissionsAndroid, Platform, Text, TouchableOpacity, View} from "react-native";
+import NaverMapView, {Align, Circle, Marker, Path, Polygon, Polyline} from "./map";
+import {Image, ImageBackground, PermissionsAndroid, Platform, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -19,7 +19,7 @@ const App = () => {
     return <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="home" component={HomeScreen}/>
-            <Stack.Screen name="stack" component={MapViewScreen}/>
+            <Stack.Screen name="stack" component={MapViewScreen2}/>
         </Stack.Navigator>
     </NavigationContainer>
 }
@@ -61,7 +61,8 @@ const MapViewScreen = ({navigation}) => {
                         <Image source={require("./marker.png")} style={{
                             width: 32, height: 32,
                             backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',
-                            borderWidth: 2, borderColor: 'black'}} fadeDuration={0}/>
+                            borderWidth: 2, borderColor: 'black'
+                        }} fadeDuration={0}/>
                         <Text>Image</Text>
                     </View>
                     <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>
@@ -78,6 +79,41 @@ const MapViewScreen = ({navigation}) => {
         <Text style={{position: 'absolute', top: '95%', width: '100%', textAlign: 'center'}}>Icon made by Pixel perfect from www.flaticon.com</Text>
     </>
 };
+
+const MapViewScreen2 = ({navigation}) => {
+    return <View>
+        <TouchableOpacity onPress={navigation.goBack}>
+            <View style={{backgroundColor: 'gray', padding: 4}}>
+                <Text style={{color: 'white'}}>goBack</Text>
+            </View>
+        </TouchableOpacity>
+        <ScrollView style={{width: '100%', height: '100%'}}>
+            <Text>scrollGesturesEnabled: default</Text>
+            <NaverMapView style={{width: '100%', height: 200}}
+                          center={{...P0, zoom: 15}}
+                          useTextureView>
+                <Marker coordinate={P0}/>
+            </NaverMapView>
+            {Array.from({length: 20}, (_, i) => i).map(i => <Text key={i}></Text>)}
+            <Text>scrollGesturesEnabled</Text>
+            <NaverMapView style={{width: '100%', height: 200}}
+                          center={{...P0, zoom: 15}}
+                          scrollGesturesEnabled
+                          useTextureView>
+                <Marker coordinate={P0}/>
+            </NaverMapView>
+            {Array.from({length: 20}, (_, i) => i).map(i => <Text key={i}></Text>)}
+            <Text>scrollGesturesEnabled: false</Text>
+            <NaverMapView style={{width: '100%', height: 200}}
+                          center={{...P0, zoom: 15}}
+                          scrollGesturesEnabled={false}
+                          useTextureView>
+                <Marker coordinate={P0}/>
+            </NaverMapView>
+            {Array.from({length: 20}, (_, i) => i).map(i => <Text key={i}></Text>)}
+        </ScrollView>
+    </View>
+}
 
 async function requestLocationPermission() {
     if (Platform.OS !== 'android') return;
