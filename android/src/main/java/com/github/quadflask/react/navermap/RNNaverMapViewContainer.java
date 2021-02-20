@@ -3,7 +3,9 @@ package com.github.quadflask.react.navermap;
 import android.view.Choreographer;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
@@ -59,7 +61,10 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
         isAttachedToWindow = true;
         if (mapView == null) {
             mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
-            mapView.restoreFrom(prevMapView);
+            if (prevMapView != null) {
+                mapView.restoreFrom(prevMapView);
+                prevMapView = null;
+            }
             addView(mapView);
         }
         mapView.setId(getId());

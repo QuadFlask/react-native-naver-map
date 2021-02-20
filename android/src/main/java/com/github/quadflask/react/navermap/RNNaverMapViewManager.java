@@ -337,13 +337,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
         return true;
     }
 
-    @Override
-    public void onDropViewInstance(RNNaverMapViewContainer view) {
-        view.onStop();
-//        view.onDestroy();
-        super.onDropViewInstance(view);
-    }
-
     private java.util.Map<String, Object> bubbled(String callbackName) {
         return MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", callbackName));
     }
