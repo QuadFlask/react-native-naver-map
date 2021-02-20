@@ -292,3 +292,5 @@ export interface PolygonProps {
 ## 참고
 
 - *react-navigation*의 스택 스크린 사용시 안드로이드에서 맵뷰가 겹쳐 보이는 현상이 있을 경우 `useTextureView` 옵션을 추가해 주세요. [#27](https://github.com/QuadFlask/react-native-naver-map/issues/27)
+
+- 안드로이드에서 `ScrollView` 내부에 추가할 경우 `scrollGesturesEnabled`를 이용해 맵 스크롤을 제어할 수 있습니다. [#62](https://github.com/QuadFlask/react-native-naver-map/issues/62)
