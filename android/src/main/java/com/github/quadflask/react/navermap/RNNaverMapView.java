@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.airbnb.android.react.maps.ViewAttacherGroup;
+import com.airbnb.android.react.maps.ViewAttacherGroup2;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -26,7 +26,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private ThemedReactContext themedReactContext;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
-    private ViewAttacherGroup attacherGroup;
+    private ViewAttacherGroup2 attacherGroup;
     private long lastTouch = 0;
     private final List<RNNaverMapFeature<?>> features = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
         // Set up a parent view for triggering visibility in subviews that depend on it.
         // Mainly ReactImageView depends on Fresco which depends on onVisibilityChanged() event
-        attacherGroup = new ViewAttacherGroup(this.themedReactContext);
+        attacherGroup = new ViewAttacherGroup2(this.themedReactContext);
         LayoutParams attacherLayoutParams = new LayoutParams(0, 0);
         attacherLayoutParams.width = 0;
         attacherLayoutParams.height = 0;

@@ -5,16 +5,16 @@ import android.os.Looper;
 
 import java.util.LinkedList;
 
-public class ViewChangesTracker {
+public class ViewChangesTracker2 {
 
-    private static ViewChangesTracker instance;
+    private static ViewChangesTracker2 instance;
     private Handler handler;
     private LinkedList<TrackableView> markers = new LinkedList<>();
     private boolean hasScheduledFrame = false;
     private Runnable updateRunnable;
     private final long fps = 2; // FIXME flickering custom view
 
-    private ViewChangesTracker() {
+    private ViewChangesTracker2() {
         handler = new Handler(Looper.myLooper());
         updateRunnable = () -> {
             hasScheduledFrame = false;
@@ -26,10 +26,10 @@ public class ViewChangesTracker {
         };
     }
 
-    public static ViewChangesTracker getInstance() {
+    public static ViewChangesTracker2 getInstance() {
         if (instance == null) {
-            synchronized (ViewChangesTracker.class) {
-                instance = new ViewChangesTracker();
+            synchronized (ViewChangesTracker2.class) {
+                instance = new ViewChangesTracker2();
             }
         }
 
