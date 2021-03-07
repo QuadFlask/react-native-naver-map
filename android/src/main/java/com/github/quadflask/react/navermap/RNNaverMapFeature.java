@@ -17,7 +17,7 @@ public abstract class RNNaverMapFeature<T extends Overlay> extends EventEmmitabl
 
     public void removeFromMap() {
         feature.setMap(null);
-        feature = null;
+        //feature = null;
     }
 
     public T getFeature() {
