@@ -116,6 +116,7 @@ export interface NaverMapViewProps {
     rotateGesturesEnabled?: boolean;
     stopGesturesEnabled?: boolean;
     useTextureView?: boolean;
+    locationTrackingMode?: number;
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps> {
