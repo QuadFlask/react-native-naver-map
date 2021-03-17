@@ -100,6 +100,10 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
     }) => void;
+    onLocationChange?: (event: {
+        latitude: number;
+        longitude: number;
+    }) => void;
     onTouch?: () => void;
     showsMyLocationButton?: boolean;
     compass?: boolean;
@@ -172,6 +176,12 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         zoom: number;
     }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
+    
+    handleOnLocationChange = (event: SyntheticEvent<{}, {
+        latitude: number;
+        longitude: number;
+    }>) => this.props.onLocationChange && this.props.onLocationChange(event.nativeEvent);
+
     handleOnMapClick = (event: SyntheticEvent<{}, {
         x: number;
         y: number;
@@ -189,6 +199,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             logoMargin,
             nightMode,
             useTextureView,
+            locationTrackingMode,
         } = this.props;
 
         const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
@@ -203,7 +214,9 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
             tilt={tilt}
             bearing={bearing}
             nightMode={nightMode}
+            locationTrackingMode={locationTrackingMode}
             onCameraChange={this.handleOnCameraChange}
+            onLocationChange={this.handleOnLocationChange}
             onMapClick={this.handleOnMapClick}
         />
     }
