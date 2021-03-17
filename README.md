@@ -175,6 +175,7 @@ interface NaverMapViewProps {
     rotateGesturesEnabled?: boolean;
     stopGesturesEnabled?: boolean;
     useTextureView?: boolean; // android only
+    locationTrackingMode?: boolean;
 }
 /// component method
 animateToCoordinate: (coord: Coord) => void;
