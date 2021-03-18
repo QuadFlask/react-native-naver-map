@@ -46,6 +46,14 @@
   return self;
 }
 
+- (void)setZIndex:(NSInteger) zIndex {
+    _realMarker.zIndex = zIndex;
+}
+
+- (void)setHidden:(BOOL) hidden {
+    _realMarker.hidden = hidden;
+}
+
 - (void)setCoordinate:(NMGLatLng*) coordinate {
   _realMarker.position = coordinate;
 }
@@ -62,18 +70,47 @@
   _realMarker.angle = rotation;
 }
 
-- (void)setPinColor:(UIColor *)pinColor {
+- (void)setPinColor:(UIColor *) pinColor {
   _realMarker.iconTintColor = pinColor;
 }
 
-- (void)setAlpha:(CGFloat)alpha {
+- (void)setAlpha:(CGFloat) alpha {
   _realMarker.alpha = alpha;
 }
 
-- (void)setAnchor:(CGPoint)anchor {
+- (void)setAnchor:(CGPoint) anchor {
   _anchor = anchor;
   _realMarker.anchor = anchor;
 }
+
+- (void)setAngle:(CGFloat) angle {
+    _realMarker.angle = angle;
+}
+
+- (void)setFlatEnabled:(BOOL) flatEnabled {
+    _realMarker.flat = flatEnabled;
+}
+
+- (void)setIconPerspectiveEnabled:(BOOL) iconPerspectiveEnabled {
+    _realMarker.iconPerspectiveEnabled = iconPerspectiveEnabled;
+}
+
+- (void)setisHideCollidedSymbols:(BOOL) isHideCollidedSymbols {
+    _realMarker.isHideCollidedSymbols = isHideCollidedSymbols;
+}
+
+- (void)setIsHideCollidedMarkers:(BOOL) isHideCollidedMarkers {
+    _realMarker.isHideCollidedMarkers = isHideCollidedMarkers;
+}
+
+- (void)setIsHideCollidedCaptions:(BOOL) isHideCollidedCaptions {
+    _realMarker.isHideCollidedCaptions = isHideCollidedCaptions;
+}
+
+- (void)isForceShowIcon:(BOOL) isForceShowIcon {
+    _realMarker.isForceShowIcon = isForceShowIcon;
+}
+
 
 - (void)setMapView:(NMFMapView*) mapView {
   _realMarker.mapView = mapView;
@@ -99,7 +136,50 @@
   _realMarker.captionAligns = aligns;
 }
 
-- (void)setImage:(NSString *)image
+- (void)setCaptionOffset:(CGFloat) offset {
+    _realMarker.captionOffset = offset;
+}
+- (void)setCaptionRequestedWidth:(CGFloat) captionWidth {
+   _realMarker.captionRequestedWidth = captionWidth;
+}
+
+- (void)setCaptionMinZoom:(double) minZoom {
+   _realMarker.captionMinZoom = minZoom;
+}
+
+- (void)setCaptionMaxZoom:(double) maxZoom {
+   _realMarker.captionMaxZoom = maxZoom;
+}
+
+- (void)setSubCaptionText:(NSString *) subText {
+    _realMarker.subCaptionText = subText;
+}
+
+- (void)setSubCaptionTextSize:(CGFloat) subTextSize {
+    _realMarker.subCaptionTextSize = subTextSize;
+}
+
+- (void)setSubCaptionColor:(UIColor *) subColor {
+    _realMarker.subCaptionColor = subColor == nil ? UIColor.blackColor : subColor;
+}
+
+- (void)setSubCaptionHaloColor:(UIColor *) subHaloColor {
+    _realMarker.subCaptionHaloColor = subHaloColor == nil ? UIColor.whiteColor : subHaloColor;
+}
+
+- (void)setSubCaptionRequestedWidth:(CGFloat) subCaptionWidth {
+    _realMarker.subCaptionRequestedWidth = subCaptionWidth;
+}
+
+- (void)setSubCaptionMinZoom:(double) subMinZoom {
+   _realMarker.subCaptionMinZoom = subMinZoom;
+}
+
+- (void)setSubCaptionMaxZoom:(double) subMaxZoom {
+   _realMarker.subCaptionMaxZoom = subMaxZoom;
+}
+
+- (void)setImage:(NSString *) image
 {
   _image = image;
 
