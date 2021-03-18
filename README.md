@@ -212,12 +212,35 @@ interface MarkerProps {
     flat?: boolean
     image?: ImageSourcePropType
     onClick?: () => void
+    width?: number
+    height?: number
+    angle?: number
+    hidden?: boolean
+    zIndex?: number
+    iconPerspectiveEnabled?: boolean
+    isHideCollidedSymbols?: boolean
+    isHideCollidedMarkers?: boolean
+    isHideCollidedCaptions?: boolean;
+    isForceShowIcon?: boolean;
     caption?: {
         text?: string;
         align?: Align;
         textSize?: number;
         color?: string;
         haloColor?: string;
+        offset?: number;
+        requestedWidth?: number;
+        minZoom?: number;
+        maxZoom?: number;
+    };
+    subCaption?: {
+        text?: string;
+        textSize?: number;
+        color?: number;
+        haloColor?: number;
+        requestedWidth?: number;
+        minZoom?: number;
+        maxZoom?: number;
     };
 }
 ```
