@@ -238,6 +238,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     @Override
     public void scrollToAndZoom(LatLng latLng, float zoom) {
         CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(latLng, zoom);
+        cameraUpdate.animate(CameraAnimation.Easing);
         getMapAsync(e -> naverMap.moveCamera(cameraUpdate));
     }
 

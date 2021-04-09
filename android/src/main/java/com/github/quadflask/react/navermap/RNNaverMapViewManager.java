@@ -14,6 +14,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.util.FusedLocationSource;
@@ -290,9 +291,9 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 break;
             case ANIMATE_TO_POSITION:
                 LatLng latLng = toNaverLatLng(args.getMap(0));
-                Double zoom = args.getDouble(1);
+                int zoom = args.getInt(1);
 
-                mapView.scrollToAndZoom(latLng, zoom.floatValue());
+                mapView.scrollToAndZoom(latLng, (float) zoom);
                 break;
             case ANIMATE_TO_COORDINATE:
                 mapView.setCenter(toNaverLatLng(args.getMap(0)));
