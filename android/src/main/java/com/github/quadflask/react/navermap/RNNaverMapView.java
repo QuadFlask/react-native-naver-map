@@ -1,6 +1,7 @@
 package com.github.quadflask.react.navermap;
 
 import android.graphics.PointF;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,35 +28,15 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     private NaverMap naverMap;
     private ViewAttacherGroup attacherGroup;
     private long lastTouch = 0;
+    private final List<RNNaverMapFeature<?>> features = new ArrayList<>();
 
-    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
+    public RNNaverMapView(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions, Bundle instanceStateBundle) {
         super(ReactUtil.getNonBuggyContext(themedReactContext, appContext), naverMapOptions);
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;
-        super.onCreate(null);
+        super.onCreate(instanceStateBundle);
         super.onStart();
         getMapAsync(this);
-
-        themedReactContext.addLifecycleEventListener(new LifecycleEventListener() {
-            @Override
-            public void onHostResume() {
-                // onResume();
-            }
-
-            @Override
-            public void onHostPause() {
-                // onPause();
-            }
-
-            @Override
-            public void onHostDestroy() {
-                // onStop();
-                // onDestroy();
-                if (locationSource != null)
-                    locationSource.deactivate();
-                themedReactContext.removeLifecycleEventListener(this);
-            }
-        });
 
         // Set up a parent view for triggering visibility in subviews that depend on it.
         // Mainly ReactImageView depends on Fresco which depends on onVisibilityChanged() event
@@ -249,8 +230,6 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }
 
-    private final List<RNNaverMapFeature<?>> features = new ArrayList<>();
-
     @Override
     public void addFeature(View child, int index) {
         getMapAsync(e -> {
@@ -260,7 +239,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
                 features.add(index, annotation);
                 int visibility = annotation.getVisibility();
                 annotation.setVisibility(View.INVISIBLE);
-                ViewGroup annotationParent = (ViewGroup)annotation.getParent();
+                ViewGroup annotationParent = (ViewGroup) annotation.getParent();
                 if (annotationParent != null) {
                     annotationParent.removeView(annotation);
                 }
@@ -310,31 +289,17 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         emitEvent("onMapClick", param);
     }
 
-    public void restoreFrom(RNNaverMapView prevState) {
-        if (prevState != null && prevState.naverMap != null) {
-            CameraPosition cameraPosition = prevState.naverMap.getCameraPosition();
-            setCenter(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, cameraPosition.bearing);
-
-            setLocationTrackingMode(prevState.naverMap.getLocationTrackingMode().ordinal());
-            setMapType(prevState.naverMap.getMapType());
-            setBuildingHeight(prevState.naverMap.getBuildingHeight());
-            setNightModeEnabled(prevState.naverMap.isNightModeEnabled());
-            int[] padding = prevState.getMap().getContentPadding();
-            setMapPadding(padding[0], padding[1], padding[2], padding[3]);
-
-            UiSettings uiSettings = prevState.naverMap.getUiSettings();
-            showsMyLocationButton(uiSettings.isLocationButtonEnabled());
-            setCompassEnabled(uiSettings.isCompassEnabled());
-            setScaleBarEnabled(uiSettings.isScaleBarEnabled());
-            setZoomControlEnabled(uiSettings.isZoomControlEnabled());
-            setLogoGravity(uiSettings.getLogoGravity());
-            int[] logoMargin = uiSettings.getLogoMargin();
-            setLogoMargin(logoMargin[0], logoMargin[1], logoMargin[2], logoMargin[3]);
-
-            for (int i = 0; i < prevState.features.size(); i++) {
-                addFeature(prevState.features.get(i), i);
-            }
-        }
+    @Override
+    public void onDestroy() {
+        removeAllViews();
+        themedReactContext = null;
+        locationSource = null;
+        naverMap = null;
+        attacherGroup = null;
+        for (RNNaverMapFeature<?> feature : features)
+            feature.removeFromMap();
+        features.clear();
+        super.onDestroy();
     }
 
     private void emitEvent(String eventName, WritableMap param) {

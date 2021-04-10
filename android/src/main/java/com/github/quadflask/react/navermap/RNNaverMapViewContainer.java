@@ -1,5 +1,7 @@
 package com.github.quadflask.react.navermap;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
@@ -16,21 +19,13 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapViewProps {
-    private final ReactApplicationContext appContext;
-    private final ThemedReactContext themedReactContext;
-    private final FusedLocationSource locationSource;
-    private final NaverMapOptions naverMapOptions;
     private RNNaverMapView mapView;
-    private RNNaverMapView prevMapView;
+    private Bundle instanceStateBundle = new Bundle();
     private boolean isAttachedToWindow = false;
 
     public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
         super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
-        this.appContext = appContext;
-        this.themedReactContext = themedReactContext;
-        this.locationSource = locationSource;
-        this.naverMapOptions = naverMapOptions;
-        this.mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
+        this.mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions, instanceStateBundle);
         addView(mapView);
     }
 
@@ -73,25 +68,26 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         isAttachedToWindow = true;
-        if (mapView == null) {
-            mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions);
-            if (prevMapView != null) {
-                mapView.restoreFrom(prevMapView);
-                prevMapView = null;
-            }
-            addView(mapView);
-        }
+        mapView.onStart();
         mapView.setId(getId());
         setupLayoutHack();
     }
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         isAttachedToWindow = false;
+        mapView.onSaveInstanceState(instanceStateBundle);
         onStop();
-        removeView(mapView);
-        prevMapView = mapView;
+        mapView.onStop();
+        super.onDetachedFromWindow();
+    }
+
+    public void onDropViewInstance() {
+        mapView.onStop();
+        mapView.onDestroy();
+        removeAllViews();
+        instanceStateBundle.clear();
+        instanceStateBundle = null;
         mapView = null;
     }
 

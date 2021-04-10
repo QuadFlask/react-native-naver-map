@@ -65,6 +65,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
         return new RNNaverMapViewContainer(reactContext, appContext, locationSource, getNaverMapViewOptions());
     }
 
+    @Override
+    public void onDropViewInstance(@NonNull RNNaverMapViewContainer view) {
+        super.onDropViewInstance(view);
+        view.onDropViewInstance();
+    }
+
     protected NaverMapOptions getNaverMapViewOptions() {
         return null;
     }
