@@ -35,7 +35,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         this.themedReactContext = themedReactContext;
         this.locationSource = locationSource;
         super.onCreate(instanceStateBundle);
-        super.onStart();
+//        super.onStart();
         getMapAsync(this);
 
         // Set up a parent view for triggering visibility in subviews that depend on it.

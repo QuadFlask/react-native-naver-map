@@ -77,8 +77,6 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     protected void onDetachedFromWindow() {
         isAttachedToWindow = false;
         mapView.onSaveInstanceState(instanceStateBundle);
-        onStop();
-        mapView.onStop();
         super.onDetachedFromWindow();
     }
 
