@@ -204,6 +204,11 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
         mapView.setStopGesturesEnabled(enabled);
     }
 
+    @ReactProp(name = "liteModeEnabled", defaultBoolean = false)
+    public void setLiteModeEnabled(RNNaverMapViewContainer mapView, boolean enabled) {
+        mapView.setLiteModeEnabled(enabled);
+    }
+
     private Rect getRect(@Nullable ReadableMap padding, float density) {
         int left = 0;
         int top = 0;

@@ -68,6 +68,8 @@ public interface RNNaverMapViewProps {
 
     void setStopGesturesEnabled(boolean enabled);
 
+    void setLiteModeEnabled(boolean enabled);
+
     void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom);
 
     void addFeature(View child, int index);

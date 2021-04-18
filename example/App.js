@@ -91,7 +91,8 @@ const MapViewScreen2 = ({navigation}) => {
             <Text>scrollGesturesEnabled: default</Text>
             <NaverMapView style={{width: '100%', height: 200}}
                           center={{...P0, zoom: 15}}
-                          useTextureView>
+                          useTextureView
+                          liteModeEnabled>
                 <Marker coordinate={P0}/>
             </NaverMapView>
             {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}
@@ -99,7 +100,8 @@ const MapViewScreen2 = ({navigation}) => {
             <NaverMapView style={{width: '100%', height: 200}}
                           center={{...P0, zoom: 15}}
                           scrollGesturesEnabled
-                          useTextureView>
+                          useTextureView
+                          liteModeEnabled>
                 <Marker coordinate={P0}/>
             </NaverMapView>
             {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}
@@ -107,7 +109,8 @@ const MapViewScreen2 = ({navigation}) => {
             <NaverMapView style={{width: '100%', height: 200}}
                           center={{...P0, zoom: 15}}
                           scrollGesturesEnabled={false}
-                          useTextureView>
+                          useTextureView
+                          liteModeEnabled>
                 <Marker coordinate={P0}/>
             </NaverMapView>
             {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}

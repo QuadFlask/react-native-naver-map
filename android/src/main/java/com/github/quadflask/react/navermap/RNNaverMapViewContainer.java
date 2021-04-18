@@ -252,6 +252,12 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
+    public void setLiteModeEnabled(boolean enabled) {
+        if (mapView != null)
+            mapView.setLiteModeEnabled(enabled);
+    }
+
+    @Override
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         if (mapView != null)
             mapView.moveCameraFitBound(bounds, left, top, right, bottom);

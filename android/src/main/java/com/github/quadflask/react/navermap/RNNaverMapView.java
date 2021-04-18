@@ -226,6 +226,11 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     @Override
+    public void setLiteModeEnabled(boolean enabled) {
+        getMapAsync(e -> naverMap.setLiteModeEnabled(enabled));
+    }
+
+    @Override
     public void moveCameraFitBound(LatLngBounds bounds, int left, int top, int right, int bottom) {
         getMapAsync(e -> naverMap.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)));
     }
