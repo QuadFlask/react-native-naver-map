@@ -103,7 +103,7 @@ export interface NaverMapViewProps {
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
 }
-export default class NaverMapView extends Component<NaverMapViewProps> {
+export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
     private resolveRef;
@@ -173,8 +173,8 @@ export interface MarkerProps extends MapOverlay {
     subCaption?: {
         text?: string;
         textSize?: number;
-        color?: number;
-        haloColor?: number;
+        color?: string;
+        haloColor?: string;
         requestedWidth?: number;
         minZoom?: number;
         maxZoom?: number;

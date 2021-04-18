@@ -106,9 +106,8 @@ export default class NaverMapView extends Component {
 }
 export class Marker extends Component {
     render() {
-        let _a;
-        let _b;
-        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) })}));
+        var _a, _b;
+        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) }) }));
     }
 }
 export class Circle extends Component {

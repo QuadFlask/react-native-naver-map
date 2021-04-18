@@ -250,8 +250,8 @@ export interface MarkerProps extends MapOverlay {
     subCaption?: {
         text?: string;
         textSize?: number;
-        color?: number;
-        haloColor?: number;
+        color?: string;
+        haloColor?: string;
         requestedWidth?: number;
         minZoom?: number;
         maxZoom?: number;
@@ -268,6 +268,12 @@ export class Marker extends Component<MarkerProps> {
                 textSize: this.props.caption.textSize ?? 12,
                 color: parseColor(this.props.caption.color),
                 haloColor: parseColor(this.props.caption.haloColor),
+            }}
+            subCaption={this.props.subCaption && {
+                ...this.props.subCaption,
+                textSize: this.props.subCaption.textSize ?? 12,
+                color: parseColor(this.props.subCaption.color),
+                haloColor: parseColor(this.props.subCaption.haloColor),
             }}/>
     }
 }
