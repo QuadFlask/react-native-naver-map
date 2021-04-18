@@ -100,6 +100,7 @@ export interface NaverMapViewProps {
     tiltGesturesEnabled?: boolean;
     rotateGesturesEnabled?: boolean;
     stopGesturesEnabled?: boolean;
+    liteModeEnabled?: boolean;
     useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps> {
