@@ -120,6 +120,10 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> impleme
         feature.setAlpha(alpha);
     }
 
+    public void setZIndex(int zIndex) {
+        feature.setZIndex(zIndex);
+    }
+
     public void setAnchor(float x, float y) {
         feature.setAnchor(new PointF(x, y));
     }

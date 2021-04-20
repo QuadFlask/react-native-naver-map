@@ -48,8 +48,8 @@ const MapViewScreen = ({navigation}) => {
                       onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
                       useTextureView>
             <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} caption={{text: "test caption", align: Align.Left}}/>
-            <Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>
-            <Marker coordinate={P2} pinColor="red" alpha={0.5} onClick={() => console.warn('onClick! p2')}/>
+            <Marker coordinate={P1} pinColor="blue" zIndex={1000} onClick={() => console.warn('onClick! p1')}/>
+            <Marker coordinate={P2} pinColor="red" zIndex={100} alpha={0.5} onClick={() => console.warn('onClick! p2')}/>
             <Marker coordinate={P4} onClick={() => console.warn('onClick! p4')} image={require("./marker.png")} width={48} height={48}/>
             <Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>
             <Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>
