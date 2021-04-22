@@ -35,7 +35,7 @@ RCT_EXPORT_MODULE(RNNaverMapView)
 RCT_CUSTOM_VIEW_PROPERTY(center, NMFCameraUpdate*, RNNaverMapView)
 {
   if (json == nil) return;
-  [view.mapView moveCamera: [RCTConvert NMFCameraUpdate: json]];
+  [view.mapView moveCamera: [RCTConvert NMFCameraUpdateWith: json]];
   // TODO use `NMFCameraUpdateWith` if latlng, zoom, tilt, bearing exist.
 }
 
