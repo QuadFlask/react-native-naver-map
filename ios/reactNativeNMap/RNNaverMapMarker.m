@@ -210,6 +210,7 @@
                                                                completionBlock:^(NSError *error, UIImage *image) {
                                                                  if (error) {
                                                                    NSLog(@"%@", error);
+                                                                   return;
                                                                  }
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                    if (self->_iconImageView) [self->_iconImageView removeFromSuperview];
