@@ -289,6 +289,7 @@ export interface MarkerProps extends MapOverlay {
         minZoom?: number;
         maxZoom?: number;
     };
+    style?: StyleProp<ViewStyle>;
 }
 
 export class Marker extends Component<MarkerProps> {
