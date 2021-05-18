@@ -187,6 +187,7 @@ animateToCoordinates: (coords: Coord[], bounds?: {
 }) => void;
 animateToRegion: (region: Region) => void;
 setLocationTrackingMode: (mode: number) => void;
+setLayerGroupEnabled: (group: LayerGroup, enabled: boolean) => void;
 showsMyLocationButton: (show: boolean) => void;
 handleOnCameraChange: (event: React.SyntheticEvent<{}, {
     latitude: number;
@@ -310,6 +311,18 @@ export interface PolygonProps {
     color?: string;
     holes?: Coord[][];
     onClick?: () => void
+}
+```
+
+### `LayerGroup`
+```ts
+export declare enum LayerGroup {
+    LAYER_GROUP_BUILDING = "building",
+    LAYER_GROUP_TRANSIT = "transit",
+    LAYER_GROUP_BICYCLE = "bike",
+    LAYER_GROUP_TRAFFIC = "ctt",
+    LAYER_GROUP_CADASTRAL = "landparcel",
+    LAYER_GROUP_MOUNTAIN = "mountain"
 }
 ```
 

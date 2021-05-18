@@ -148,6 +148,10 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         this.dispatchViewManagerCommand('setLocationTrackingMode', [mode]);
     };
 
+    setLayerGroupEnabled = (group: LayerGroup, enabled: boolean) => {
+        this.dispatchViewManagerCommand('setLayerGroupEnabled', [group, enabled]);
+    };
+
     showsMyLocationButton = (show: boolean) => {
         this.dispatchViewManagerCommand('showsMyLocationButton', [show]);
     };
