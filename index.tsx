@@ -94,6 +94,7 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
+        heading: number;
         lt0: number;
         lt1: number;
         rt0: number;
@@ -193,6 +194,7 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         latitude: number;
         longitude: number;
         zoom: number;
+        heading: number;
         lt0: number;
         lt1: number;
         rt0: number;

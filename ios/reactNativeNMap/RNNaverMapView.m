@@ -99,22 +99,23 @@
 
 - (void)mapViewIdle:(nonnull NMFMapView *)mapView {
   if (((RNNaverMapView*)self).onCameraChange != nil) {
-      CGFloat left = ((RNNaverMapView *)self).bounds.origin.x;
-      CGFloat top = ((RNNaverMapView *)self).bounds.origin.y;
-      CGFloat right = left + ((RNNaverMapView *)self).bounds.size.width;
-      CGFloat bottom = top + ((RNNaverMapView *)self).bounds.size.height;
+    CGFloat left = ((RNNaverMapView *)self).bounds.origin.x;
+    CGFloat top = ((RNNaverMapView *)self).bounds.origin.y;
+    CGFloat right = left + ((RNNaverMapView *)self).bounds.size.width;
+    CGFloat bottom = top + ((RNNaverMapView *)self).bounds.size.height;
 
-      NMFProjection *projection = ((RNNaverMapView *)self).mapView.projection;
+    NMFProjection *projection = ((RNNaverMapView *)self).mapView.projection;
 
-      NMGLatLng *coordLeftTop = [projection latlngFromPoint:CGPointMake(left, top)];
-      NMGLatLng *coordRightTop = [projection latlngFromPoint:CGPointMake(right, top)];
-      NMGLatLng *coordLeftBottom = [projection latlngFromPoint:CGPointMake(left, bottom)];
-      NMGLatLng *coordRightBottom = [projection latlngFromPoint:CGPointMake(right, bottom)];
+    NMGLatLng *coordLeftTop = [projection latlngFromPoint:CGPointMake(left, top)];
+    NMGLatLng *coordRightTop = [projection latlngFromPoint:CGPointMake(right, top)];
+    NMGLatLng *coordLeftBottom = [projection latlngFromPoint:CGPointMake(left, bottom)];
+    NMGLatLng *coordRightBottom = [projection latlngFromPoint:CGPointMake(right, bottom)];
   
     ((RNNaverMapView*)self).onCameraChange(@{
       @"latitude" : @(mapView.cameraPosition.target.lat),
       @"longitude": @(mapView.cameraPosition.target.lng),
       @"zoom"     : @(mapView.cameraPosition.zoom),
+      @"heading"  : @(mapView.cameraPosition.heading),
       @"lt0": @(coordLeftTop.lat),
       @"lt1": @(coordLeftTop.lng),
       @"rt0": @(coordRightTop.lat),
