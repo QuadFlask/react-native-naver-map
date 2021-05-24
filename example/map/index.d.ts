@@ -116,6 +116,7 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
     }) => void;
     animateToRegion: (region: Region) => void;
     setLocationTrackingMode: (mode: number) => void;
+    setLayerGroupEnabled: (group: LayerGroup, enabled: boolean) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
     handleOnCameraChange: (event: React.SyntheticEvent<{}, {

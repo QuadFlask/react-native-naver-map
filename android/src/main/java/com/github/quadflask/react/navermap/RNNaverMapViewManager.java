@@ -38,6 +38,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     private static final int ANIMATE_TO_TWO_COORDINATES = 3;
     private static final int SET_LOCATION_TRACKING_MODE = 4;
     private static final int ANIMATE_TO_COORDINATES = 6;
+    private static final int SET_LAYER_GROUP_ENABLED = 7;
     private static final List<String> LAYER_GROUPS = Collections.unmodifiableList(Arrays.asList(
             NaverMap.LAYER_GROUP_BUILDING,
             NaverMap.LAYER_GROUP_TRANSIT,
@@ -294,6 +295,32 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
             case SET_LOCATION_TRACKING_MODE:
                 mapView.setLocationTrackingMode(args.getInt(0));
                 break;
+
+            case SET_LAYER_GROUP_ENABLED:
+                String group = args.getString(0);
+                Boolean enable = args.getBoolean(1);
+
+                switch (group) {
+                    case "building":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, enable);
+                        break;
+                    case "transit":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRANSIT, enable);
+                        break;
+                    case "bike":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BICYCLE, enable);
+                        break;
+                    case "ctt":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRAFFIC, enable);
+                        break;
+                    case "landparcel":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_CADASTRAL, enable);
+                        break;
+                    case "mountain":
+                        mapView.setLayerGroupEnabled(NaverMap.LAYER_GROUP_MOUNTAIN, enable);
+                        break;
+                }
+                break;
         }
     }
 
@@ -305,6 +332,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
                 .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
                 .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
+                .put("setLayerGroupEnabled", SET_LAYER_GROUP_ENABLED)
                 .build();
     }
 
