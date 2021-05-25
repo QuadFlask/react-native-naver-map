@@ -49,6 +49,7 @@ const MapViewScreen = ({navigation}) => {
                       style={{width: '100%', height: '100%'}}
                       showsMyLocationButton={true}
                       center={{...P0, zoom: 16}}
+                      logoMargin={{ top: 0, left: 20, bottom: 30, right: 0 }}
                       onTouch={e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
                       onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
                       onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}

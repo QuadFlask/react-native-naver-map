@@ -51,6 +51,12 @@ RCT_CUSTOM_VIEW_PROPERTY(mapPadding, UIEdgeInsets, RNNaverMapView)
   view.mapView.contentInset = [RCTConvert UIEdgeInsets: json];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(logoMargin, UIEdgeInsets, RNNaverMapView)
+{
+  if (json == nil) return;
+  view.mapView.logoMargin = [RCTConvert UIEdgeInsets: json];
+}
+
 RCT_CUSTOM_VIEW_PROPERTY(mapType, int, RNNaverMapView)
 {
   if (json == nil) return;
