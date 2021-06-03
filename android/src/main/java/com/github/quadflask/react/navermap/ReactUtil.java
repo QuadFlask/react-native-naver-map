@@ -9,6 +9,10 @@ import androidx.core.util.Consumer;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.Align;
@@ -54,6 +58,20 @@ public class ReactUtil {
             coords.add(toNaverLatLng(array.getMap(i)));
 
         return coords;
+    }
+
+    public static WritableMap toWritableMap(LatLng latLng) {
+        WritableMap map = new WritableNativeMap();
+        map.putDouble("latitude", latLng.latitude);
+        map.putDouble("longitude", latLng.longitude);
+        return map;
+    }
+
+    public static WritableArray toWritableArray(LatLng[] latLngs) {
+        WritableArray array = new WritableNativeArray();
+        for (LatLng latLng : latLngs)
+            array.pushMap(toWritableMap(latLng));
+        return array;
     }
 
     public static Integer getInt(@androidx.annotation.Nullable ReadableMap option, String key, Integer defaultValue) {

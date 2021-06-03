@@ -11,7 +11,10 @@ import com.airbnb.android.react.maps.ViewAttacherGroup;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.naver.maps.geometry.LatLng;
@@ -279,6 +282,8 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         param.putDouble("latitude", cameraPosition.target.latitude);
         param.putDouble("longitude", cameraPosition.target.longitude);
         param.putDouble("zoom", cameraPosition.zoom);
+        param.putArray("contentRegion", ReactUtil.toWritableArray(naverMap.getContentRegion()));
+        param.putArray("coveringRegion", ReactUtil.toWritableArray(naverMap.getCoveringRegion()));
 
         emitEvent("onCameraChange", param);
     }
