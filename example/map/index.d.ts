@@ -78,6 +78,8 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
+        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
         x: number;
@@ -100,9 +102,10 @@ export interface NaverMapViewProps {
     tiltGesturesEnabled?: boolean;
     rotateGesturesEnabled?: boolean;
     stopGesturesEnabled?: boolean;
+    liteModeEnabled?: boolean;
     useTextureView?: boolean;
 }
-export default class NaverMapView extends Component<NaverMapViewProps> {
+export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
     private resolveRef;
@@ -123,6 +126,8 @@ export default class NaverMapView extends Component<NaverMapViewProps> {
         latitude: number;
         longitude: number;
         zoom: number;
+        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => void;
     handleOnMapClick: (event: React.SyntheticEvent<{}, {
         x: number;
@@ -150,6 +155,14 @@ export interface MarkerProps extends MapOverlay {
     width?: number;
     height?: number;
     alpha?: number;
+    angle?: number;
+    hidden?: boolean;
+    zIndex?: number;
+    iconPerspectiveEnabled?: boolean;
+    isHideCollidedSymbols?: boolean;
+    isHideCollidedMarkers?: boolean;
+    isHideCollidedCaptions?: boolean;
+    isForceShowIcon?: boolean;
     animated?: boolean;
     caption?: {
         text?: string;
@@ -157,12 +170,19 @@ export interface MarkerProps extends MapOverlay {
         textSize?: number;
         color?: string;
         haloColor?: string;
+        offset?: number;
+        requestedWidth?: number;
+        minZoom?: number;
+        maxZoom?: number;
     };
     subCaption?: {
         text?: string;
         textSize?: number;
-        color?: number;
-        haloColor?: number;
+        color?: string;
+        haloColor?: string;
+        requestedWidth?: number;
+        minZoom?: number;
+        maxZoom?: number;
     };
 }
 export declare class Marker extends Component<MarkerProps> {

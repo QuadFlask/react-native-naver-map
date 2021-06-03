@@ -176,6 +176,8 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         latitude: number;
         longitude: number;
         zoom: number;
+        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
     handleOnMapClick = (event: SyntheticEvent<{}, {
