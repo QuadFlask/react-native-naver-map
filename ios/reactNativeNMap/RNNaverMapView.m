@@ -92,6 +92,7 @@
   }
   [_reactSubviews removeObject:(UIView *)subview];
 }
+
 - (NSArray<id<RCTComponent>> *)reactSubviews {
   return _reactSubviews;
 }
@@ -99,10 +100,26 @@
 - (void)mapViewIdle:(nonnull NMFMapView *)mapView {
   if (((RNNaverMapView*)self).onCameraChange != nil)
     ((RNNaverMapView*)self).onCameraChange(@{
-      @"latitude" : @(mapView.cameraPosition.target.lat),
-      @"longitude": @(mapView.cameraPosition.target.lng),
-      @"zoom"     : @(mapView.cameraPosition.zoom)
+      @"latitude"      : @(mapView.cameraPosition.target.lat),
+      @"longitude"     : @(mapView.cameraPosition.target.lng),
+      @"zoom"          : @(mapView.cameraPosition.zoom),
+      @"contentRegion" : pointsToJson(mapView.contentRegion.exteriorRing.points),
+      @"coveringRegion": pointsToJson(mapView.coveringRegion.exteriorRing.points),
     });
+}
+
+static NSArray* pointsToJson(NSArray<NMGLatLng*> *points) {
+  NSMutableArray *array = [NSMutableArray array];
+  for (int i = 0; i < points.count; i++)
+    [array addObject: toJson(points[i])];
+  return array;
+}
+
+static NSDictionary* toJson(NMGLatLng * _Nonnull latlng) {
+   return @{
+    @"latitude" : @(latlng.lat),
+    @"longitude": @(latlng.lng),
+  };
 }
 
 - (void)didTapMapView:(CGPoint)point LatLng:(NMGLatLng *)latlng {
@@ -122,5 +139,7 @@
       @"reason": @(reason)
     });
 }
+
+
 
 @end
