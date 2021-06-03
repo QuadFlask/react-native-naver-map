@@ -239,6 +239,7 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> impleme
         ViewChangesTracker.getInstance().addMarker(this);
         customView = view;
         customView.addOnLayoutChangeListener(onLayoutChangeListener);
+        updateCustomView();
     }
 
     public void removeCustomView(View view) {
