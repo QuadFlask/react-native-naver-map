@@ -152,6 +152,8 @@ interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
+        contentsRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
+        coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
         x: number;
@@ -331,3 +333,5 @@ export declare enum LayerGroup {
 - *react-navigation*의 스택 스크린 사용시 안드로이드에서 맵뷰가 겹쳐 보이는 현상이 있을 경우 `useTextureView` 옵션을 추가해 주세요. [#27](https://github.com/QuadFlask/react-native-naver-map/issues/27)
 
 - 안드로이드에서 `ScrollView` 내부에 추가할 경우 `scrollGesturesEnabled`를 이용해 맵 스크롤을 제어할 수 있습니다. [#62](https://github.com/QuadFlask/react-native-naver-map/issues/62)
+
+- 마커 클러스터링에 필요한 지도 컨텐츠 영역은 `onCameraChange` 이벤트를 통해 얻을 수 있습니다. [#64](https://github.com/QuadFlask/react-native-naver-map/issues/64)
