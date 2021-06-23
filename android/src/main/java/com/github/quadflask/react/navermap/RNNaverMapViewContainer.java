@@ -16,6 +16,7 @@ import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapViewProps {
@@ -53,7 +54,13 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (mapView != null && mapView.getMap().getUiSettings().isScrollGesturesEnabled()) {
+        NaverMap map = null;
+        if(this.mapView != null) map = this.mapView.getMap();
+
+        UiSettings uiSettings = null;
+        if(map != null) uiSettings = map.getUiSettings();
+
+        if (uiSettings != null && uiSettings.isScrollGesturesEnabled()) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_UP:
