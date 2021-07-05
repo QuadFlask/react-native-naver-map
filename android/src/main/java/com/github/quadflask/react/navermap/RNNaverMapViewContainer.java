@@ -54,13 +54,7 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        NaverMap map = null;
-        if(this.mapView != null) map = this.mapView.getMap();
-
-        UiSettings uiSettings = null;
-        if(map != null) uiSettings = map.getUiSettings();
-
-        if (uiSettings != null && uiSettings.isScrollGesturesEnabled()) {
+        if (mapView != null && mapView.getMap().getUiSettings().isScrollGesturesEnabled()) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_UP:
