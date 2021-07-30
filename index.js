@@ -89,6 +89,12 @@ export default class NaverMapView extends Component {
         this.showsMyLocationButton = (show) => {
             this.dispatchViewManagerCommand('showsMyLocationButton', [show]);
         };
+        this.getPointLatLng = (point) => {
+            return Platform.select({
+                android:()=> NativeModules.RNNaverModule.getPointLatLng( this.nodeHandle, point),
+                ios:() => NativeModules[`RNNaverMapView`]['getPointLatLng'](this.nodeHandle,point)
+            })();
+        };
         this.dispatchViewManagerCommand = (command, arg) => {
             return Platform.select({
                 // @ts-ignore

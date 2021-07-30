@@ -258,6 +258,61 @@ RCT_EXPORT_METHOD(animateToRegion:(nonnull NSNumber *)reactTag
   }];
 }
 
+RCT_EXPORT_METHOD(
+                  getPointLatLng:(nonnull NSNumber *)reactTag
+                  withPoint: (NSDictionary *) point
+                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject
+)
+{
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+    id view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[RNNaverMapView class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting NMFMapView, got: %@", view);
+    } else {
+      NSDictionary *centerDictonary = (NSDictionary *)[point objectForKey:@"center"];
+      NSDictionary *screen = (NSDictionary *)[point objectForKey:@"screen"];
+      
+      NMGLatLng *centerPoint = NMGLatLngMake([[centerDictonary objectForKey:@"latitude"] doubleValue],
+                                             [[centerDictonary objectForKey:@"longitude"] doubleValue]);
+      float x = [[screen objectForKey:@"width"] floatValue];
+      float y = [[screen objectForKey:@"height"] floatValue];
+      CGPoint centerCoord =[((RNNaverMapView *)view).mapView.projection pointFromLatLng:centerPoint];
+      
+      CGPoint topLeft = CGPointMake(centerCoord.x - x, centerCoord.y - y);
+      NMGLatLng *topLeftCoord = [((RNNaverMapView *)view).mapView.projection latlngFromPoint:(topLeft)];
+      
+      CGPoint topRight = CGPointMake(centerCoord.x + x, centerCoord.y - y);
+      NMGLatLng *topRightCoord = [((RNNaverMapView *)view).mapView.projection latlngFromPoint:(topRight)];
+
+      CGPoint bottomLeft = CGPointMake(centerCoord.x - x, centerCoord.y + y);
+      NMGLatLng *bottomLeftCoord = [((RNNaverMapView *)view).mapView.projection latlngFromPoint:(bottomLeft)];
+      
+      CGPoint bottomRight = CGPointMake(centerCoord.x + x, centerCoord.y + y);
+      NMGLatLng *bottomRightCoord = [((RNNaverMapView *)view).mapView.projection latlngFromPoint:(bottomRight)];
+     
+      NSArray *screenTopLeftCoord = [ [NSArray alloc] initWithObjects:
+                                                [NSNumber numberWithFloat:topLeftCoord.lat],
+                                                [NSNumber numberWithFloat:topLeftCoord.lng],nil];
+      NSArray *screenTopRightCoord = [ [NSArray alloc] initWithObjects:
+                                                [NSNumber numberWithFloat:topRightCoord.lat],
+                                                [NSNumber numberWithFloat:topRightCoord.lng],nil];
+      NSArray *screenBottomRightCoord = [ [NSArray alloc] initWithObjects:
+                                                [NSNumber numberWithFloat:bottomRightCoord.lat],
+                                                [NSNumber numberWithFloat:bottomRightCoord.lng],nil];
+      NSArray *screenBottomLeftCoord = [ [NSArray alloc] initWithObjects:
+                                                     [NSNumber numberWithFloat:bottomLeftCoord.lat],
+                                                     [NSNumber numberWithFloat:bottomLeftCoord.lng],nil];
+      
+      NSDictionary *pointLatLng = @{@"topLeftCoord": screenTopLeftCoord,
+                                    @"topRightCoord": screenTopRightCoord,
+                                    @"bottomLeftCoord": screenBottomLeftCoord,
+                                    @"bottomRightCoord": screenBottomRightCoord };
+      resolve(pointLatLng);
+    }
+  }];
+}
+
 RCT_EXPORT_VIEW_PROPERTY(onInitialized, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onCameraChange, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onTouch, RCTDirectEventBlock);
