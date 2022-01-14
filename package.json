@@ -23,8 +23,8 @@
     "navermap"
   ],
   "peerDependencies": {
-    "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react": ">=16.8.6",
+    "react-native": ">=0.60.5"
   },
   "devDependencies": {
     "@types/react": "^16.8.15",
