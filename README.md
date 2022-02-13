@@ -14,19 +14,11 @@ npm install react-native-nmap --save;
 
 - **React Native 0.60+**
 
+> ⚠ ️ios의 경우 `git-lfs` 설치가 필요합니다. [참고](https://github.com/navermaps/ios-map-sdk#%EB%8C%80%EC%9A%A9%EB%9F%89-%ED%8C%8C%EC%9D%BC%EC%9D%84-%EB%B0%9B%EA%B8%B0-%EC%9C%84%ED%95%B4-git-lfs-%EC%84%A4%EC%B9%98%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A9%EB%8B%88%EB%8B%A4)
+
 ```bash
 $ cd ios/ && pod install
 ```
-
-- **React Native <= 0.59**
-
-```bash
-$ react-native link react-native-nmap
-$ cd ios/ && pod install
-```
-
-> ios의 경우 `git-lfs` 설치가 필요합니다. [참고](https://github.com/navermaps/ios-map-sdk#%EB%8C%80%EC%9A%A9%EB%9F%89-%ED%8C%8C%EC%9D%BC%EC%9D%84-%EB%B0%9B%EA%B8%B0-%EC%9C%84%ED%95%B4-git-lfs-%EC%84%A4%EC%B9%98%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A9%EB%8B%88%EB%8B%A4)
-
 
 ### 안드로이드 추가 설정
 
@@ -83,7 +75,7 @@ allprojects {
 
 ## 예제
 
-> [example/App.js](https://github.com/QuadFlask/react-native-naver-map/blob/master/example/App.js) 
+> [example/App.js](https://github.com/QuadFlask/react-native-naver-map/blob/master/example/App.js)
 
 ```tsx
 import NaverMapView, {Circle, Marker, Path, Polyline, Polygon} from "react-native-nmap";
@@ -152,7 +144,7 @@ interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
+        contentRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
@@ -262,7 +254,7 @@ interface MarkerProps {
 >             <Text>image background</Text>
 >         </ImageBackground>
 >     </View>
-> </Marker> 
+> </Marker>
 > ```
 
 ### `Polyline`

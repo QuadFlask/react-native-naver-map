@@ -1,0 +1,195 @@
+import React, {useEffect, useRef, useState} from 'react';
+import {Image, ImageBackground, PermissionsAndroid, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import NaverMapView, {Marker, InfoWindow, Gravity} from "../../src";
+
+const P0 = {latitude: 37.564362, longitude: 126.977011};
+const P1 = {latitude: 37.565051, longitude: 126.978567};
+const P2 = {latitude: 37.565383, longitude: 126.976292};
+const P4 = {latitude: 37.564834, longitude: 126.977218};
+const P5 = {latitude: 37.562834, longitude: 126.976218};
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return <NavigationContainer>
+    <Stack.Navigator initialRouteName="home">
+      <Stack.Screen name="home" component={HomeScreen}/>
+      <Stack.Screen name="stack" component={MapViewScreen2}/>
+    </Stack.Navigator>
+  </NavigationContainer>
+}
+
+const HomeScreen = ({}) =>
+  <Tab.Navigator>
+    <Tab.Screen name={"map"} component={MapViewScreen}/>
+    <Tab.Screen name={"text"} component={TextScreen}/>
+  </Tab.Navigator>
+
+const TextScreen = () => {
+  return <Text>text</Text>
+}
+
+const MapViewScreen = ({navigation}) => {
+  const mapView = useRef(null);
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
+  const [enableLayerGroup, setEnableLayerGroup] = useState(true);
+  const [open, setOpen] = useState(true)
+
+  const toggleInfoWindow = () => {
+    setOpen(!open)
+  }
+
+  return <View style={styles.container}>
+    <NaverMapView style={{width: '100%', height: '100%'}}
+                  showsMyLocationButton={true}
+                  logoMargin={{left: 0, top: 5, right: 5, bottom: 0}}
+                  logoGravity={Gravity.TOP | Gravity.RIGHT}
+                  extent={[
+                    {latitude: 31.43, longitude: 122.37},
+                    {latitude: 44.35, longitude: 132}
+                  ]}
+                  onTouch={e => console.warn('onTouch', JSON.stringify(e))}
+                  onOptionChange={e => console.warn("onOptionChange" + JSON.stringify(e))}
+                  onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
+                  onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
+
+    >
+      {/*<Marker coordinate={P0}*/}
+      {/*        onClick={() => {*/}
+      {/*          // console.warn('onClick! p0')*/}
+      {/*          // mapView.current.setLayerGroupEnabled(LayerGroup.LAYER_GROUP_BICYCLE, enableLayerGroup);*/}
+      {/*          // mapView.current.setLayerGroupEnabled(LayerGroup.LAYER_GROUP_TRANSIT, enableLayerGroup);*/}
+      {/*          // setEnableLayerGroup(!enableLayerGroup)*/}
+      {/*        }}*/}
+      {/*        caption={{text: "test caption", align: Align.Left}}*/}
+      {/*/>*/}
+      <Marker coordinate={P1} pinColor="blue" onClick={() => console.warn('onClick! p1')}/>
+      <Marker coordinate={P2} pinColor="red" alpha={0.5} onClick={() => console.warn('onClick! p2')}/>
+      <Marker coordinate={P4} onClick={() => console.warn('onClick! p4')} image={require("./marker.png")} width={48} height={48}/>
+      {/*<Path coordinates={[P0, P1]} onClick={() => console.warn('onClick! path')} width={10}/>*/}
+      {/*<Polyline coordinates={[P1, P2]} onClick={() => console.warn('onClick! polyline')}/>*/}
+      {/*<Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.warn('onClick! circle')}/>*/}
+      {/*<Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.warn('onClick! polygon')}/>*/}
+      {/*<Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} width={96} height={96}>*/}
+      {/*  <CustomView/>*/}
+      {/*</Marker>*/}
+      <CustomViewMarker/>
+      <Marker coordinate={P0} width={96} height={64} onClick={toggleInfoWindow}>
+        {/*<InfoWindow open={true} text={"test2323"}/>*/}
+        <View style={{backgroundColor: 'rgba(255,0,0,0.4)', borderRadius: 10, width: 96, height: 64}}>
+          <Text>InfoWindow: {"" + open}</Text>
+        </View>
+        <InfoWindow open={open} text={`${open}`}/>
+      </Marker>
+    </NaverMapView>
+    <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}} onPress={() => navigation.navigate('stack')}>
+      <View style={{backgroundColor: 'gray', padding: 4}}>
+        <Text style={{color: 'white'}}>open stack</Text>
+      </View>
+    </TouchableOpacity>
+    <Text style={{position: 'absolute', top: '95%', width: '100%', textAlign: 'center'}}>Icon made by Pixel perfect from www.flaticon.com</Text>
+  </View>
+};
+
+const CustomViewMarker = () => {
+  const [n, set] = useState(0)
+
+  // setTimeout(() => {
+  //   set(n + 1)
+  // }, 1000)
+
+  return <Marker coordinate={P0} onClick={() => console.warn('onClick! p0')} width={96} height={96}>
+    <View style={{backgroundColor: 'rgba(255,0,0,0.4)', borderRadius: 10, width: 96}}>
+      <View style={{backgroundColor: 'rgba(0,0,255,0.5)', borderWidth: 1, borderColor: 'red', flexDirection: 'row'}}>
+        <Image source={require("./marker.png")} style={{
+          width: 32, height: 32,
+          backgroundColor: 'rgba(0,0,0,0.2)', resizeMode: 'stretch',
+          borderWidth: 2, borderColor: 'black'
+        }} fadeDuration={0}/>
+        <Text>Image {n}</Text>
+      </View>
+      <ImageBackground source={require("./marker.png")} style={{width: 64, height: 64}}>
+        <Text>image background</Text>
+      </ImageBackground>
+    </View>
+  </Marker>
+}
+
+const MapViewScreen2 = ({navigation}) => {
+  return <View>
+    <TouchableOpacity onPress={navigation.goBack}>
+      <View style={{backgroundColor: 'gray', padding: 4}}>
+        <Text style={{color: 'white'}}>goBack</Text>
+      </View>
+    </TouchableOpacity>
+    <ScrollView style={{width: '100%', height: '100%'}}>
+      <Text>scrollGesturesEnabled: default</Text>
+      <NaverMapView style={{width: '100%', height: 200}}
+                    center={{...P0, zoom: 15}}
+                    useTextureView
+                    liteModeEnabled>
+        <Marker coordinate={P0}/>
+      </NaverMapView>
+      {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}
+      <Text>scrollGesturesEnabled</Text>
+      <NaverMapView style={{width: '100%', height: 200}}
+                    center={{...P0, zoom: 15}}
+                    scrollGesturesEnabled
+                    useTextureView
+                    liteModeEnabled>
+        <Marker coordinate={P0}/>
+      </NaverMapView>
+      {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}
+      <Text>scrollGesturesEnabled: false</Text>
+      <NaverMapView style={{width: '100%', height: 200}}
+                    center={{...P0, zoom: 15}}
+                    scrollGesturesEnabled={false}
+                    useTextureView
+                    liteModeEnabled>
+        <Marker coordinate={P0}/>
+      </NaverMapView>
+      {Array.from({length: 10}, (_, i) => i).map(i => <Text key={i}></Text>)}
+    </ScrollView>
+  </View>
+}
+
+async function requestLocationPermission() {
+  if (Platform.OS !== 'android') return;
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Location Permission',
+        message: 'show my location need Location permission',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the location');
+    } else {
+      console.log('Location permission denied');
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%', height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

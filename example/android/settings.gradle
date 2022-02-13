@@ -1,4 +1,6 @@
-rootProject.name = 'example'
+rootProject.name = 'NmapExample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
-include ':app', ':reactNativeNMap'
-project(':reactNativeNMap').projectDir = file("../../android")
+include ':app'
+
+include ':reactnativenmap'
+project(':reactnativenmap').projectDir = new File(rootProject.projectDir, '../../android')
