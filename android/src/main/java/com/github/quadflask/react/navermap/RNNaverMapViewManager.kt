@@ -1,6 +1,5 @@
 package com.github.quadflask.react.navermap
 
-import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import com.airbnb.android.react.maps2.SizeReportingShadowNode
@@ -11,24 +10,20 @@ import com.facebook.react.uimanager.LayoutShadowNode
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.getDoubleOrNull
-import com.github.quadflask.react.navermap.ReactUtil.getInt
-import com.github.quadflask.react.navermap.ReactUtil.toLatLngBounds
-import com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng
+import com.github.quadflask.react.navermap.util.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.util.FusedLocationSource
 import java.util.*
-import kotlin.math.max
-import kotlin.math.min
 import kotlin.math.roundToInt
 
 open class RNNaverMapViewManager(private val appContext: ReactApplicationContext) : ViewGroupManager<RNNaverMapViewContainer>() {
   private val locationSource: FusedLocationSource = FusedLocationSource(appContext.currentActivity!!, 0x1000)
 
   companion object {
+    private const val DEFAULT_PADDING_IN_DP = 56
     private const val ANIMATE_TO_REGION = 1
     private const val ANIMATE_TO_COORDINATE = 2
     private const val ANIMATE_TO_TWO_COORDINATES = 3
@@ -66,10 +61,10 @@ open class RNNaverMapViewManager(private val appContext: ReactApplicationContext
   fun setCenter(mapView: RNNaverMapViewContainer, option: ReadableMap?) {
     if (option != null) {
       mapView.setCenter(
-        toNaverLatLng(option),
-        getDoubleOrNull(option, "zoom"),
-        getDoubleOrNull(option, "tilt"),
-        getDoubleOrNull(option, "bearing")
+        option.toNaverLatLng(),
+        option.getDoubleOrNull("zoom"),
+        option.getDoubleOrNull("tilt"),
+        option.getDoubleOrNull("bearing")
       )
     }
   }
@@ -111,7 +106,7 @@ open class RNNaverMapViewManager(private val appContext: ReactApplicationContext
 
   @ReactProp(name = "extent")
   fun setExtent(mapView: RNNaverMapViewContainer, option: ReadableArray?) {
-    mapView.setExtent(option?.let { toLatLngBounds(it.getMap(0), it.getMap(1)) })
+    mapView.setExtent(option?.toLatLngBounds())
   }
 
   @ReactProp(name = "buildingHeight", defaultFloat = 1.0f)
@@ -137,7 +132,7 @@ open class RNNaverMapViewManager(private val appContext: ReactApplicationContext
   @ReactProp(name = "layerGroup")
   fun setLayerGroupEnabled(mapView: RNNaverMapViewContainer, option: ReadableMap?) {
     for (layerGroup in LAYER_GROUPS)
-      mapView.setLayerGroupEnabled(layerGroup, option?.getBoolean(layerGroup!!) ?: false)
+      mapView.setLayerGroupEnabled(layerGroup, option?.getBoolean(layerGroup) ?: false)
   }
 
   @ReactProp(name = "nightMode", defaultBoolean = false)
@@ -147,13 +142,13 @@ open class RNNaverMapViewManager(private val appContext: ReactApplicationContext
 
   @ReactProp(name = "mapPadding")
   fun setMapPadding(mapView: RNNaverMapViewContainer, padding: ReadableMap?) {
-    val rect = getRect(padding, mapView.resources.displayMetrics.density)
+    val rect = padding.toRectF().apply { scale(mapView.resources.displayMetrics.density) }.toRect()
     mapView.setMapPadding(rect.left, rect.top, rect.right, rect.bottom)
   }
 
   @ReactProp(name = "logoMargin")
   fun setLogoMargin(mapView: RNNaverMapViewContainer, margin: ReadableMap?) {
-    val rect = getRect(margin, mapView.resources.displayMetrics.density)
+    val rect = margin.toRectF().apply { scale(mapView.resources.displayMetrics.density) }.toRect()
     mapView.setLogoMargin(rect.left, rect.top, rect.right, rect.bottom)
   }
 
@@ -192,70 +187,56 @@ open class RNNaverMapViewManager(private val appContext: ReactApplicationContext
     mapView.setLiteModeEnabled(enabled)
   }
 
-  private fun getRect(padding: ReadableMap?, density: Float): Rect {
-    return Rect(0, 0, 0, 0).apply {
-      if (padding != null) {
-        if (padding.hasKey("left"))
-          left = (padding.getDouble("left").toFloat() * density).roundToInt()
-        if (padding.hasKey("top"))
-          top = (padding.getDouble("top").toFloat() * density).roundToInt()
-        if (padding.hasKey("right"))
-          right = (padding.getDouble("right").toFloat() * density).roundToInt()
-        if (padding.hasKey("bottom"))
-          bottom = (padding.getDouble("bottom").toFloat() * density).roundToInt()
-      }
-    }
-  }
-
   override fun receiveCommand(mapView: RNNaverMapViewContainer, commandId: Int, args: ReadableArray?) {
     if (args == null) return
+
+    fun Int.toPx(): Int {
+      return (this * mapView.resources.displayMetrics.density).roundToInt()
+    }
 
     when (commandId) {
       ANIMATE_TO_REGION -> {
         val region = args.getMap(0)
+        val padding = if (args.size() == 2) args.getInt(1).toPx() else DEFAULT_PADDING_IN_DP.toPx()
         val lat = region.getDouble("latitude")
         val lng = region.getDouble("longitude")
         val latDelta = region.getDouble("latitudeDelta")
         val lngDelta = region.getDouble("longitudeDelta")
         val bounds = LatLngBounds(
-          LatLng(lat - latDelta / 2, lng - lngDelta / 2),  // southwest
+          LatLng(lat - latDelta / 2, lng - lngDelta / 2),// southwest
           LatLng(lat + latDelta / 2, lng + lngDelta / 2) // northeast
         )
-        mapView.moveCameraFitBound(bounds, 0, 0, 0, 0)
+        mapView.moveCameraFitBound(
+          bounds,
+          padding,
+          padding,
+          padding,
+          padding
+        )
       }
       ANIMATE_TO_TWO_COORDINATES -> {
-        val density = mapView.resources.displayMetrics.density
-        val region1 = args.getMap(0)
-        val region2 = args.getMap(1)
-        val padding = if (args.size() == 3) args.getInt(2) else 56
-        val lat1 = region1.getDouble("latitude")
-        val lng1 = region1.getDouble("longitude")
-        val lat2 = region2.getDouble("latitude")
-        val lng2 = region2.getDouble("longitude")
+        val c1 = args.getMap(0).toNaverLatLng()
+        val c2 = args.getMap(1).toNaverLatLng()
+        val latLngBounds = arrayOf(c1, c2).toLatLngBounds()
+        val padding = if (args.size() == 3) args.getInt(2).toPx() else DEFAULT_PADDING_IN_DP.toPx()
         mapView.zoomTo(
-          LatLngBounds(
-            LatLng(max(lat1, lat2), min(lng1, lng2)),
-            LatLng(min(lat1, lat2), max(lng1, lng2))
-          ),
-          (padding * density).roundToInt()
+          latLngBounds,
+          padding
         )
       }
       ANIMATE_TO_COORDINATES -> {
-        val coordinatesArray = args.getArray(0)
+        val latLngBounds = args.getArray(0).toLatLngBounds()
         val edgePadding = args.getMap(1)
 
         mapView.moveCameraFitBound(
-          LatLngBounds.Builder().apply {
-            for (i in 0 until coordinatesArray.size())
-              include(toNaverLatLng(coordinatesArray.getMap(i)))
-          }.build(),
-          getInt(edgePadding, "left"),
-          getInt(edgePadding, "top"),
-          getInt(edgePadding, "right"),
-          getInt(edgePadding, "bottom")
+          latLngBounds,
+          edgePadding.getInt("left", DEFAULT_PADDING_IN_DP.toPx()),
+          edgePadding.getInt("top", DEFAULT_PADDING_IN_DP.toPx()),
+          edgePadding.getInt("right", DEFAULT_PADDING_IN_DP.toPx()),
+          edgePadding.getInt("bottom", DEFAULT_PADDING_IN_DP.toPx())
         )
       }
-      ANIMATE_TO_COORDINATE -> mapView.setCenter(toNaverLatLng(args.getMap(0)))
+      ANIMATE_TO_COORDINATE -> mapView.setCenter(args.getMap(0).toNaverLatLng())
       SET_LOCATION_TRACKING_MODE -> mapView.setLocationTrackingMode(args.getInt(0))
       SET_LAYER_GROUP_ENABLED -> {
         val group = args.getString(0)

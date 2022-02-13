@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ThemedReactContext
+import com.github.quadflask.react.navermap.util.ReactUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.NaverMap.MapType
@@ -104,7 +105,7 @@ class RNNaverMapViewContainer(
     mapView?.setCenter(latLng, zoom, tilt, bearing)
   }
 
-  override fun zoomTo(latLngBounds: LatLngBounds?, paddingInPx: Int) {
+  override fun zoomTo(latLngBounds: LatLngBounds, paddingInPx: Int) {
     mapView?.zoomTo(latLngBounds, paddingInPx)
   }
 
@@ -168,7 +169,7 @@ class RNNaverMapViewContainer(
     mapView?.setBuildingHeight(height)
   }
 
-  override fun setLayerGroupEnabled(layerGroup: String?, enable: Boolean) {
+  override fun setLayerGroupEnabled(layerGroup: String, enable: Boolean) {
     mapView?.setLayerGroupEnabled(layerGroup, enable)
   }
 
@@ -208,7 +209,7 @@ class RNNaverMapViewContainer(
     mapView?.setLiteModeEnabled(enabled)
   }
 
-  override fun moveCameraFitBound(bounds: LatLngBounds?, left: Int, top: Int, right: Int, bottom: Int) {
+  override fun moveCameraFitBound(bounds: LatLngBounds, left: Int, top: Int, right: Int, bottom: Int) {
     mapView?.moveCameraFitBound(bounds, left, top, right, bottom)
   }
 

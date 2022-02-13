@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.content.Context
 import com.naver.maps.geometry.LatLng
@@ -9,8 +9,8 @@ class RNNaverMapCircleOverlay(emitter: EventEmittable, context: Context) : Click
     feature = CircleOverlay()
   }
 
-  fun setCenter(center: LatLng?) {
-    feature.center = center!!
+  fun setCenter(center: LatLng) {
+    feature.center = center
   }
 
   fun setRadius(radius: Double) {

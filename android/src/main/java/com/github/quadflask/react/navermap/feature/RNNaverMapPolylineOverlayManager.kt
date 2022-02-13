@@ -1,11 +1,11 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.graphics.Color
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.toLatLngList
+import com.github.quadflask.react.navermap.util.toLatLngList
 import com.naver.maps.map.overlay.PolylineOverlay
 
 class RNNaverMapPolylineOverlayManager(reactContext: ReactApplicationContext) : EventEmittableViewGroupManager<RNNaverMapPolylineOverlay?>(reactContext) {
@@ -19,13 +19,12 @@ class RNNaverMapPolylineOverlayManager(reactContext: ReactApplicationContext) : 
 
   @ReactProp(name = "coordinates")
   fun setCoordinate(view: RNNaverMapPolylineOverlay, coordinates: ReadableArray?) {
-    view.setCoords(toLatLngList(coordinates))
+    view.setCoords(coordinates.toLatLngList())
   }
 
   @ReactProp(name = "strokeWidth", defaultFloat = 1f)
   fun setStrokeWidth(view: RNNaverMapPolylineOverlay, widthInPoints: Float) {
-    val widthInScreenPx: Float = metrics.density * widthInPoints
-    view.setLineWidth(widthInScreenPx)
+    view.setLineWidth(widthInPoints * metrics.density)
   }
 
   @ReactProp(name = "strokeColor", defaultInt = Color.RED, customType = "Color")

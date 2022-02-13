@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap

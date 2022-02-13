@@ -1,11 +1,11 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.graphics.Color
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng
+import com.github.quadflask.react.navermap.util.toNaverLatLng
 
 class RNNaverMapCircleOverlayManager(reactContext: ReactApplicationContext) : EventEmittableViewGroupManager<RNNaverMapCircleOverlay>(reactContext) {
   override val eventNames = arrayOf("onClick")
@@ -18,7 +18,7 @@ class RNNaverMapCircleOverlayManager(reactContext: ReactApplicationContext) : Ev
 
   @ReactProp(name = "coordinate")
   fun setCenter(view: RNNaverMapCircleOverlay, map: ReadableMap?) {
-    view.setCenter(toNaverLatLng(map))
+    view.setCenter(map.toNaverLatLng())
   }
 
   @ReactProp(name = "radius", defaultDouble = 100.0)

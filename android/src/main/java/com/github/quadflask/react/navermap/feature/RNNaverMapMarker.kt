@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
@@ -27,7 +27,9 @@ import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.image.CloseableStaticBitmap
 import com.facebook.imagepipeline.image.ImageInfo
 import com.facebook.imagepipeline.request.ImageRequestBuilder
-import com.github.quadflask.react.navermap.OverlayImages.put
+import com.github.quadflask.react.navermap.util.ReactUtil
+import com.github.quadflask.react.navermap.util.OverlayImages
+import com.github.quadflask.react.navermap.util.OverlayImages.put
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Align
@@ -151,6 +153,7 @@ class RNNaverMapMarker(
   }
 
   fun setImage(uri: String?) {
+    // TODO refactor
     if (uri != null) {
       val overlayImage = OverlayImages[uri]
       if (overlayImage != null) {

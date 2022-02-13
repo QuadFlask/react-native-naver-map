@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.content.Context
 import android.graphics.PointF
@@ -59,20 +59,18 @@ class RNNaverMapInfoWindow(
   }
 
   fun setMarker(marker: Marker?) {
-    Log.e("RNN", "RNNaverMapInfoWindow.setMarker: " + marker)
+    Log.e("RNN", "RNNaverMapInfoWindow.setMarker: $marker")
     this.marker = marker
     refresh()
   }
 
   fun setOpen(open: Boolean) {
-    Log.e("RNN", "RNNaverMapInfoWindow.setOpen: " + open)
+    Log.e("RNN", "RNNaverMapInfoWindow.setOpen: $open")
     this.open = open
     if (open) {
-      if (marker != null) {
-        feature.open(marker!!, align)
-      } else {
-        feature.map?.let { feature.open(it) }
-      }
+      marker
+        ?.let { feature.open(it, align) }
+        ?: feature.map?.let { feature.open(it) }
     } else {
       feature.close()
     }

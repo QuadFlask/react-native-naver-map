@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.graphics.Color
 import android.os.Handler
@@ -9,9 +9,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.parseAlign
-import com.github.quadflask.react.navermap.ReactUtil.parseColorString
-import com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng
+import com.github.quadflask.react.navermap.util.*
 import com.naver.maps.map.overlay.Marker
 import kotlin.math.roundToInt
 
@@ -26,12 +24,12 @@ open class RNNaverMapMarkerManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "coordinate")
   fun setCoordinate(view: RNNaverMapMarker, map: ReadableMap?) {
-    view.setCoordinate(toNaverLatLng(map))
+    view.setCoordinate(map.toNaverLatLng())
   }
 
   @ReactProp(name = "anchor")
   fun setAnchor(view: RNNaverMapMarker, map: ReadableMap?) {
-    view.setAnchor(ReactUtil.toPointF(map, Marker.DEFAULT_ANCHOR))
+    view.setAnchor(map.toPointF(Marker.DEFAULT_ANCHOR))
   }
 
   @ReactProp(name = "image")
@@ -56,14 +54,12 @@ open class RNNaverMapMarkerManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "width", defaultFloat = 64f)
   fun setWidth(view: RNNaverMapMarker, width: Float) {
-    val widthInScreenPx: Int = (metrics.density * width).roundToInt()
-    view.width = widthInScreenPx
+    view.width = (width * metrics.density).roundToInt()
   }
 
   @ReactProp(name = "height", defaultFloat = 64f)
   fun setHeight(view: RNNaverMapMarker, height: Float) {
-    val heightInScreenPx: Int = (metrics.density * height).roundToInt()
-    view.height = heightInScreenPx
+    view.height = (height * metrics.density).roundToInt()
   }
 
   @ReactProp(name = "animated", defaultBoolean = false)
@@ -93,16 +89,17 @@ open class RNNaverMapMarkerManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "caption")
   fun setCaption(view: RNNaverMapMarker, map: ReadableMap?) {
-    if (map == null || !map.hasKey("text")) {
+    if (map == null || !map.hasKey("text") || map.getString("text") == null) {
       view.removeCaption()
       return
     }
-    val text = map.getString("text") ?: ""
-    val textSize = if (map.hasKey("textSize")) map.getInt("textSize") else 16
-    val color = if (map.hasKey("color")) parseColorString(map.getString("color")) else Color.BLACK
-    val haloColor = if (map.hasKey("haloColor")) parseColorString(map.getString("haloColor")) else Color.WHITE
-    val align = if (map.hasKey("align")) parseAlign(map.getInt("align")) else Marker.DEFAULT_CAPTION_ALIGNS[0]
-    view.setCaption(text, textSize, color, haloColor, align)
+    view.setCaption(
+      map.getString("text") ?: "",
+      map.getInt("textSize", 16),
+      map.getString("color")?.hex2Color() ?: Color.BLACK,
+      map.getString("haloColor")?.hex2Color() ?: Color.WHITE,
+      map.getInt("align").toAlign() ?: Marker.DEFAULT_CAPTION_ALIGNS[0]
+    )
   }
 
   // react component render listener

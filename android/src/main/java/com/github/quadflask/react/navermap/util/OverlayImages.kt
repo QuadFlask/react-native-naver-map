@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.util
 
 import com.naver.maps.map.overlay.OverlayImage
 import java.util.concurrent.ConcurrentHashMap

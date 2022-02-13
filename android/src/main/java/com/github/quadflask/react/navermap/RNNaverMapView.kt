@@ -9,11 +9,11 @@ import com.airbnb.android.react.maps2.ViewAttacherGroup
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableMap
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.events.RCTEventEmitter
-import com.facebook.react.uimanager.events.RCTModernEventEmitter
+import com.github.quadflask.react.navermap.feature.RNNaverMapFeature
+import com.github.quadflask.react.navermap.util.ReactUtil
+import com.github.quadflask.react.navermap.util.toWritableArray
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*
@@ -92,19 +92,20 @@ class RNNaverMapView(
   override fun setCenter(latLng: LatLng?, zoom: Double?, tilt: Double?, bearing: Double?) {
     getMapAsync { map ->
       val cam = map.cameraPosition
+      val target = latLng ?: cam.target
       val zoomValue = zoom ?: cam.zoom
       val tiltValue = tilt ?: cam.tilt
       val bearingValue = bearing ?: cam.bearing
       map.moveCamera(
-        CameraUpdate.toCameraPosition(CameraPosition(latLng!!, zoomValue, tiltValue, bearingValue))
+        CameraUpdate.toCameraPosition(CameraPosition(target, zoomValue, tiltValue, bearingValue))
           .animate(CameraAnimation.Easing)
       )
     }
   }
 
-  override fun zoomTo(latLngBounds: LatLngBounds?, paddingInPx: Int) {
+  override fun zoomTo(latLngBounds: LatLngBounds, paddingInPx: Int) {
     getMapAsync { map ->
-      val cameraUpdate = CameraUpdate.fitBounds(latLngBounds!!, paddingInPx)
+      val cameraUpdate = CameraUpdate.fitBounds(latLngBounds, paddingInPx)
         .animate(CameraAnimation.Easing)
       map.moveCamera(cameraUpdate)
     }
@@ -184,8 +185,8 @@ class RNNaverMapView(
     getMapAsync { map -> map.buildingHeight = height }
   }
 
-  override fun setLayerGroupEnabled(layerGroup: String?, enable: Boolean) {
-    getMapAsync { map -> map.setLayerGroupEnabled(layerGroup!!, enable) }
+  override fun setLayerGroupEnabled(layerGroup: String, enable: Boolean) {
+    getMapAsync { map -> map.setLayerGroupEnabled(layerGroup, enable) }
   }
 
   override fun setNightModeEnabled(enable: Boolean) {
@@ -224,8 +225,8 @@ class RNNaverMapView(
     getMapAsync { map -> map.isLiteModeEnabled = enabled }
   }
 
-  override fun moveCameraFitBound(bounds: LatLngBounds?, left: Int, top: Int, right: Int, bottom: Int) {
-    getMapAsync { map -> map.moveCamera(CameraUpdate.fitBounds(bounds!!, left, top, right, bottom).animate(CameraAnimation.Fly, 500)) }
+  override fun moveCameraFitBound(bounds: LatLngBounds, left: Int, top: Int, right: Int, bottom: Int) {
+    getMapAsync { map -> map.moveCamera(CameraUpdate.fitBounds(bounds, left, top, right, bottom).animate(CameraAnimation.Fly, 500)) }
   }
 
   override fun addFeature(child: View?, index: Int) {
@@ -269,8 +270,8 @@ class RNNaverMapView(
         putDouble("latitude", cameraPosition.target.latitude)
         putDouble("longitude", cameraPosition.target.longitude)
         putDouble("zoom", cameraPosition.zoom)
-        putArray("contentRegion", ReactUtil.toWritableArray(map.contentRegion))
-        putArray("coveringRegion", ReactUtil.toWritableArray(map.coveringRegion))
+        putArray("contentRegion", map.contentRegion.toWritableArray())
+        putArray("coveringRegion", map.coveringRegion.toWritableArray())
       })
     }
   }

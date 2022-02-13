@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -16,6 +16,7 @@ import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.image.CloseableStaticBitmap
 import com.facebook.imagepipeline.image.ImageInfo
 import com.facebook.imagepipeline.request.ImageRequestBuilder
+import com.github.quadflask.react.navermap.util.OverlayImages
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
@@ -40,8 +41,8 @@ class RNNaverMapPathOverlay(
       .build()
   }
 
-  fun setCoords(coords: List<LatLng?>?) {
-    feature.coords = coords!!
+  fun setCoords(coords: List<LatLng>) {
+    feature.coords = coords
   }
 
   fun setWidth(widthInScreenPx: Float) {
@@ -81,6 +82,7 @@ class RNNaverMapPathOverlay(
   }
 
   fun setPattern(uri: String?) {
+    // TODO refactor
     if (uri != null) {
       val overlayImage = OverlayImages[uri]
       if (overlayImage != null) {

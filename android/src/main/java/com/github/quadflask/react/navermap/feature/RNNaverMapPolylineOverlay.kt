@@ -1,4 +1,4 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.content.Context
 import com.naver.maps.geometry.LatLng
@@ -15,8 +15,8 @@ class RNNaverMapPolylineOverlay(
     feature = PolylineOverlay()
   }
 
-  fun setCoords(coords: List<LatLng?>?) {
-    feature.coords = coords!!
+  fun setCoords(coords: List<LatLng>) {
+    feature.coords = coords
   }
 
   fun setLineWidth(widthInScreenPx: Float) {

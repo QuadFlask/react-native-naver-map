@@ -1,11 +1,11 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.graphics.Color
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.toLatLngList
+import com.github.quadflask.react.navermap.util.toLatLngList
 import com.naver.maps.geometry.LatLng
 
 class RNNaverMapPolygonOverlayManager(reactContext: ReactApplicationContext) : EventEmittableViewGroupManager<RNNaverMapPolygonOverlay>(reactContext) {
@@ -19,13 +19,12 @@ class RNNaverMapPolygonOverlayManager(reactContext: ReactApplicationContext) : E
 
   @ReactProp(name = "coordinates")
   fun setCoordinate(view: RNNaverMapPolygonOverlay, coordinates: ReadableArray?) {
-    view.setCoords(toLatLngList(coordinates))
+    view.setCoords(coordinates.toLatLngList())
   }
 
   @ReactProp(name = "outlineWidth", defaultFloat = 1f)
   fun setOutlineWidth(view: RNNaverMapPolygonOverlay, widthInPoints: Float) {
-    val widthInScreenPx = metrics.density * widthInPoints
-    view.setOutlineWidth(widthInScreenPx)
+    view.setOutlineWidth(widthInPoints * metrics.density)
   }
 
   @ReactProp(name = "outlineColor", defaultInt = Color.RED, customType = "Color")
@@ -43,7 +42,7 @@ class RNNaverMapPolygonOverlayManager(reactContext: ReactApplicationContext) : E
     val holesArray = ArrayList<List<LatLng>>(holes.size())
     for (i in 0 until holes.size()) {
       holes.getArray(i).let {
-        if (it.size() >= 3) holesArray.add(toLatLngList(it))
+        if (it.size() >= 3) holesArray.add(it.toLatLngList())
       }
     }
     view.setHoles(holesArray)

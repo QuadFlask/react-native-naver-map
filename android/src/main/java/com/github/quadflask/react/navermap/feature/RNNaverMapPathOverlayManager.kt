@@ -1,11 +1,11 @@
-package com.github.quadflask.react.navermap
+package com.github.quadflask.react.navermap.feature
 
 import android.graphics.Color
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.github.quadflask.react.navermap.ReactUtil.toLatLngList
+import com.github.quadflask.react.navermap.util.toLatLngList
 import kotlin.math.roundToInt
 
 class RNNaverMapPathOverlayManager(reactContext: ReactApplicationContext) : EventEmittableViewGroupManager<RNNaverMapPathOverlay>(reactContext) {
@@ -19,13 +19,12 @@ class RNNaverMapPathOverlayManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "coordinates")
   fun setCoordinate(view: RNNaverMapPathOverlay, coordinates: ReadableArray?) {
-    view.setCoords(toLatLngList(coordinates))
+    view.setCoords(coordinates.toLatLngList())
   }
 
   @ReactProp(name = "width", defaultFloat = 1f)
   fun setStrokeWidth(view: RNNaverMapPathOverlay, widthInPoints: Float) {
-    val widthInScreenPx = metrics.density * widthInPoints
-    view.setWidth(widthInScreenPx)
+    view.setWidth(widthInPoints * metrics.density)
   }
 
   @ReactProp(name = "zIndex", defaultInt = 0)
@@ -40,8 +39,7 @@ class RNNaverMapPathOverlayManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "outlineWidth", defaultFloat = 1f)
   fun setOutlineWidth(view: RNNaverMapPathOverlay, widthInPoints: Float) {
-    val widthInScreenPx = metrics.density * widthInPoints
-    view.setOutlineWidth(widthInScreenPx)
+    view.setOutlineWidth(widthInPoints * metrics.density)
   }
 
   @ReactProp(name = "passedColor", defaultInt = Color.RED, customType = "Color")
@@ -66,8 +64,7 @@ class RNNaverMapPathOverlayManager(reactContext: ReactApplicationContext) : Even
 
   @ReactProp(name = "patternInterval", defaultFloat = 1f)
   fun setPatternInterval(view: RNNaverMapPathOverlay, widthInPoints: Float) {
-    val widthInScreenPx = (metrics.density * widthInPoints).roundToInt()
-    view.setPatternInterval(widthInScreenPx)
+    view.setPatternInterval((widthInPoints * metrics.density).roundToInt())
   }
 
   @ReactProp(name = "progress", defaultFloat = 0f)
