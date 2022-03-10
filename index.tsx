@@ -8,9 +8,9 @@ const RNNaverMapViewTexture = Platform.select({
 })?.();
 const RNNaverMapMarker = requireNativeComponent<any>('RNNaverMapMarker');
 const RNNaverMapPathOverlay = requireNativeComponent<any>('RNNaverMapPathOverlay');
-const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
-const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
-const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
+const RNNaverMapPolylineOverlay = requireNativeComponent<any>('RNNaverMapPolylineOverlay');
+const RNNaverMapCircleOverlay = requireNativeComponent<any>('RNNaverMapCircleOverlay');
+const RNNaverMapPolygonOverlay = requireNativeComponent<any>('RNNaverMapPolygonOverlay');
 
 export interface Coord {
     latitude: number;
@@ -327,6 +327,10 @@ export class Polygon extends Component<PolygonProps> {
             android: () => <RNNaverMapPolygonOverlay {...this.props} />,
             ios: () => <RNNaverMapPolygonOverlay
                 {...this.props}
+                coordinates={{
+                    exteriorRing: this.props.coordinates,
+                    interiorRings: this.props.holes,
+                }}
             />
         })?.();
     }

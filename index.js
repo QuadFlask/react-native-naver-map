@@ -131,7 +131,10 @@ export class Polygon extends Component {
         var _a;
         return (_a = Platform.select({
             android: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props)),
-            ios: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props))
+            ios: () => React.createElement(RNNaverMapPolygonOverlay, Object.assign({}, this.props, { coordinates: {
+                    exteriorRing: this.props.coordinates,
+                    interiorRings: this.props.holes,
+                } }))
         })) === null || _a === void 0 ? void 0 : _a();
     }
 }
