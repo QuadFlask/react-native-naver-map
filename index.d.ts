@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
-declare const RNNaverMapView: any;
+declare const RNNaverMapView: import("react-native").HostComponent<any>;
 export interface Coord {
     latitude: number;
     longitude: number;
@@ -106,8 +106,8 @@ export interface NaverMapViewProps {
     useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
-    ref?: RNNaverMapView;
-    nodeHandle?: null | number;
+    ref?: RNNaverMapView | null;
+    nodeHandle: null | number;
     private resolveRef;
     animateToCoordinate: (coord: Coord) => void;
     animateToTwoCoordinates: (c1: Coord, c2: Coord) => void;
@@ -116,26 +116,26 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         bottom: number;
         left: number;
         right: number;
-    }) => void;
+    } | undefined) => void;
     animateToRegion: (region: Region) => void;
     setLocationTrackingMode: (mode: number) => void;
     setLayerGroupEnabled: (group: LayerGroup, enabled: boolean) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
-    handleOnCameraChange: (event: React.SyntheticEvent<{}, {
+    handleOnCameraChange: (event: SyntheticEvent<{}, {
         latitude: number;
         longitude: number;
         zoom: number;
         contentsRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
-    }>) => void;
-    handleOnMapClick: (event: React.SyntheticEvent<{}, {
+    }>) => void | undefined;
+    handleOnMapClick: (event: SyntheticEvent<{}, {
         x: number;
         y: number;
         latitude: number;
         longitude: number;
-    }>) => void;
-    render(): JSX.Element;
+    }>) => void | undefined;
+    render(): JSX.Element | undefined;
 }
 interface RNNaverMapView extends React.Component<{}, any> {
 }
@@ -214,7 +214,7 @@ interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
     holes?: Coord[][];
 }
 export declare class Polygon extends Component<PolygonProps> {
-    render(): JSX.Element;
+    render(): JSX.Element | undefined;
 }
 export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];

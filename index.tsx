@@ -1,16 +1,16 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
+import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, ProcessedColorValue, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 
-const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+const RNNaverMapView = requireNativeComponent<any>('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
-    android: () => requireNativeComponent('RNNaverMapViewTexture'),
+    android: () => requireNativeComponent<any>('RNNaverMapViewTexture'),
     ios: () => RNNaverMapView
-})();
-const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
-const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
-const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
-const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
-const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
+})?.();
+const RNNaverMapMarker = requireNativeComponent<any>('RNNaverMapMarker');
+const RNNaverMapPathOverlay = requireNativeComponent<any>('RNNaverMapPathOverlay');
+const RNNaverMapPolylineOverlay = requireNativeComponent<any>('RNNaverMapPolylineOverlay');
+const RNNaverMapCircleOverlay = requireNativeComponent<any>('RNNaverMapCircleOverlay');
+const RNNaverMapPolygonOverlay = requireNativeComponent<any>('RNNaverMapPolygonOverlay');
 
 export interface Coord {
     latitude: number;
@@ -122,10 +122,10 @@ export interface NaverMapViewProps {
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
-    ref?: RNNaverMapView;
-    nodeHandle?: null | number;
+    ref?: RNNaverMapView | null;
+    nodeHandle: null | number = null;
 
-    private resolveRef = (ref: RNNaverMapView) => {
+    private resolveRef = (ref: RNNaverMapView | null) => {
         this.ref = ref;
         this.nodeHandle = findNodeHandle(ref);
     };
@@ -160,16 +160,14 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
 
     private dispatchViewManagerCommand = (command: string, arg: any) => {
         return Platform.select({
-            // @ts-ignore
             android: () => UIManager.dispatchViewManagerCommand(
                 this.nodeHandle,
-                // @ts-ignore
                 UIManager.getViewManagerConfig('RNNaverMapView').Commands[command],
                 arg,
             ),
             ios: () =>
                 NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg),
-        })();
+        })?.();
     };
 
     handleOnCameraChange = (event: SyntheticEvent<{}, {
@@ -199,7 +197,10 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
             useTextureView,
         } = this.props;
 
-        const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
+        const ViewClass = useTextureView && RNNaverMapViewTexture ? RNNaverMapViewTexture  : RNNaverMapView;
+        if (ViewClass === undefined){
+            return undefined;
+        }
 
         return <ViewClass
             ref={this.resolveRef}
@@ -331,7 +332,7 @@ export class Polygon extends Component<PolygonProps> {
                     interiorRings: this.props.holes,
                 }}
             />
-        })();
+        })?.();
     }
 }
 
@@ -367,7 +368,7 @@ function getImageUri(src?: ImageSourcePropType): string | null {
     return imageUri;
 }
 
-function parseColor(color?: string | null): string | null | undefined | number {
+function parseColor(color?: string | null): string | null | undefined | number | ProcessedColorValue {
     if (color && Platform.OS === 'ios')
         return processColor(color);
     return color;
