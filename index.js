@@ -103,23 +103,17 @@ export default class NaverMapView extends Component {
     }
     render() {
         const { onInitialized, center, tilt, bearing, mapPadding, logoMargin, nightMode, useTextureView, } = this.props;
-        const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
+        const ViewClass = useTextureView && RNNaverMapViewTexture ? RNNaverMapViewTexture : RNNaverMapView;
         if (ViewClass === undefined) {
             return undefined;
         }
-        return React.createElement(ViewClass
-        // @ts-ignore
-        , Object.assign({ 
-            // @ts-ignore
-            ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
+        return React.createElement(ViewClass, Object.assign({ ref: this.resolveRef }, this.props, { onInitialized: onInitialized, center: center, mapPadding: mapPadding, logoMargin: logoMargin, tilt: tilt, bearing: bearing, nightMode: nightMode, onCameraChange: this.handleOnCameraChange, onMapClick: this.handleOnMapClick }));
     }
 }
 export class Marker extends Component {
     render() {
         var _a, _b;
-        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { 
-            // @ts-ignore
-            image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) }) }));
+        return React.createElement(RNNaverMapMarker, Object.assign({}, this.props, { image: getImageUri(this.props.image), caption: this.props.caption && Object.assign(Object.assign({}, this.props.caption), { textSize: (_a = this.props.caption.textSize) !== null && _a !== void 0 ? _a : 12, color: parseColor(this.props.caption.color), haloColor: parseColor(this.props.caption.haloColor) }), subCaption: this.props.subCaption && Object.assign(Object.assign({}, this.props.subCaption), { textSize: (_b = this.props.subCaption.textSize) !== null && _b !== void 0 ? _b : 12, color: parseColor(this.props.subCaption.color), haloColor: parseColor(this.props.subCaption.haloColor) }) }));
     }
 }
 export class Circle extends Component {
@@ -143,9 +137,7 @@ export class Polygon extends Component {
 }
 export class Path extends Component {
     render() {
-        return React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { 
-            // @ts-ignore
-            pattern: getImageUri(this.props.pattern) }));
+        return React.createElement(RNNaverMapPathOverlay, Object.assign({}, this.props, { pattern: getImageUri(this.props.pattern) }));
     }
 }
 function getImageUri(src) {

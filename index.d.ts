@@ -1,6 +1,6 @@
 import React, { Component, SyntheticEvent } from 'react';
 import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
-declare const RNNaverMapView: import("react-native").HostComponent<unknown>;
+declare const RNNaverMapView: import("react-native").HostComponent<any>;
 export interface Coord {
     latitude: number;
     longitude: number;
@@ -106,7 +106,7 @@ export interface NaverMapViewProps {
     useTextureView?: boolean;
 }
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
-    ref?: RNNaverMapView;
+    ref?: RNNaverMapView | null;
     nodeHandle: null | number;
     private resolveRef;
     animateToCoordinate: (coord: Coord) => void;

@@ -1,13 +1,13 @@
 import React, {Component, SyntheticEvent} from 'react';
 import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, ProcessedColorValue, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 
-const RNNaverMapView = requireNativeComponent('RNNaverMapView');
+const RNNaverMapView = requireNativeComponent<any>('RNNaverMapView');
 const RNNaverMapViewTexture = Platform.select({
-    android: () => requireNativeComponent('RNNaverMapViewTexture'),
+    android: () => requireNativeComponent<any>('RNNaverMapViewTexture'),
     ios: () => RNNaverMapView
 })?.();
-const RNNaverMapMarker = requireNativeComponent('RNNaverMapMarker');
-const RNNaverMapPathOverlay = requireNativeComponent('RNNaverMapPathOverlay');
+const RNNaverMapMarker = requireNativeComponent<any>('RNNaverMapMarker');
+const RNNaverMapPathOverlay = requireNativeComponent<any>('RNNaverMapPathOverlay');
 const RNNaverMapPolylineOverlay = requireNativeComponent('RNNaverMapPolylineOverlay');
 const RNNaverMapCircleOverlay = requireNativeComponent('RNNaverMapCircleOverlay');
 const RNNaverMapPolygonOverlay = requireNativeComponent('RNNaverMapPolygonOverlay');
@@ -122,10 +122,10 @@ export interface NaverMapViewProps {
 }
 
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
-    ref?: RNNaverMapView;
+    ref?: RNNaverMapView | null;
     nodeHandle: null | number = null;
 
-    private resolveRef = (ref: RNNaverMapView) => {
+    private resolveRef = (ref: RNNaverMapView | null) => {
         this.ref = ref;
         this.nodeHandle = findNodeHandle(ref);
     };
@@ -197,13 +197,12 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
             useTextureView,
         } = this.props;
 
-        const ViewClass = useTextureView ? RNNaverMapViewTexture : RNNaverMapView;
+        const ViewClass = useTextureView && RNNaverMapViewTexture ? RNNaverMapViewTexture  : RNNaverMapView;
         if (ViewClass === undefined){
             return undefined;
         }
 
         return <ViewClass
-            // @ts-ignore
             ref={this.resolveRef}
             {...this.props}
             onInitialized={onInitialized}
@@ -272,7 +271,6 @@ export class Marker extends Component<MarkerProps> {
     render() {
         return <RNNaverMapMarker
             {...this.props}
-            // @ts-ignore
             image={getImageUri(this.props.image)}
             caption={this.props.caption && {
                 ...this.props.caption,
@@ -352,7 +350,6 @@ export class Path extends Component<PathProps> {
     render() {
         return <RNNaverMapPathOverlay
             {...this.props}
-            // @ts-ignore
             pattern={getImageUri(this.props.pattern)}
         />
     }
