@@ -19,6 +19,7 @@ import com.naver.maps.map.overlay.Align;
 import static com.github.quadflask.react.navermap.ReactUtil.parseAlign;
 import static com.github.quadflask.react.navermap.ReactUtil.parseColorString;
 import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
+import static com.github.quadflask.react.navermap.ReactUtil.px2dp;
 
 public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNaverMapMarker> {
     private static final Align DEFAULT_CAPTION_ALIGN = Align.Bottom;
@@ -136,9 +137,10 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         int textSize = map.hasKey("textSize") ? map.getInt("textSize") : 16;
         int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
         int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
+        int offset = map.hasKey("offset") ? px2dp(map.getInt("offset"), metrics) : 0;
         Align align = map.hasKey("align") ? parseAlign(map.getInt("align")) : DEFAULT_CAPTION_ALIGN;
 
-        view.setCaption(text, textSize, color, haloColor, align);
+        view.setCaption(text, textSize, color, haloColor, offset, align);
     }
 
     @Override
