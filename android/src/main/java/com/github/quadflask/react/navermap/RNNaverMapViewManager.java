@@ -2,6 +2,7 @@ package com.github.quadflask.react.navermap;
 
 import android.graphics.Rect;
 import android.view.View;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,6 @@ import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
-import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +31,6 @@ import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
 public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContainer> {
     private final ReactApplicationContext appContext;
-    private final FusedLocationSource locationSource;
 
     private static final int ANIMATE_TO_REGION = 1;
     private static final int ANIMATE_TO_COORDINATE = 2;
@@ -39,6 +38,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     private static final int SET_LOCATION_TRACKING_MODE = 4;
     private static final int ANIMATE_TO_COORDINATES = 6;
     private static final int SET_LAYER_GROUP_ENABLED = 7;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private static final List<String> LAYER_GROUPS = Collections.unmodifiableList(Arrays.asList(
             NaverMap.LAYER_GROUP_BUILDING,
             NaverMap.LAYER_GROUP_TRANSIT,
@@ -51,7 +51,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     public RNNaverMapViewManager(ReactApplicationContext context) {
         super();
         this.appContext = context;
-        locationSource = new FusedLocationSource(context.getCurrentActivity(), 0x1000);
     }
 
     @NonNull
@@ -63,7 +62,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     @NonNull
     @Override
     protected RNNaverMapViewContainer createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new RNNaverMapViewContainer(reactContext, appContext, locationSource, getNaverMapViewOptions());
+        return new RNNaverMapViewContainer(reactContext, appContext, getNaverMapViewOptions());
     }
 
     @Override
