@@ -127,6 +127,11 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         view.setZIndex(zIndex);
     }
 
+    @ReactProp(name = "isHideCollidedCaptions", defaultBoolean = false)
+    public void setHideCollidedCaptions(RNNaverMapMarker view, boolean isHideCollidedCaptions) {
+        view.setHideCollidedCaptions(isHideCollidedCaptions);
+    }
+
     @ReactProp(name = "caption")
     public void setCaption(RNNaverMapMarker view, ReadableMap map) {
         if (map == null || !map.hasKey("text")) {
@@ -154,7 +159,7 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
         int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
 
-        view.setSubCaption(text, textSize, color, haloColor, align);
+        view.setSubCaption(text, textSize, color, haloColor);
     }
 
     @Override
