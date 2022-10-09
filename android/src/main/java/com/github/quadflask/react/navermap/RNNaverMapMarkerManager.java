@@ -143,6 +143,20 @@ public class RNNaverMapMarkerManager extends EventEmittableViewGroupManager<RNNa
         view.setCaption(text, textSize, color, haloColor, offset, align);
     }
 
+    @ReactProp(name = "subCaption")
+    public void setSubCaption(RNNaverMapMarker view, ReadableMap map) {
+        if (map == null || !map.hasKey("text")) {
+            view.removeSubCaption();
+            return;
+        }
+        String text = map.getString("text");
+        int textSize = map.hasKey("textSize") ? map.getInt("textSize") : 15;
+        int color = map.hasKey("color") ? parseColorString(map.getString("color")) : Color.BLACK;
+        int haloColor = map.hasKey("haloColor") ? parseColorString(map.getString("haloColor")) : Color.WHITE;
+
+        view.setSubCaption(text, textSize, color, haloColor, align);
+    }
+
     @Override
     public void addView(RNNaverMapMarker parent, View child, int index) {
         parent.setCustomView(child, index);

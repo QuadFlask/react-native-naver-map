@@ -161,6 +161,17 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> impleme
         feature.setCaptionText("");
     }
 
+    public void setSubCaption(String text, int textSize, int color, int haloColor) { 
+        feature.setSubCaptionText(text); 
+        feature.setSubCaptionTextSize(textSize);
+        feature.setSubCaptionColor(color);
+        feature.setSubCaptionHaloColor(haloColor); 
+    }
+
+    public void removeSubCaption() {
+        feature.setSubCaptionText("");
+    }
+
     public void setImage(String uri) {
         if (uri != null) {
             OverlayImage overlayImage = OverlayImages.get(uri);
