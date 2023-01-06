@@ -9,7 +9,6 @@
 #import "RNNaverMapPolygonOverlayManager.h"
 #import "RNNaverMapPolygonOverlay.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
