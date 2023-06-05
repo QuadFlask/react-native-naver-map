@@ -31,4 +31,10 @@ public class RNNaverMapPolygonOverlay extends ClickableRNNaverMapFeature<Polygon
     public void setHoles(List<List<LatLng>> holes) {
         feature.setHoles(holes);
     }
+
+    @Override
+    public boolean onClick(@NonNull Overlay overlay) {
+        emitEvent("onClick", null);
+        return true;
+    }
 }

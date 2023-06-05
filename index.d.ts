@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 declare const RNNaverMapView: any;
 export interface Coord {
@@ -104,6 +104,7 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
+    children?: Element;
 }
 export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     ref?: RNNaverMapView;
@@ -122,20 +123,20 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
     setLayerGroupEnabled: (group: LayerGroup, enabled: boolean) => void;
     showsMyLocationButton: (show: boolean) => void;
     private dispatchViewManagerCommand;
-    handleOnCameraChange: (event: React.SyntheticEvent<{}, {
+    handleOnCameraChange: (event: SyntheticEvent<{}, {
         latitude: number;
         longitude: number;
         zoom: number;
         contentsRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => void;
-    handleOnMapClick: (event: React.SyntheticEvent<{}, {
+    handleOnMapClick: (event: SyntheticEvent<{}, {
         x: number;
         y: number;
         latitude: number;
         longitude: number;
     }>) => void;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 interface RNNaverMapView extends React.Component<{}, any> {
 }
@@ -186,7 +187,7 @@ export interface MarkerProps extends MapOverlay {
     };
 }
 export declare class Marker extends Component<MarkerProps> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export interface CircleProps extends MapOverlay {
     radius?: number;
@@ -196,7 +197,7 @@ export interface CircleProps extends MapOverlay {
     zIndex?: number;
 }
 export declare class Circle extends Component<CircleProps> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
@@ -204,7 +205,7 @@ interface PolylineProps extends Omit<MapOverlay, "coordinate"> {
     strokeColor?: string;
 }
 export declare class Polyline extends Component<PolylineProps> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
@@ -214,7 +215,7 @@ interface PolygonProps extends Omit<MapOverlay, "coordinate"> {
     holes?: Coord[][];
 }
 export declare class Polygon extends Component<PolygonProps> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     coordinates: Coord[];
@@ -230,6 +231,6 @@ export interface PathProps extends Omit<MapOverlay, "coordinate"> {
     zIndex?: number;
 }
 export declare class Path extends Component<PathProps> {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};

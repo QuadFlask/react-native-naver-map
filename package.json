@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "build:examplets": "tsc -p ./tsconfig.json --outDir ./example/map/",
     "build": "tsc -p ./tsconfig.json",
-    "deploy": "npm version patch; npm run build; npm publish"
+    "deploy": "git switch deploy && rm index.tsx && git push"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.8.6",
-    "typescript": "^3.8.3"
+    "typescript": "^4.9.0"
   },
   "jest": {
     "preset": "react-native"

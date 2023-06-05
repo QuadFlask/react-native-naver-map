@@ -19,7 +19,7 @@ public class ClickableRNNaverMapFeature<T extends Overlay> extends RNNaverMapFea
 
     @Override
     public boolean onClick(@NonNull Overlay overlay) {
-        emitEvent("onClick", null);
-        return true;
+        super.onClick(overlay);
+        return false;
     }
 }
