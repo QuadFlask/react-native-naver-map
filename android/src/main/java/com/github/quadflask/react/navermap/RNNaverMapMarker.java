@@ -155,6 +155,15 @@ public class RNNaverMapMarker extends ClickableRNNaverMapFeature<Marker> impleme
         feature.setCaptionHaloColor(haloColor);
         feature.setCaptionOffset(offset);
         feature.setCaptionAligns(aligns);
+
+             feature.setHideCollidedCaptions(true);
+        feature.setForceShowIcon(false);
+        feature.setCaptionMaxZoom(18.0);
+        feature.setCaptionMinZoom(14.0);
+        feature.setIconPerspectiveEnabled(true);
+
+        feature.setHideCollidedMarkers(true);
+        feature.setHideCollidedSymbols(true);
     }
 
     public void removeCaption() {
