@@ -47,4 +47,8 @@
   _realOverlay.color = strokeColor;
 }
 
+- (void)setPattern:(NSArray<NSNumber *>*) pattern {
+  _realOverlay.pattern = pattern;
+}
+
 @end

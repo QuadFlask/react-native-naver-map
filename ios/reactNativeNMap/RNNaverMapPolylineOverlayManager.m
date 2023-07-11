@@ -32,6 +32,15 @@ RCT_CUSTOM_VIEW_PROPERTY(coordinates, NSArray<NMGLatLng*>, RNNaverMapPolylineOve
   }
   view.coordinates = points;
 }
+RCT_CUSTOM_VIEW_PROPERTY(pattern, NSArray<NSNumber*>, RNNaverMapPolylineOverlay) {
+  NSArray *inputArray = [RCTConvert NSArray:json];
+  NSUInteger size = inputArray.count;
+  NSMutableArray<NSNumber*> *points = [NSMutableArray arrayWithCapacity: size];
+  for (int i=0; i<size; i++) {
+    [points addObject:[RCTConvert NSNumber: inputArray[i]]];
+  }
+  view.pattern = points;
+}
 RCT_EXPORT_VIEW_PROPERTY(strokeWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
