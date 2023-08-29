@@ -3,9 +3,9 @@
   "version": "0.0.67",
   "description": "react-native bridge for naver map",
   "main": "index.js",
-  "author": "QuadFlask",
+  "author": "ZeroCho",
   "license": "MIT",
-  "homepage": "https://github.com/quadflask/react-native-naver-map",
+  "homepage": "https://github.com/zerocho/react-native-naver-map",
   "scripts": {
     "start": "react-native start",
     "test": "jest",
