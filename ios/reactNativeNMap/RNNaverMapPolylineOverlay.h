@@ -7,7 +7,6 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPolylineOverlay.h>
 
 #import "RCTConvert+NMFMapView.h"

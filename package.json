@@ -1,6 +1,6 @@
 {
   "name": "react-native-nmap",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "react-native bridge for naver map",
   "main": "index.js",
   "author": "QuadFlask",

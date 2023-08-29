@@ -8,7 +8,6 @@
 #import "RNNaverMapMarkerManager.h"
 #import "RNNaverMapMarker.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCameraCommon.h>
 
 #import "RCTConvert+NMFMapView.h"
@@ -60,7 +59,7 @@ RCT_CUSTOM_VIEW_PROPERTY(subCaption, NSDictionary, RNNaverMapMarker)
   CGFloat requestedWidth = [RCTConvert CGFloat:dic[@"requestedWidth"]];
   double minZoom = dic[@"minZoom"] ? [RCTConvert double:dic[@"minZoom"]] : NMF_MIN_ZOOM;
   double maxZoom = dic[@"maxZoom"] ? [RCTConvert double:dic[@"maxZoom"]] : NMF_MAX_ZOOM;
-    
+
   [view setSubCaptionText: text];
   [view setSubCaptionTextSize:textSize];
   [view setSubCaptionColor:color];

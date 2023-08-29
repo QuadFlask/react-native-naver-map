@@ -8,7 +8,6 @@
 #import "RNNaverMapPathOverlayManager.h"
 #import "RNNaverMapPathOverlay.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
