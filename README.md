@@ -1,3 +1,15 @@
+### 사용하면서 겪었던 문제 공유
+- 커스텀 사이즈가 Android, iOS 마다 조금씩 차이가 있습니다.
+- zoom 값도 android, ios 마다 조금의 차이가 있습니다.
+- 지도 좌표 위치가 간혈적으로 네이버 본사 위치로 이동됩니다.
+- 마커가 간혈적으로 렌더링 되지 않습니다.
+- 이미지 기반 마커도 최초 렌더링 될 때, 한번은 렌더링 안 되는 이슈가 있습니다.
+- zoom 값도 간혈적으로 설정한 값으로 되지 않는 이슈가 있습니다.
+- png 이미지 잘리는 이슈
+
+저는 임의로 여러번 마커 렌더링, 좌표 위치 변경, zoom 값 지정 등 로직의 흐름으로 커버하였습니다. 네이티브 코드를 보았을 때, 별다른 이슈를 찾지 못 하였고 위 버그를 해결하는 것이 임펙트가 없는 상황이라 디깅하지 않았습니다. 만약 사용하시는 분이 있다면 행운을 빕니다. RN 생태계에서 그나마 잘 관리되는 지도 오픈소스는 [react-native-maps](https://github.com/react-native-maps/react-native-maps) 입니다. 이것을 사용하는 것을 추천드립니다. 만약 PO가 강력하게 Naver Map을 요구한다면, 위 이슈를 다 커버하셔야 될 겁니다. 파이팅 입니다.
+
+
 react-native-naver-map [![npm version](https://badge.fury.io/js/react-native-nmap.svg)](https://badge.fury.io/js/react-native-nmap)
 -----
 
