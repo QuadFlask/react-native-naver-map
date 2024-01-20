@@ -39,6 +39,5 @@ RCT_EXPORT_VIEW_PROPERTY(outlineColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(passedOutlineColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(pattern, NSString)
 RCT_EXPORT_VIEW_PROPERTY(patternInterval, CGFloat)
-RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
 
 @end
