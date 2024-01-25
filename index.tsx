@@ -1,4 +1,4 @@
-import React, {Component, SyntheticEvent} from 'react';
+import React, {Component, PropsWithChildren, SyntheticEvent} from 'react';
 import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
@@ -119,10 +119,9 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
-    children?: Element;
 }
 
-export default class NaverMapView extends Component<NaverMapViewProps, {}> {
+export default class NaverMapView extends Component<PropsWithChildren<NaverMapViewProps>, {}> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
 
