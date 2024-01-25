@@ -7,8 +7,8 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPath.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
