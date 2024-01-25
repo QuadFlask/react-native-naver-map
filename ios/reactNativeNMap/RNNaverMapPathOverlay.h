@@ -26,6 +26,6 @@
 @property (nonatomic, assign) UIColor* passedOutlineColor;
 @property (nonatomic, assign) NSString* pattern;
 @property (nonatomic, assign) CGFloat patternInterval;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onPathClick;
 
 @end

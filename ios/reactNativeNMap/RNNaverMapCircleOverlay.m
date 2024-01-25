@@ -39,8 +39,8 @@
 
   __block RNNaverMapCircleOverlay *this = self;
   _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-    if (this.onClick != nil) {
-      this.onClick(@{});
+    if (this.onCircleClick != nil) {
+      this.onCircleClick(@{});
       return YES;
     }
     return NO;

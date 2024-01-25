@@ -20,6 +20,6 @@
 @property (nonatomic, assign) NSArray<NMGLatLng *> *coordinates;
 @property (nonatomic, assign) CGFloat strokeWidth;
 @property (nonatomic, strong) UIColor *strokeColor;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onPolylineClick;
 
 @end

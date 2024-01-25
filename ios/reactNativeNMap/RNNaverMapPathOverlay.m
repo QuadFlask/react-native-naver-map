@@ -27,8 +27,8 @@
 
     __block RNNaverMapPathOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onPathClick != nil) {
+        this.onPathClick(@{});
         return YES;
       }
       return NO;

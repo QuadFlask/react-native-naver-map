@@ -25,8 +25,8 @@
 
     __block RNNaverMapPolylineOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onPolylineClick != nil) {
+        this.onPolylineClick(@{});
         return YES;
       }
       return NO;
