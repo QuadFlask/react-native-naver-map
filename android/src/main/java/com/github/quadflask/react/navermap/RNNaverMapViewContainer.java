@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;

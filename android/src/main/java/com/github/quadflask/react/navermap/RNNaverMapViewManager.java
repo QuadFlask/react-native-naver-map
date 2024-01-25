@@ -31,7 +31,6 @@ import static com.github.quadflask.react.navermap.ReactUtil.toNaverLatLng;
 
 public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContainer> {
     private final ReactApplicationContext appContext;
-    private final FusedLocationSource locationSource;
 
     private static final int ANIMATE_TO_REGION = 1;
     private static final int ANIMATE_TO_COORDINATE = 2;
