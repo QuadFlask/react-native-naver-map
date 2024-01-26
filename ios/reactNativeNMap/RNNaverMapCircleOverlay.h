@@ -24,6 +24,6 @@
 @property (nonatomic, assign) CGFloat outlineWidth;
 @property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) NSInteger zIndex;
-@property (nonatomic, copy) RCTDirectEventBlock onCircleClick
+@property (nonatomic, copy) RCTDirectEventBlock onCircleClick;
 
 @end
