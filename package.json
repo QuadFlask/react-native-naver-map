@@ -1,11 +1,11 @@
 {
   "name": "react-native-nmap",
-  "version": "0.0.66",
+  "version": "0.0.67",
   "description": "react-native bridge for naver map",
   "main": "index.js",
-  "author": "QuadFlask",
+  "author": "chlee1001",
   "license": "MIT",
-  "homepage": "https://github.com/quadflask/react-native-naver-map",
+  "homepage": "https://github.com/chlee1001/react-native-naver-map",
   "scripts": {
     "start": "react-native start",
     "test": "jest",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/quadflask/react-native-naver-map"
+    "url": "https://github.com/chlee1001/react-native-naver-map"
   },
   "keywords": [
     "react-native",
