@@ -272,6 +272,10 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     @Override
     public View getFeatureAt(int index) {
+       // java.lang.IndexOutOfBoundsException 예외가 발생해서 방어함.
+        if (index < 0 || index >= features.size()) {
+            return null;
+        }
         return features.get(index);
     }
 
