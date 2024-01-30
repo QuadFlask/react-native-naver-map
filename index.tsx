@@ -93,7 +93,7 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
@@ -176,7 +176,7 @@ export default class NaverMapView extends Component<PropsWithChildren<NaverMapVi
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
@@ -223,7 +223,7 @@ interface RNNaverMapView extends React.Component<{}, any> {
 
 export interface MapOverlay {
     coordinate: Coord;
-    onClick?: () => void;
+    onClick?: (e:React.SyntheticEvent<EventTarget>) => void;
 }
 
 export interface MarkerProps extends MapOverlay {
@@ -264,6 +264,7 @@ export interface MarkerProps extends MapOverlay {
         minZoom?: number;
         maxZoom?: number;
     };
+    children?: React.ReactNode;
 }
 
 export class Marker extends Component<MarkerProps> {

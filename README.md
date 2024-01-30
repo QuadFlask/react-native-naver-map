@@ -152,7 +152,7 @@ interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
+        contentRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
