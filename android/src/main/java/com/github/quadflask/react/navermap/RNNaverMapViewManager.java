@@ -51,7 +51,6 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     public RNNaverMapViewManager(ReactApplicationContext context) {
         super();
         this.appContext = context;
-        locationSource = new FusedLocationSource(context.getCurrentActivity(), 0x1000);
     }
 
     @NonNull
