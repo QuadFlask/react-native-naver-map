@@ -754,7 +754,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.quadflask.rnnmap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zerocho.rnnmap;
 				PRODUCT_NAME = example;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -794,7 +794,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.quadflask.rnnmap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.zerocho.rnnmap;
 				PRODUCT_NAME = example;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

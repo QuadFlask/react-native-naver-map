@@ -9,7 +9,6 @@
 #import "RNNaverMapPolygonOverlayManager.h"
 #import "RNNaverMapPolygonOverlay.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -53,6 +52,5 @@ RCT_CUSTOM_VIEW_PROPERTY(coordinates, NSDictionary, RNNaverMapPolygonOverlay) {
 RCT_EXPORT_VIEW_PROPERTY(outlineWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(color, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(outlineColor, UIColor)
-RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
 
 @end
