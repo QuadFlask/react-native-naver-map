@@ -68,8 +68,9 @@ export default class NaverMapView extends Component {
             this.ref = ref;
             this.nodeHandle = findNodeHandle(ref);
         };
-        this.animateToCoordinate = (coord) => {
-            this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+        this.animateToCoordinate = (coord, zoom) => {
+            const zoomLevel = zoom ?? -1;
+            this.dispatchViewManagerCommand('animateToCoordinate', [coord, zoomLevel]);
         };
         this.animateToTwoCoordinates = (c1, c2) => {
             this.dispatchViewManagerCommand('animateToTwoCoordinates', [c1, c2]);
@@ -92,9 +93,9 @@ export default class NaverMapView extends Component {
         this.dispatchViewManagerCommand = (command, arg) => {
             return Platform.select({
                 // @ts-ignore
-                android: () => UIManager.dispatchViewManagerCommand(this.nodeHandle, 
-                // @ts-ignore
-                UIManager.getViewManagerConfig('RNNaverMapView').Commands[command], arg),
+                android: () => UIManager.dispatchViewManagerCommand(this.nodeHandle,
+                    // @ts-ignore
+                    UIManager.getViewManagerConfig('RNNaverMapView').Commands[command], arg),
                 ios: () => NativeModules[`RNNaverMapView`][command](this.nodeHandle, ...arg),
             })();
         };

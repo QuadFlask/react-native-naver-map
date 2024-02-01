@@ -95,9 +95,10 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
-    public void setCenter(LatLng latLng) {
-        if (mapView != null)
-            mapView.setCenter(latLng);
+    public void setCenter(LatLng latLng, Double zoom) {
+        if (mapView != null) {
+            mapView.setCenter(latLng, zoom);
+        }
     }
 
     @Override

@@ -73,11 +73,19 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     }
 
     @Override
-    public void setCenter(LatLng latLng) {
-        getMapAsync(e -> {
-            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng).animate(CameraAnimation.Easing);
-            naverMap.moveCamera(cameraUpdate);
-        });
+    public void setCenter(LatLng latLng, Double zoom) {
+        if(zoom >= 0) {
+            getMapAsync(e -> {
+                CameraUpdate cameraUpdate = CameraUpdate.scrollAndZoomTo(latLng, zoom)
+                    .animate(CameraAnimation.Easing);
+                naverMap.moveCamera(cameraUpdate);
+            });
+        } else {
+            getMapAsync(e -> {
+                CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng).animate(CameraAnimation.Easing);
+                naverMap.moveCamera(cameraUpdate);
+            });
+        }
     }
 
     @Override
@@ -89,7 +97,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
             double bearingValue = bearing == null ? cam.bearing : bearing;
 
             naverMap.moveCamera(CameraUpdate.toCameraPosition(new CameraPosition(latLng, zoomValue, tiltValue, bearingValue))
-                    .animate(CameraAnimation.Easing));
+                .animate(CameraAnimation.Easing));
         });
     }
 
@@ -97,7 +105,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
     public void zoomTo(LatLngBounds latLngBounds, int paddingInPx) {
         getMapAsync(e -> {
             CameraUpdate cameraUpdate = CameraUpdate.fitBounds(latLngBounds, paddingInPx)
-                    .animate(CameraAnimation.Easing);
+                .animate(CameraAnimation.Easing);
             naverMap.moveCamera(cameraUpdate);
         });
     }
@@ -107,7 +115,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
             naverMap.moveCamera(CameraUpdate.toCameraPosition(
-                    new CameraPosition(cameraPosition.target, cameraPosition.zoom, tilt, cameraPosition.bearing)));
+                new CameraPosition(cameraPosition.target, cameraPosition.zoom, tilt, cameraPosition.bearing)));
         });
     }
 
@@ -116,7 +124,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
         getMapAsync(e -> {
             final CameraPosition cameraPosition = naverMap.getCameraPosition();
             naverMap.moveCamera(CameraUpdate.toCameraPosition(
-                    new CameraPosition(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, bearing)));
+                new CameraPosition(cameraPosition.target, cameraPosition.zoom, cameraPosition.tilt, bearing)));
         });
     }
 
@@ -272,7 +280,7 @@ public class RNNaverMapView extends MapView implements OnMapReadyCallback, Naver
 
     @Override
     public View getFeatureAt(int index) {
-       // java.lang.IndexOutOfBoundsException 예외가 발생해서 방어함.
+        // java.lang.IndexOutOfBoundsException 예외가 발생해서 방어함.
         if (index < 0 || index >= features.size()) {
             return null;
         }

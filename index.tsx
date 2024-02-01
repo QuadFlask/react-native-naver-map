@@ -130,8 +130,9 @@ export default class NaverMapView extends Component<PropsWithChildren<NaverMapVi
         this.nodeHandle = findNodeHandle(ref);
     };
 
-    animateToCoordinate = (coord: Coord) => {
-        this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+    animateToCoordinate = (coord: Coord, zoom?: number) => {
+        const zoomLevel = zoom ?? -1; // zoom이 undefined일 때 -1을 사용
+        this.dispatchViewManagerCommand('animateToCoordinate', [coord, zoomLevel]);
     }
 
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {

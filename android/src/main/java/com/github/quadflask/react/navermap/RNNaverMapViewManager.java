@@ -40,12 +40,12 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     private static final int SET_LAYER_GROUP_ENABLED = 7;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
     private static final List<String> LAYER_GROUPS = Collections.unmodifiableList(Arrays.asList(
-            NaverMap.LAYER_GROUP_BUILDING,
-            NaverMap.LAYER_GROUP_TRANSIT,
-            NaverMap.LAYER_GROUP_BICYCLE,
-            NaverMap.LAYER_GROUP_TRAFFIC,
-            NaverMap.LAYER_GROUP_CADASTRAL,
-            NaverMap.LAYER_GROUP_MOUNTAIN
+        NaverMap.LAYER_GROUP_BUILDING,
+        NaverMap.LAYER_GROUP_TRANSIT,
+        NaverMap.LAYER_GROUP_BICYCLE,
+        NaverMap.LAYER_GROUP_TRAFFIC,
+        NaverMap.LAYER_GROUP_CADASTRAL,
+        NaverMap.LAYER_GROUP_MOUNTAIN
     ));
 
     public RNNaverMapViewManager(ReactApplicationContext context) {
@@ -79,10 +79,10 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
     public void setCenter(RNNaverMapViewContainer mapView, @Nullable ReadableMap option) {
         if (option != null) {
             mapView.setCenter(
-                    toNaverLatLng(option),
-                    getDoubleOrNull(option, "zoom"),
-                    getDoubleOrNull(option, "tilt"),
-                    getDoubleOrNull(option, "bearing"));
+                toNaverLatLng(option),
+                getDoubleOrNull(option, "zoom"),
+                getDoubleOrNull(option, "tilt"),
+                getDoubleOrNull(option, "bearing"));
         }
     }
 
@@ -244,8 +244,8 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 final double lngDelta = region.getDouble("longitudeDelta");
 
                 LatLngBounds bounds = new LatLngBounds(
-                        new LatLng(lat - latDelta / 2, lng - lngDelta / 2), // southwest
-                        new LatLng(lat + latDelta / 2, lng + lngDelta / 2)  // northeast
+                    new LatLng(lat - latDelta / 2, lng - lngDelta / 2), // southwest
+                    new LatLng(lat + latDelta / 2, lng + lngDelta / 2)  // northeast
                 );
                 mapView.moveCameraFitBound(bounds, 0, 0, 0, 0);
 
@@ -264,9 +264,9 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                 final double lng2 = region2.getDouble("longitude");
 
                 mapView.zoomTo(new LatLngBounds(
-                                new LatLng(Math.max(lat1, lat2), Math.min(lng1, lng2)),
-                                new LatLng(Math.min(lat1, lat2), Math.max(lng1, lng2))),
-                        Math.round(padding * density));
+                        new LatLng(Math.max(lat1, lat2), Math.min(lng1, lng2)),
+                        new LatLng(Math.min(lat1, lat2), Math.max(lng1, lng2))),
+                    Math.round(padding * density));
 
                 break;
             }
@@ -288,7 +288,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
 
                 break;
             case ANIMATE_TO_COORDINATE:
-                mapView.setCenter(toNaverLatLng(args.getMap(0)));
+                mapView.setCenter(toNaverLatLng(args.getMap(0)), args.getDouble(1));
                 break;
 
             case SET_LOCATION_TRACKING_MODE:
@@ -320,19 +320,18 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                         break;
                 }
                 break;
-        }
     }
 
     @Override
     public java.util.Map<String, Integer> getCommandsMap() {
         return MapBuilder.<String, Integer>builder()
-                .put("animateToRegion", ANIMATE_TO_REGION)
-                .put("animateToCoordinate", ANIMATE_TO_COORDINATE)
-                .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
-                .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
-                .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
-                .put("setLayerGroupEnabled", SET_LAYER_GROUP_ENABLED)
-                .build();
+            .put("animateToRegion", ANIMATE_TO_REGION)
+            .put("animateToCoordinate", ANIMATE_TO_COORDINATE)
+            .put("animateToTwoCoordinates", ANIMATE_TO_TWO_COORDINATES)
+            .put("setLocationTrackingMode", SET_LOCATION_TRACKING_MODE)
+            .put("animateToCoordinates", ANIMATE_TO_COORDINATES)
+            .put("setLayerGroupEnabled", SET_LAYER_GROUP_ENABLED)
+            .build();
     }
 
     @Override
