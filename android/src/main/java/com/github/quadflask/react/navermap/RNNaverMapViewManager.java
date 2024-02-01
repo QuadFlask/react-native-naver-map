@@ -320,6 +320,7 @@ public class RNNaverMapViewManager extends ViewGroupManager<RNNaverMapViewContai
                         break;
                 }
                 break;
+        }
     }
 
     @Override
