@@ -2,8 +2,10 @@ package com.github.quadflask.react.navermap;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.CircleOverlay;
+import com.naver.maps.map.overlay.Overlay;
 
 public class RNNaverMapCircleOverlay extends ClickableRNNaverMapFeature<CircleOverlay> {
     public RNNaverMapCircleOverlay(EventEmittable emitter, Context context) {
@@ -33,5 +35,11 @@ public class RNNaverMapCircleOverlay extends ClickableRNNaverMapFeature<CircleOv
 
     public void setZIndex(int zIndex) {
         feature.setZIndex(zIndex);
+    }
+
+    @Override
+    public boolean onClick(@NonNull Overlay overlay) {
+        super.onClick(overlay);
+        return false;
     }
 }
