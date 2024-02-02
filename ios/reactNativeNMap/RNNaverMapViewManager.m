@@ -12,7 +12,7 @@
 #import <NMapsMap/NMFNaverMapView.h>
 #import <NMapsMap/NMFCameraUpdate.h>
 #import <NMapsMap/NMFCameraPosition.h>
-#import <NMapsMap/NMGLatLng.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 #import "RNNaverMapView.h"
@@ -201,6 +201,7 @@ RCT_EXPORT_METHOD(setLayerGroupEnabled:(nonnull NSNumber *)reactTag
 
 RCT_EXPORT_METHOD(animateToCoordinate:(nonnull NSNumber *)reactTag
                   withCoord: (NMGLatLng *) coord
+                  withZoom: (nonnull NSNumber *) zoom
                   )
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
@@ -208,9 +209,12 @@ RCT_EXPORT_METHOD(animateToCoordinate:(nonnull NSNumber *)reactTag
     if (![view isKindOfClass:[RNNaverMapView class]]) {
       RCTLogError(@"Invalid view returned from registry, expecting NMFMapView, got: %@", view);
     } else {
-      NMFCameraUpdate* cameraUpdate = [NMFCameraUpdate
-                                       cameraUpdateWithScrollTo:
-                                       coord];
+      NMFCameraUpdate *cameraUpdate;
+        if ([zoom doubleValue] >= 0) { // 줌 레벨이 0 이상일 경우에만 줌 레벨 변경
+        cameraUpdate = [NMFCameraUpdate cameraUpdateWithScrollTo:coord zoomTo:[zoom doubleValue]];
+      } else {
+        cameraUpdate = [NMFCameraUpdate cameraUpdateWithScrollTo:coord];
+      }
       cameraUpdate.animation = NMFCameraUpdateAnimationEaseIn;
       [((RNNaverMapView *)view).mapView moveCamera: cameraUpdate];
     }

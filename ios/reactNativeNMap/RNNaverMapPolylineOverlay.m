@@ -10,8 +10,8 @@
 #import <React/RCTImageLoader.h>
 #import <React/RCTUtils.h>
 #import <NMapsMap/NMFNaverMapView.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPolylineOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -25,8 +25,8 @@
 
     __block RNNaverMapPolylineOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onPolylineClick != nil) {
+        this.onPolylineClick(@{});
         return YES;
       }
       return NO;

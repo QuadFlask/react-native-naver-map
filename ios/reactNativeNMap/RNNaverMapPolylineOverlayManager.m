@@ -8,7 +8,7 @@
 #import "RNNaverMapPolylineOverlayManager.h"
 #import "RNNaverMapPolylineOverlay.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -34,6 +34,6 @@ RCT_CUSTOM_VIEW_PROPERTY(coordinates, NSArray<NMGLatLng*>, RNNaverMapPolylineOve
 }
 RCT_EXPORT_VIEW_PROPERTY(strokeWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor)
-RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onPolylineClick, RCTDirectEventBlock)
 
 @end

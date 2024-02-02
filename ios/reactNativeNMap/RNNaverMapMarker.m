@@ -11,9 +11,9 @@
 #import <React/RCTImageLoader.h>
 #import <React/RCTUtils.h>
 #import <NMapsMap/NMFNaverMapView.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
 #import <NMapsMap/NMFOverlayImage.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -36,8 +36,8 @@
 
     __block RNNaverMapMarker *this = self;
     _realMarker.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onMarkerClick != nil) {
+        this.onMarkerClick(@{});
         return YES;
       }
       return NO;

@@ -10,8 +10,8 @@
 #import <React/RCTBridge.h>
 #import <React/RCTUtils.h>
 #import <NMapsMap/NMFNaverMapView.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCircleOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -36,11 +36,11 @@
   _realOverlay.zIndex = _oldOverlay.zIndex;
   _realOverlay.mapView = _oldOverlay.mapView;
   _oldOverlay.mapView = nil;
-  
+
   __block RNNaverMapCircleOverlay *this = self;
   _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-    if (this.onClick != nil) {
-      this.onClick(@{});
+    if (this.onCircleClick != nil) {
+      this.onCircleClick(@{});
       return YES;
     }
     return NO;

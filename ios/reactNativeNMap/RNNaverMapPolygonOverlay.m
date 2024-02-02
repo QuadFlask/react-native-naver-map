@@ -12,8 +12,8 @@
 #import <React/RCTImageLoader.h>
 #import <React/RCTUtils.h>
 #import <NMapsMap/NMFNaverMapView.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPolygonOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -27,8 +27,8 @@
 
     __block RNNaverMapPolygonOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onPolygonClick != nil) {
+        this.onPolygonClick(@{});
         return YES;
       }
       return NO;

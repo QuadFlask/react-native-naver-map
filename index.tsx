@@ -1,4 +1,4 @@
-import React, {Component, SyntheticEvent} from 'react';
+import React, {Component, PropsWithChildren, SyntheticEvent} from 'react';
 import {findNodeHandle, Image, ImageSourcePropType, NativeModules, Platform, processColor, requireNativeComponent, StyleProp, UIManager, ViewStyle,} from 'react-native';
 
 const RNNaverMapView = requireNativeComponent('RNNaverMapView');
@@ -93,7 +93,7 @@ export interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
@@ -119,10 +119,9 @@ export interface NaverMapViewProps {
     stopGesturesEnabled?: boolean;
     liteModeEnabled?: boolean;
     useTextureView?: boolean;
-    children?: Element;
 }
 
-export default class NaverMapView extends Component<NaverMapViewProps, {}> {
+export default class NaverMapView extends Component<PropsWithChildren<NaverMapViewProps>, {}> {
     ref?: RNNaverMapView;
     nodeHandle?: null | number;
 
@@ -131,8 +130,9 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         this.nodeHandle = findNodeHandle(ref);
     };
 
-    animateToCoordinate = (coord: Coord) => {
-        this.dispatchViewManagerCommand('animateToCoordinate', [coord]);
+    animateToCoordinate = (coord: Coord, zoom?: number) => {
+        const zoomLevel = zoom ?? -1; // zoom이 undefined일 때 -1을 사용
+        this.dispatchViewManagerCommand('animateToCoordinate', [coord, zoomLevel]);
     }
 
     animateToTwoCoordinates = (c1: Coord, c2: Coord) => {
@@ -177,7 +177,7 @@ export default class NaverMapView extends Component<NaverMapViewProps, {}> {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord];
+        contentRegion: [Coord, Coord, Coord, Coord, Coord];
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }>) => this.props.onCameraChange && this.props.onCameraChange(event.nativeEvent);
 
@@ -224,7 +224,7 @@ interface RNNaverMapView extends React.Component<{}, any> {
 
 export interface MapOverlay {
     coordinate: Coord;
-    onClick?: () => void;
+    onClick?: (e:React.SyntheticEvent<EventTarget>) => void;
 }
 
 export interface MarkerProps extends MapOverlay {
@@ -265,6 +265,7 @@ export interface MarkerProps extends MapOverlay {
         minZoom?: number;
         maxZoom?: number;
     };
+    children?: React.ReactNode;
 }
 
 export class Marker extends Component<MarkerProps> {

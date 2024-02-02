@@ -7,8 +7,8 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFMarker.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UIColor *pinColor;
 @property (nonatomic, assign) CGFloat alpha;
 @property (nonatomic, assign) CGPoint anchor;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onMarkerClick;
 
 - (void)setCaptionText:(NSString *) text;
 - (void)setCaptionTextSize:(CGFloat) size;

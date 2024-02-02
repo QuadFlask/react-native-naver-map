@@ -8,8 +8,8 @@
 #import "RNNaverMapMarkerManager.h"
 #import "RNNaverMapMarker.h"
 #import <React/RCTUIManager.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCameraCommon.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -60,7 +60,7 @@ RCT_CUSTOM_VIEW_PROPERTY(subCaption, NSDictionary, RNNaverMapMarker)
   CGFloat requestedWidth = [RCTConvert CGFloat:dic[@"requestedWidth"]];
   double minZoom = dic[@"minZoom"] ? [RCTConvert double:dic[@"minZoom"]] : NMF_MIN_ZOOM;
   double maxZoom = dic[@"maxZoom"] ? [RCTConvert double:dic[@"maxZoom"]] : NMF_MAX_ZOOM;
-    
+
   [view setSubCaptionText: text];
   [view setSubCaptionTextSize:textSize];
   [view setSubCaptionColor:color];
@@ -89,6 +89,6 @@ RCT_EXPORT_VIEW_PROPERTY(image, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pinColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(alpha, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(anchor, CGPoint)
-RCT_EXPORT_VIEW_PROPERTY(onClick, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMarkerClick, RCTDirectEventBlock)
 
 @end

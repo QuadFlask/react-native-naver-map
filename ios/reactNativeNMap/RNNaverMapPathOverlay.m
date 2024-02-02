@@ -10,9 +10,9 @@
 #import <React/RCTImageLoader.h>
 #import <React/RCTUtils.h>
 #import <NMapsMap/NMFNaverMapView.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPath.h>
 #import <NMapsMap/NMFOverlayImage.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -27,8 +27,8 @@
 
     __block RNNaverMapPathOverlay *this = self;
     _realOverlay.touchHandler = ^BOOL(NMFOverlay *overlay) {
-      if (this.onClick != nil) {
-        this.onClick(@{});
+      if (this.onPathClick != nil) {
+        this.onPathClick(@{});
         return YES;
       }
       return NO;

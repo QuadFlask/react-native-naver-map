@@ -9,23 +9,21 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
-import com.naver.maps.map.util.FusedLocationSource;
 
 public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapViewProps {
     private RNNaverMapView mapView;
     private Bundle instanceStateBundle = new Bundle();
     private boolean isAttachedToWindow = false;
 
-    public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, FusedLocationSource locationSource, NaverMapOptions naverMapOptions) {
+    public RNNaverMapViewContainer(@NonNull ThemedReactContext themedReactContext, ReactApplicationContext appContext, NaverMapOptions naverMapOptions) {
         super(ReactUtil.getNonBuggyContext(themedReactContext, appContext));
-        this.mapView = new RNNaverMapView(themedReactContext, appContext, locationSource, naverMapOptions, instanceStateBundle);
+        this.mapView = new RNNaverMapView(themedReactContext, appContext, naverMapOptions, instanceStateBundle);
         addView(mapView);
     }
 
@@ -97,9 +95,10 @@ public class RNNaverMapViewContainer extends FrameLayout implements RNNaverMapVi
     }
 
     @Override
-    public void setCenter(LatLng latLng) {
-        if (mapView != null)
-            mapView.setCenter(latLng);
+    public void setCenter(LatLng latLng, Double zoom) {
+        if (mapView != null) {
+            mapView.setCenter(latLng, zoom);
+        }
     }
 
     @Override

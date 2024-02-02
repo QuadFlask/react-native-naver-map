@@ -7,8 +7,8 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFCircleOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -24,6 +24,6 @@
 @property (nonatomic, assign) CGFloat outlineWidth;
 @property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) NSInteger zIndex;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onCircleClick;
 
 @end
