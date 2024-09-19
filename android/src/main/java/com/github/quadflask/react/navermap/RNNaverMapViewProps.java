@@ -16,7 +16,7 @@ public interface RNNaverMapViewProps {
 
     void onStop();
 
-    void setCenter(LatLng latLng);
+    void setCenter(LatLng latLng, Double zoom);
 
     void setCenter(LatLng latLng, Double zoom, Double tilt, Double bearing);
 

@@ -7,8 +7,8 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPolylineOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -20,6 +20,6 @@
 @property (nonatomic, assign) NSArray<NMGLatLng *> *coordinates;
 @property (nonatomic, assign) CGFloat strokeWidth;
 @property (nonatomic, strong) UIColor *strokeColor;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onPolylineClick;
 
 @end

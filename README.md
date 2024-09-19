@@ -34,7 +34,9 @@ $ cd ios/ && pod install
 
 `/android/build.gradle` 파일에 아래와 같이 레포지터리를 추가합니다
 
-> ⚠️ Bintray 지원 중단에 의해 jfrog로 수정되었습니다
+> ~~⚠️ Bintray 지원 중단에 의해 jfrog로 수정되었습니다~~
+>
+> jgrog에서 repository로 변경되었습니다.  [공식문서](https://navermaps.github.io/android-map-sdk/guide-ko/1.html)
 
 ```
 allprojects {
@@ -43,7 +45,7 @@ allprojects {
         jcenter()
         // 네이버 지도 저장소
         maven {
-            url 'https://naver.jfrog.io/artifactory/maven/'
+            url 'https://repository.map.naver.com/archive/maven'
         }
     }
 }
@@ -152,7 +154,7 @@ interface NaverMapViewProps {
         latitude: number;
         longitude: number;
         zoom: number;
-        contentsRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
+        contentRegion: [Coord, Coord, Coord, Coord, Coord]; // https://navermaps.github.io/android-map-sdk/reference/com/naver/maps/map/NaverMap.html#getContentRegion()
         coveringRegion: [Coord, Coord, Coord, Coord, Coord];
     }) => void;
     onMapClick?: (event: {
@@ -179,7 +181,7 @@ interface NaverMapViewProps {
     useTextureView?: boolean; // android only
 }
 /// component method
-animateToCoordinate: (coord: Coord) => void;
+animateToCoordinate: (coord: Coord, zoom?: number) => void;
 animateToTwoCoordinates: (c1: Coord, c2: Coord) => void;
 animateToCoordinates: (coords: Coord[], bounds?: {
     top: number;

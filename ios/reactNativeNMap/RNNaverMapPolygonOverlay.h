@@ -8,8 +8,8 @@
 
 #import <React/RCTBridge.h>
 #import <React/RCTComponent.h>
-#import <NMapsMap/NMGLatLng.h>
 #import <NMapsMap/NMFPolygonOverlay.h>
+#import <NMapsGeometry/NMGLatLng.h>
 
 #import "RCTConvert+NMFMapView.h"
 
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) CGFloat outlineWidth;
-@property (nonatomic, copy) RCTDirectEventBlock onClick;
+@property (nonatomic, copy) RCTDirectEventBlock onPolygonClick;
 
 - (void)setPolygonWithRing:(NMGLineString*) exteriorRing interiorRings:(NSArray<NMGLineString*>*) interiorRings;
 
